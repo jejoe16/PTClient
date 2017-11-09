@@ -11,6 +11,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,14 +60,74 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\APIController.cs" />
+    <Compile Include="API\IAPIController.cs" />
+    <Compile Include="Check\Check.cs" />
+    <Compile Include="Check\ICheck.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IO.Swagger\Api\DefaultApi.cs" />
+    <Compile Include="IO.Swagger\Client\ApiClient.cs" />
+    <Compile Include="IO.Swagger\Client\ApiException.cs" />
+    <Compile Include="IO.Swagger\Client\ApiResponse.cs" />
+    <Compile Include="IO.Swagger\Client\Configuration.cs" />
+    <Compile Include="IO.Swagger\Client\ExceptionFactory.cs" />
+    <Compile Include="IO.Swagger\Client\IApiAccessor.cs" />
+    <Compile Include="IO.Swagger\Model\InlineResponse200.cs" />
+    <Compile Include="IO.Swagger\Model\InlineResponse2001.cs" />
+    <Compile Include="IO.Swagger\Model\InlineResponse400.cs" />
+    <Compile Include="LogicController\Controller.cs" />
+    <Compile Include="LogicController\IController.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\ILogin.cs" />
+    <Compile Include="Login\Login.cs" />
+    <Compile Include="Login\LoginScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginScreen.Designer.cs">
+      <DependentUpon>LoginScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Session.cs" />
+    <Compile Include="Login\User.cs" />
+    <Compile Include="Map\IMap.cs" />
+    <Compile Include="Map\MapControl.cs" />
+    <Compile Include="Map\MapMarker.cs" />
+    <Compile Include="Map\Overview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Map\Overview.Designer.cs">
+      <DependentUpon>Overview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Map\TurbineMarker.cs" />
+    <Compile Include="Map\VesselMarker.cs" />
+    <Compile Include="Position\ITurbinePosition.cs" />
+    <Compile Include="Position\TurbinePosition.cs" />
+    <Compile Include="Position\VesselPosition.cs" />
+    <Compile Include="Position\WindTurbine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimPositionProgram\GuiSimPos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimPositionProgram\GuiSimPos.Designer.cs">
+      <DependentUpon>GuiSimPos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SimPositionProgram\ISimPosition.cs" />
+    <Compile Include="SimPositionProgram\SimPosition.cs" />
+    <Compile Include="User\User.cs" />
+    <EmbeddedResource Include="Map\Overview.resx">
+      <DependentUpon>Overview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -61,7 +136,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SimPositionProgram\GuiSimPos.resx">
+      <DependentUpon>GuiSimPos.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="IO.Swagger\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -74,6 +154,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\vessel.png" />
+    <Content Include="Images\wind.png" />
+    <Content Include="IO.Swagger\IO.Swagger.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
