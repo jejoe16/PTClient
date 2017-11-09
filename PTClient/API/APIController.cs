@@ -1,5 +1,5 @@
-﻿using IO.Swagger.Api;
-using IO.Swagger.Model;
+﻿using PTClient.IO.Swagger.Api;
+using PTClient.IO.Swagger.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeopleTrackingC.Persistence.API
+namespace PTClient.API
 {
     class APIController : IAPIController
     {   

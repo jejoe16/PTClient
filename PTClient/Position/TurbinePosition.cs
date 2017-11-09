@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeopleTrackingC.Position
+namespace PTClient.Position
 {
     class TurbinePosition : ITurbinePosition
     {

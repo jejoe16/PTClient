@@ -1,6 +1,6 @@
-﻿namespace PeopleTrackingC
+﻿namespace PTClient
 {
-    partial class Login
+    partial class Login1
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
-using PeopleTrackingC.Map;
+using PTClient.Map;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PeopleTrackingC.SimPosition
+namespace PTClient.SimPosition
 {
     public partial class GuiSimPos : Form
     {

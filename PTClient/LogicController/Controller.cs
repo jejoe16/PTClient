@@ -1,4 +1,4 @@
-﻿using PTClient.Persistence.API;
+﻿using PTClient.API;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient
+namespace PTClient.LogicController
 {
     class Controller
     {
@@ -17,7 +17,7 @@ namespace PTClient
         private Workers.User currentUser;
         public Controller()
         {
-            api = PeopleTrackingC.Persistence.API.APIController.GetAPIController();
+            api = PTClient.API.APIController.GetAPIController();
             DownloadTurbines();
             SetWindTurbineMarkers();
         }

@@ -47,8 +47,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>..\..\Release-NETv4.0\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms">
+      <HintPath>..\..\Release-NETv4.0\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.0.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.0.1\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,7 +80,7 @@
   <ItemGroup>
     <Compile Include="API\APIController.cs" />
     <Compile Include="API\IAPIController.cs" />
-    <Compile Include="Check\Check.cs" />
+    <Compile Include="Check\Check1.cs" />
     <Compile Include="Check\ICheck.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Form1.cs">
@@ -83,11 +101,11 @@
     <Compile Include="IO.Swagger\Model\InlineResponse400.cs" />
     <Compile Include="LogicController\Controller.cs" />
     <Compile Include="LogicController\IController.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="Login1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Login1.designer.cs">
+      <DependentUpon>Login1.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\ILogin.cs" />
     <Compile Include="Login\Login.cs" />
@@ -124,7 +142,16 @@
     </Compile>
     <Compile Include="SimPositionProgram\ISimPosition.cs" />
     <Compile Include="SimPositionProgram\SimPosition.cs" />
-    <Compile Include="User\User.cs" />
+    <Compile Include="Workers\User.cs" />
+    <Compile Include="Worker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Worker.designer.cs">
+      <DependentUpon>Worker.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Login1.resx">
+      <DependentUpon>Login1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Map\Overview.resx">
       <DependentUpon>Overview.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,7 +168,11 @@
     <EmbeddedResource Include="SimPositionProgram\GuiSimPos.resx">
       <DependentUpon>GuiSimPos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Worker.resx">
+      <DependentUpon>Worker.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="IO.Swagger\packages.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -159,6 +190,7 @@
     <Content Include="Images\vessel.png" />
     <Content Include="Images\wind.png" />
     <Content Include="IO.Swagger\IO.Swagger.csproj" />
+    <None Include="Resources\vessel.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

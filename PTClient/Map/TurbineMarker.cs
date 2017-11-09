@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeopleTrackingC.Map
+namespace PTClient.Map
 {
     class TurbineMarker : MapMarker
     {
-        private Bitmap image = PeopleTrackingC.Properties.Resources.wind;
+        private Bitmap image = PTClient.Properties.Resources.wind;
 
         public TurbineMarker(string name, long latitude, long longitude) : base(name, latitude, longitude)
         {

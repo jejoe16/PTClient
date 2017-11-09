@@ -1,4 +1,4 @@
-﻿namespace PeopleTrackingC.Logic.Login
+﻿namespace PTClient.Login
 {
     partial class LoginScreen
     {

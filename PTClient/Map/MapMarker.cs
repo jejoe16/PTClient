@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeopleTrackingC.Map
+namespace PTClient.Map
 {
     abstract class MapMarker
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient
+namespace PTClient.LogicController
 {
     interface Interface1
     {

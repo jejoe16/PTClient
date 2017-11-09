@@ -33,7 +33,8 @@ using System.Text;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace IO.Swagger.Client
+
+namespace PTClient.IO.Swagger.Client
 {
     /// <summary>
     /// API client is mainly responsible for making the HTTP call to the API backend.
@@ -149,7 +150,7 @@ namespace IO.Swagger.Client
 
             if (postBody != null) // http body (model or byte[]) parameter
             {
-                if (postBody.GetType() == typeof(String))
+                if (postBody.GetType() == typeof(String))   
                 {
                     request.AddParameter("application/json", postBody, ParameterType.RequestBody);
                 }

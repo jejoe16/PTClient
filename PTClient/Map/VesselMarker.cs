@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeopleTrackingC.Map
+namespace PTClient.Map
 {
     class VesselMarker : MapMarker
     {
-        private Bitmap image = PeopleTrackingC.Properties.Resources.vessel;
+        private Bitmap image = PTClient.Properties.Resources.vessel;
 
         public VesselMarker(string name, long latitude, long longitude) : base(name, latitude, longitude)
         {

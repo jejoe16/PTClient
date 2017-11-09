@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PeopleTrackingC.Map
+namespace PTClient.Map
 {
     partial class Overview
     {
@@ -34,6 +34,7 @@ namespace PeopleTrackingC.Map
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gmap = new GMap.NET.WindowsForms.GMapControl();
             this.buttonCheckin = new System.Windows.Forms.Button();
             this.buttonCheckout = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@ namespace PeopleTrackingC.Map
             this.buttonLogin = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // gmap
@@ -66,7 +68,7 @@ namespace PeopleTrackingC.Map
             this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gmap.ShowTileGridLines = false;
-            this.gmap.Size = new System.Drawing.Size(582, 537);
+            this.gmap.Size = new System.Drawing.Size(582, 527);
             this.gmap.TabIndex = 0;
             this.gmap.Zoom = 0D;
             // 
@@ -142,6 +144,11 @@ namespace PeopleTrackingC.Map
             this.label3.TabIndex = 8;
             this.label3.Text = "Username:";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Overview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,6 +182,7 @@ namespace PeopleTrackingC.Map
         private Button buttonLogin;
         private Label label2;
         private Label label3;
+        private ContextMenuStrip contextMenuStrip1;
     }
 
 }

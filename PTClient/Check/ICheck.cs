@@ -8,7 +8,7 @@ namespace PTClient.Check
 {
     interface ICheck
     {
-        Boolean CheckIn(User.User user, String poss);
-        Boolean CheckOut(User.User user, String poss);
+        Boolean CheckIn(Workers.User user, String poss);
+        Boolean CheckOut(Workers.User user, String poss);
     }
 }

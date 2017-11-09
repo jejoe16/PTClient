@@ -24,7 +24,7 @@
 using System;
 using RestSharp;
 
-namespace IO.Swagger.Client
+namespace PTClient.IO.Swagger.Client
 {
     /// <summary>
     /// A delegate to ExceptionFactory method

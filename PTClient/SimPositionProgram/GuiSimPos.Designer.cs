@@ -1,4 +1,4 @@
-﻿namespace PeopleTrackingC.SimPosition
+﻿namespace PTClient.SimPosition
 {
     partial class GuiSimPos
     {

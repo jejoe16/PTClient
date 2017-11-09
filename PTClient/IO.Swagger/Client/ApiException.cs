@@ -22,7 +22,7 @@
 
 using System;
 
-namespace IO.Swagger.Client
+namespace PTClient.IO.Swagger.Client
 {
     /// <summary>
     /// API Exception

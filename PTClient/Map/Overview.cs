@@ -5,7 +5,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PeopleTrackingC.Map
+namespace PTClient.Map
 {
     public partial class Overview : Form
     {

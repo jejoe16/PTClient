@@ -1,6 +1,6 @@
-﻿using PeopleTrackingC.SimPosition;
+﻿using PTClient.SimPosition;
 
-namespace PeopleTrackingC.Position
+namespace PTClient.Position
 {
     /// <summary>
     /// class that returns the vessels position

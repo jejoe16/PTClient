@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PTClient.Check
 {
-    public class Check : ICheck
+    public class Check1 : ICheck
     {
         /*
          * takes a user and alters their possition if possible, else return false.
          * */
-        public bool CheckIn(User.User user, String poss)
+        public bool CheckIn(Workers.User user, String poss)
         {
             if (poss != null)
             {
@@ -30,7 +30,7 @@ namespace PTClient.Check
          * Places the user on the vessel or harbor, not on turbine.
         **/
 
-        public bool CheckOut(User.User user, String poss)
+        public bool CheckOut(Workers.User user, String poss)
         {
             if (poss.ToLower().Equals("vessel"))
             {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeopleTrackingC.Logic.Login
+namespace PTClient.Login
 {
     class Session
     {

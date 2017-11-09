@@ -33,7 +33,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-namespace IO.Swagger.Model
+
+namespace PTClient.IO.Swagger.Model
 {
     /// <summary>
     /// InlineResponse200

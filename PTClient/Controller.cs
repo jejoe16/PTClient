@@ -1,5 +1,5 @@
-﻿using IO.Swagger.Api;
-using IO.Swagger.Model;
+﻿using PTClient.IO.Swagger.Api;
+using PTClient.IO.Swagger.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -102,11 +102,13 @@ namespace PTClient
         }
         public Boolean TryCheckIn(String currentPoss)
         {
-            return Check.Check.getInstance().CheckIn(currentUser, currentPoss);
+            //  return Check.Check1.getInstance().CheckIn(currentUser, currentPoss);
+            return true;
         }
         public Boolean TryCheckOut(String currentPoss)
         {
-            return Check.Check.getInstance().CheckOut(currentUser, currentPoss);
+            //  return Check.Check1.getInstance().CheckOut(currentUser, currentPoss);
+            return true;
         }
         }
     }

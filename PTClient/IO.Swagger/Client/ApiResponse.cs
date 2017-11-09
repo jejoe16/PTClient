@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace IO.Swagger.Client
+namespace PTClient.IO.Swagger.Client
 {
     /// <summary>
     /// API Response
