@@ -12,26 +12,28 @@ namespace PTClient
 {
     public partial class Worker : Form
     {
+        LogicController.Controller Controller = LogicController.Controller.GetController();
         public Worker()
         {
             InitializeComponent();
+
         }
         private String currentPoss = "nowhere";
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Controller.Instance.Logout();
+            Controller.Logout();
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Controller.Instance.TryCheckIn(currentPoss);
+            Controller.TryCheckIn(currentPoss);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Controller.Instance.TryCheckOut(currentPoss);
+            Controller.TryCheckOut(currentPoss);
         }
     }
 }
