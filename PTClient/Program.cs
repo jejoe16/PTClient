@@ -12,11 +12,12 @@ namespace PTClient
         [STAThread]
         static void Main()
         {
-            Controller control = new Controller();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            Controller control = Controller.GetController();
+            Application.Run(new Map.Overview());
 
         }
     }

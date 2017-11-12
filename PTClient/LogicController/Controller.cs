@@ -53,16 +53,32 @@ namespace PTClient.LogicController
             map.SetTurbineMarkers(turbinelist);
         }
 
-        private Boolean  Login(String username, String password)
+        public Workers.User Login(String username, String password)
         {
-            Boolean check = api.Login(username, password);
-            if (check == true)
-            {
-                var Position = api.GetUserPosition();
-                Boolean IsCaptain = (Boolean)api.CaptainCheck();
-                currentUser = new Workers.User(IsCaptain, Position, username, password);
-            }
-            return check;
+
+            //var apiInstance = new DefaultApi();
+            //InlineResponse200 uResult = apiInstance.GetUserUsernamePasswordGet(username, password);
+            //var Position = uResult.Position;
+            //Boolean IsCaptain = (Boolean)uResult.IsCaptain;
+            //currentUser = new Workers.User(IsCaptain, Position);
+            //return currentUser;
+            currentUser = new Workers.User(false, "der", "123", "Hello");
+            return currentUser;
+        }
+        public Workers.User Logout()
+        {
+            currentUser = null;
+            return currentUser;
+        }
+        public Boolean TryCheckIn(String currentPoss)
+        {
+            //  return Check.Check1.getInstance().CheckIn(currentUser, currentPoss);
+            return true;
+        }
+        public Boolean TryCheckOut(String currentPoss)
+        {
+            //  return Check.Check1.getInstance().CheckOut(currentUser, currentPoss);
+            return true;
         }
     }
 }
