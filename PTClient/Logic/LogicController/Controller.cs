@@ -14,6 +14,7 @@ namespace PTClient.Logic.LogicController
         private Position.ITurbinePosition turbines = new Position.TurbinePosition();
         private static Controller controller = null;
         private IAPIController api = null;
+        private Session session = null;
         public Controller()
         {
             api = PTClient.API.APIController.GetAPIController();
@@ -63,7 +64,11 @@ namespace PTClient.Logic.LogicController
 
         public void Login(String username, String password)
         {
-            
+            Boolean Check = api.Login(username, password);
+            if (Check.Equals(true))
+            {
+
+            }
             
             
         }
@@ -72,6 +77,13 @@ namespace PTClient.Logic.LogicController
         }
         public Boolean TryCheckIn(String currentPoss)
         {
+            if(session.LoggedIn().Equals(false))
+            {
+                return false;
+            } else
+            {
+
+            }
             return true;
         }
         public Boolean TryCheckOut(String currentPoss)

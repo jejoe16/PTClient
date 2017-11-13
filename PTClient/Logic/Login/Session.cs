@@ -19,17 +19,17 @@ namespace PTClient.Logic.Login
 
         public void ClearSession()
         {
-            throw new NotImplementedException();
+            currentUser = null;
         }
 
         public bool GetCaptain()
         {
-            throw new NotImplementedException();
+            return currentUser.Captain;
         }
 
         public string GetPassword()
         {
-            throw new NotImplementedException();
+            return currentUser.Password;
         }
 
         public string GetUptime()
@@ -37,26 +37,48 @@ namespace PTClient.Logic.Login
             throw new NotImplementedException();
         }
 
-        public string GetUserName()
+        public long GetUserLatitude()
         {
             throw new NotImplementedException();
+        }
+
+        public long GetUserLongtitude()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetUserName()
+        {
+            return currentUser.Username;
+        }
+
+        public bool LoggedIn()
+        {
+            if (currentUser == null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void SetCaptain(bool capt)
         {
-            throw new NotImplementedException();
+            currentUser.Captain = capt;
         }
 
         public void SetPassWord(string password)
         {
-            throw new NotImplementedException();
+            currentUser.Password = password;
         }
 
         public void SetUserName(string username)
         {
-            currentUser.Username.
+            currentUser.Username = username;
         }
 
-        
+        public void SetUserPosition(long latitude, long longtitude)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

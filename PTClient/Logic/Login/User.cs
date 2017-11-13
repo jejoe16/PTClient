@@ -15,6 +15,11 @@ namespace PTClient.Logic.Login
         private String password;
         public String Password { get { return this.password; } set { this.password = value; } }
 
+        private long longitude;
+        public long Longitude { get { return this.longitude; } set { this.longitude = value; } }
+        private long latitude;
+        private long Latitude { get { return this.latitude; } set { this.latitude = value; } }
+
 
         public User(Boolean capt, String username, String pw)
         {
