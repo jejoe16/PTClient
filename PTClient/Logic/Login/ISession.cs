@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace PTClient.Logic.Login
 {
-    interface ILogin
+    interface ISession
     {
-        Boolean Login(String username, String password);
+        String GetUserName();
+        void SetUserName(String username);
+        String GetPassword();
+        void SetPassWord(String password);
+        String GetUptime();
+        void ClearSession();
+        void SetCaptain(bool capt);
+        bool GetCaptain();
 
     }
 }

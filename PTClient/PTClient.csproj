@@ -127,8 +127,7 @@
     <Compile Include="GUI\Login1.designer.cs">
       <DependentUpon>Login1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logic\Login\ILogin.cs" />
-    <Compile Include="Logic\Login\Login.cs" />
+    <Compile Include="Logic\Login\ISession.cs" />
     <Compile Include="Logic\Login\Session.cs" />
     <Compile Include="Logic\Login\User.cs" />
     <Compile Include="GUI\Map\IMap.cs" />

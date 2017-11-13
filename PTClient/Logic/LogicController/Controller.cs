@@ -1,4 +1,5 @@
 ﻿using PTClient.API;
+using PTClient.Logic.Login;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace PTClient.Logic.LogicController
         private Position.ITurbinePosition turbines = new Position.TurbinePosition();
         private static Controller controller = null;
         private IAPIController api = null;
-        private Login.User currentUser;
         public Controller()
         {
             api = PTClient.API.APIController.GetAPIController();
@@ -63,18 +63,12 @@ namespace PTClient.Logic.LogicController
 
         public void Login(String username, String password)
         {
-
-            //var apiInstance = new DefaultApi();
-            //InlineResponse200 uResult = apiInstance.GetUserUsernamePasswordGet(username, password);
-            //var Position = uResult.Position;
-            //Boolean IsCaptain = (Boolean)uResult.IsCaptain;
-            //currentUser = new Workers.User(IsCaptain, Position);
-            //return currentUser;
-            currentUser = new Login.User(false, "der", "123", "Hello");
+            
+            
+            
         }
         public void Logout()
         {
-            currentUser = null;
         }
         public Boolean TryCheckIn(String currentPoss)
         {
