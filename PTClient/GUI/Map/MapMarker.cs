@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.Map
+namespace PTClient.GUI.Map
 {
     abstract class MapMarker
     {

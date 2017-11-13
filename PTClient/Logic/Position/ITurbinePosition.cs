@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.Position
+namespace PTClient.Logic.Position
 {
     interface ITurbinePosition
     {
@@ -35,5 +35,9 @@ namespace PTClient.Position
         /// Method to show the location debugger
         /// </summary>
         void ShowPosDebugger();
+
+        List<String> GetTurbineName();
+        long GetTurbineLongitude(String Name);
+        long GetTurbineLatitude(String Name);
     }
 }

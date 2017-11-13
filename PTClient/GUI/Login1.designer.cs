@@ -1,4 +1,4 @@
-﻿namespace PTClient
+﻿namespace PTClient.GUI
 {
     partial class Login1
     {

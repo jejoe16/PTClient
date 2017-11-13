@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PTClient
+namespace PTClient.GUI
 {
     public partial class Worker : Form
     {
-        LogicController.Controller Controller = LogicController.Controller.GetController();
+        Logic.LogicController.Controller Controller = Logic.LogicController.Controller.GetController();
         public Worker()
         {
             InitializeComponent();

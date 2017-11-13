@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PTClient.Map
+namespace PTClient.GUI.Map
 {
     partial class Overview
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.Login
+namespace PTClient.Logic.Login
 {
     class Login : ILogin
     {

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.Login
+namespace PTClient.GUI.Map
 {
-    interface ILogin
+    interface IMap
     {
-        Boolean Login(String username, String password);
+        void AddTurbineMarker(String Name, long Latitude, long Longitude);
 
     }
 }

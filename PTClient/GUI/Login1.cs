@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PTClient
+namespace PTClient.GUI
 {
     public partial class Login1 : Form
     {

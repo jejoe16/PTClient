@@ -6,20 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.LogicController
+namespace PTClient.Logic.LogicController
 {
     class Controller
     {
         private Position.ITurbinePosition turbines = new Position.TurbinePosition();
-        private Map.IMap map = new Map.MapControl();
         private static Controller controller = null;
         private IAPIController api = null;
-        private Workers.User currentUser;
+        private Login.User currentUser;
         public Controller()
         {
             api = PTClient.API.APIController.GetAPIController();
             DownloadTurbines();
-            SetWindTurbineMarkers();
         }
 
         public static Controller GetController()
@@ -47,13 +45,23 @@ namespace PTClient.LogicController
             }
         }
 
-        private void SetWindTurbineMarkers()
+        public List<String> GetWindTurbineList()
         {
-            var turbinelist = turbines.GetTurbineList();
-            map.SetTurbineMarkers(turbinelist);
+            var turbinelist = turbines.GetTurbineName();
+            return turbinelist;
         }
 
-        public Workers.User Login(String username, String password)
+        public long GetTurbineLongitude(String Name)
+        {
+            return turbines.GetTurbineLongitude(Name);
+        }
+         
+        public long GetTurbineLatitude(String Name)
+        {
+            return turbines.GetTurbineLatitude(Name);
+        }
+
+        public void Login(String username, String password)
         {
 
             //var apiInstance = new DefaultApi();
@@ -62,22 +70,18 @@ namespace PTClient.LogicController
             //Boolean IsCaptain = (Boolean)uResult.IsCaptain;
             //currentUser = new Workers.User(IsCaptain, Position);
             //return currentUser;
-            currentUser = new Workers.User(false, "der", "123", "Hello");
-            return currentUser;
+            currentUser = new Login.User(false, "der", "123", "Hello");
         }
-        public Workers.User Logout()
+        public void Logout()
         {
             currentUser = null;
-            return currentUser;
         }
         public Boolean TryCheckIn(String currentPoss)
         {
-            //  return Check.Check1.getInstance().CheckIn(currentUser, currentPoss);
             return true;
         }
         public Boolean TryCheckOut(String currentPoss)
         {
-            //  return Check.Check1.getInstance().CheckOut(currentUser, currentPoss);
             return true;
         }
     }

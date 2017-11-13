@@ -7,18 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.Map
+namespace PTClient.GUI.Map
 {
     class MapControl : IMap
     {
         private static List<Object> markers = new List<Object>();
+      
 
-        public void SetTurbineMarkers(List<Position.WindTurbine> turbineList)
+        public void AddTurbineMarker(String Name, long Latitude, long Longitude)
         {
-            foreach (Position.WindTurbine list in turbineList)
-            {
-                markers.Add(new TurbineMarker(list.GetName, list.GetLatitude, list.GetLongitude));
-            }
+            markers.Add(new TurbineMarker(Name, Latitude, Longitude));
         }
 
         public void SetVesselMarker()
