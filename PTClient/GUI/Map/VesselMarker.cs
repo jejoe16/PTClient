@@ -13,6 +13,7 @@ namespace PTClient.GUI.Map
 
         public VesselMarker(string name, long latitude, long longitude) : base(name, latitude, longitude)
         {
+
         }
 
         public Bitmap Image { get => image; }
