@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace PTClient.Logic.LogicController
 {
-    interface Interface1
+    interface IController
     {
+        void DownloadTurbines();
+        List<String> GetWindTurbineList();
+        long GetTurbineLongitude(String Name);
+        long GetTurbineLatitude(String Name);
+        Boolean Login(String username, String password);
+        void Logout();
+        Boolean CheckIn(String currentPos);
+        Boolean CheckOut(String currentPoss);
+
     }
 }

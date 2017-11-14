@@ -17,7 +17,7 @@ namespace PTClient.Logic.Login
         void SetCaptain(bool capt);
         bool GetCaptain();
         bool LoggedIn();
-        void SetUserPosition(long latitude, long longtitude);
+        void SetUserPosition(long latitude, long longitude);
         long GetUserLongtitude();
         long GetUserLatitude();
     }

@@ -18,7 +18,7 @@ namespace PTClient.GUI
             InitializeComponent();
 
         }
-        private String currentPoss = "nowhere";
+        private String currentPos = "nowhere";
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -28,12 +28,12 @@ namespace PTClient.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Controller.TryCheckIn(currentPoss);
+            Controller.CheckIn(currentPos);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Controller.TryCheckOut(currentPoss);
+            Controller.CheckOut(currentPos);
         }
     }
 }

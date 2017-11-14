@@ -14,6 +14,7 @@ namespace PTClient.API
         List<int?> GetTurbinesLatitude();
         Boolean Login(String UserName, String PassWord);
         String GetUserPosition();
-        bool? CaptainCheck();
+        Boolean CaptainCheck();
+        String UpdateUserPosition(String Username, String Password, String Position);
     }
 }

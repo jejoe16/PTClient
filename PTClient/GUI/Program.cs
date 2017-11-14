@@ -9,7 +9,7 @@ namespace PTClient.GUI
     static class Program
     {
 
-        private static Controller control = Controller.GetController();
+        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,6 +19,7 @@ namespace PTClient.GUI
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Controller control = Controller.GetController();
             IMap map = new MapControl();
             List<String> TurbineNames = control.GetWindTurbineList();
             foreach(String Name in TurbineNames)

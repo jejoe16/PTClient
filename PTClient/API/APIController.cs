@@ -30,9 +30,9 @@ namespace PTClient.API
             return apicontroller;
         }
 
-        public bool? CaptainCheck()
+        public Boolean CaptainCheck()
         {
-            return response200.IsCaptain;
+            return (Boolean)response200.IsCaptain;
         }
 
         public List<String> GetTurbinesName()
@@ -83,6 +83,11 @@ namespace PTClient.API
             {
 
             }
+        }
+
+        public string UpdateUserPosition(string Username, string Password, string Position)
+        {
+            throw new NotImplementedException();
         }
     }
 }

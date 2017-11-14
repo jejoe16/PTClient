@@ -39,18 +39,19 @@ namespace PTClient.Logic.Login
 
         public long GetUserLatitude()
         {
-            throw new NotImplementedException();
+            return currentUser.Latitude;
         }
 
         public long GetUserLongtitude()
         {
-            throw new NotImplementedException();
+            return currentUser.Longitude;
         }
 
         public string GetUserName()
         {
             return currentUser.Username;
         }
+
 
         public bool LoggedIn()
         {
@@ -76,9 +77,10 @@ namespace PTClient.Logic.Login
             currentUser.Username = username;
         }
 
-        public void SetUserPosition(long latitude, long longtitude)
+        public void SetUserPosition(long latitude, long longitude)
         {
-            throw new NotImplementedException();
+            currentUser.Longitude = longitude;
+            currentUser.Latitude = latitude;
         }
     }
 }
