@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.Position
+namespace PTClient.Logic.Position
 {
     class TurbinePosition : ITurbinePosition
     {
@@ -45,7 +45,44 @@ namespace PTClient.Position
             return windturbines;
         }
 
-       
+        public List<String> GetTurbineName()
+        {
+            List<String> TurbineNames = new List<String>();
+            foreach (WindTurbine wt in windturbines)
+            {
+                TurbineNames.Add(wt.GetName);
+            }
+            return TurbineNames;
+        }
+
+        public long GetTurbineLatitude(String Name)
+        {
+            long Latitude = 0;
+            foreach (WindTurbine wt in windturbines)
+            {
+                if (wt.GetName.Equals(Name))
+                {
+                    Latitude = wt.GetLatitude;
+                }
+            }
+            return Latitude;
+        }
+
+        public long GetTurbineLongitude(String Name)
+        {
+            long Longitude = 0;
+            foreach (WindTurbine wt in windturbines)
+            {
+                if (wt.GetName.Equals(Name))
+                {
+                    Longitude = wt.GetLongitude;
+                }
+            }
+            return Longitude;
+        }
+
+
+
 
     }
 }

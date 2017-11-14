@@ -1,6 +1,6 @@
 ﻿using PTClient.SimPosition;
 
-namespace PTClient.Position
+namespace PTClient.Logic.Position
 {
     /// <summary>
     /// class that returns the vessels position

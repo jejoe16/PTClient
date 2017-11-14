@@ -5,7 +5,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PTClient.Map
+namespace PTClient.GUI.Map
 {
     public partial class Overview : Form
     {

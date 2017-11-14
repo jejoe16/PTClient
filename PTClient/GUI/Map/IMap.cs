@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.LogicController
+namespace PTClient.GUI.Map
 {
-    interface Interface1
+    interface IMap
     {
+        void AddTurbineMarker(String Name, long Latitude, long Longitude);
+
     }
 }

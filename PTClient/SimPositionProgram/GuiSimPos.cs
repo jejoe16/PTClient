@@ -1,6 +1,6 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
-using PTClient.Map;
+using PTClient.GUI.Map;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

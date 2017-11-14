@@ -8,17 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PTClient
+namespace PTClient.GUI
 {
     public partial class Worker : Form
     {
-        LogicController.Controller Controller = LogicController.Controller.GetController();
+        Logic.LogicController.Controller Controller = Logic.LogicController.Controller.GetController();
         public Worker()
         {
             InitializeComponent();
 
         }
-        private String currentPoss = "nowhere";
+        private String currentPos = "nowhere";
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -28,12 +28,12 @@ namespace PTClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Controller.TryCheckIn(currentPoss);
+            Controller.CheckIn(currentPos);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Controller.TryCheckOut(currentPoss);
+            Controller.CheckOut(currentPos);
         }
     }
 }
