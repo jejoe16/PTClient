@@ -34,7 +34,7 @@ namespace PTClient.Logic.LogicController
         /// <summary>
         /// downloads the list of turbines from the server and adds them to the client 
         /// </summary>
-        public void DownloadTurbines()
+        private void DownloadTurbines()
         {
             var latitude = api.GetTurbinesLatitude();
             var longitude = api.GetTurbinesLongitude();

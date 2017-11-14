@@ -8,7 +8,6 @@ namespace PTClient.Logic.LogicController
 {
     interface IController
     {
-        void DownloadTurbines();
         List<String> GetWindTurbineList();
         long GetTurbineLongitude(String Name);
         long GetTurbineLatitude(String Name);
