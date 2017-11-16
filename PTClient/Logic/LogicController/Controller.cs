@@ -110,5 +110,10 @@ namespace PTClient.Logic.LogicController
             }
             return true;
         }
+
+        public bool CaptainCheck()
+        {
+            return session.GetCaptain();
+        }
     }
 }

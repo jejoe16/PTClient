@@ -16,6 +16,7 @@ namespace PTClient.Logic.LogicController
         void Logout();
         Boolean CheckIn(String currentPos);
         Boolean CheckOut(String currentPoss);
+        Boolean CaptainCheck();
 
     }
 }
