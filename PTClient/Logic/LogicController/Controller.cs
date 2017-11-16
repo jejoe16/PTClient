@@ -94,16 +94,7 @@ namespace PTClient.Logic.LogicController
                 long UserLatitude = turbines.GetTurbineLatitude(position);
                 session.SetUserPosition(UserLatitude, UserLongitude);
 
-                if (session.GetCaptain())
-                {
-                    CaptainScreen captainScreen = new CaptainScreen();
-                    captainScreen.Show();
-                }
-                else
-                {
-                    WorkerScreen workerScreen = new WorkerScreen();
-                    workerScreen.Show();
-                }
+                
 
             }
 

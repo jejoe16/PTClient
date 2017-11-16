@@ -24,6 +24,16 @@ namespace PTClient.GUI
             String username = textBoxUsername.Text;
             String password = textBoxPassword.Text;
             control.Login(username, password);
+            if (control.CaptainCheck())
+            {
+                CaptainScreen captainScreen = new CaptainScreen();
+                captainScreen.Show();
+            }
+            else
+            {
+                WorkerScreen workerScreen = new WorkerScreen();
+                workerScreen.Show();
+            }
         }
 
         private void Login_Load(object sender, EventArgs e)
