@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace PTClient.GUI
 {
-    public partial class Worker : Form
+    public partial class WorkerScreen : Form
     {
         Logic.LogicController.Controller Controller = Logic.LogicController.Controller.GetController();
-        public Worker()
+        public WorkerScreen()
         {
             InitializeComponent();
 

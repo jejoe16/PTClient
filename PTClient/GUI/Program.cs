@@ -19,15 +19,10 @@ namespace PTClient.GUI
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Controller control = Controller.GetController();
-            IMap map = new MapControl();
-            List<String> TurbineNames = control.GetWindTurbineList();
-            foreach(String Name in TurbineNames)
-            {
-                map.AddTurbineMarker(Name, control.GetTurbineLatitude(Name), control.GetTurbineLongitude(Name));
-            }
-            Application.Run(new Overview());
 
+
+            Application.Run(new LoginScreen());
+            Controller control = Controller.GetController();
         }
 
     }
