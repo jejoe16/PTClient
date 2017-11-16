@@ -84,26 +84,24 @@ namespace PTClient.Logic.LogicController
 
         public Boolean Login(String username, String password)
         {
+            Session session;
+            session = new Session();
             Boolean Check = api.Login(username, password);
+            
             if (Check.Equals(true))
             {
                 Boolean Captain = api.CaptainCheck();
-                session = new Session(username, password, Captain);
+                //session = new Session(username, password, Captain);
+                session.SetUserName(username);
+                session.SetPassWord(password);
+                session.SetCaptain(Captain);
                 String position = api.GetUserPosition();
                 long UserLongitude = turbines.GetTurbineLongitude(position);
                 long UserLatitude = turbines.GetTurbineLatitude(position);
                 session.SetUserPosition(UserLatitude, UserLongitude);
 
-                if (session.GetCaptain())
-                {
-                    CaptainScreen captainScreen = new CaptainScreen();
-                    captainScreen.Show();
-                }
-                else
-                {
-                    WorkerScreen workerScreen = new WorkerScreen();
-                    workerScreen.Show();
-                }
+                
+            
 
             }
 
