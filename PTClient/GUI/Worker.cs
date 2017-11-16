@@ -12,7 +12,6 @@ namespace PTClient.GUI
 {
     public partial class Worker : Form
     {
-        Logic.LogicController.Controller Controller = Logic.LogicController.Controller.GetController();
         public Worker()
         {
             InitializeComponent();
@@ -22,18 +21,18 @@ namespace PTClient.GUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Controller.Logout();
+            Logic.LogicController.Controller.GetController().Logout();
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Controller.CheckIn(currentPos);
+            Logic.LogicController.Controller.GetController().CheckIn(currentPos);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Controller.CheckOut(currentPos);
+            Logic.LogicController.Controller.GetController().CheckOut(currentPos);
         }
     }
 }

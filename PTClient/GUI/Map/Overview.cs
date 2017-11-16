@@ -45,17 +45,18 @@ namespace PTClient.GUI.Map
 
         private void buttonCheckin_Click(object sender, EventArgs e)
         {
-
+            Logic.LogicController.Controller.GetController().CheckIn("mangler i capt gui");
         }
 
         private void buttonCheckout_Click(object sender, EventArgs e)
         {
-
+            Logic.LogicController.Controller.GetController().CheckOut("Mangler i capt gui");
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            Logic.LogicController.Controller.GetController().Logout();
+            this.Close();
         }
     }
 }

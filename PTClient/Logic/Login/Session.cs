@@ -16,6 +16,7 @@ namespace PTClient.Logic.Login
         {
             currentUser = new User(Captain, Password, Username);
         }
+        public Session() { currentUser = new User(); }
 
         public void ClearSession()
         {

@@ -26,7 +26,7 @@ namespace PTClient.GUI
             {
                 map.AddTurbineMarker(Name, control.GetTurbineLatitude(Name), control.GetTurbineLongitude(Name));
             }
-            Application.Run(new Overview());
+            Application.Run(new Login1());
 
         }
 

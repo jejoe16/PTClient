@@ -64,18 +64,28 @@ namespace PTClient.Logic.LogicController
 
         public Boolean Login(String username, String password)
         {
+            Session session;
+            session = new Session();
+            
             Boolean Check = api.Login(username, password);
             if (Check.Equals(true))
             {
                 Boolean Captain = api.CaptainCheck();
-                session = new Session(username, password, Captain);
+                //session = new Session(username, password, Captain);
+                session.SetCaptain(Captain);
+                session.SetUserName(username);
+                session.SetPassWord(password);
                 String position = api.GetUserPosition();
                 long UserLongitude = turbines.GetTurbineLongitude(position);
                 long UserLatitude = turbines.GetTurbineLatitude(position);
                 session.SetUserPosition(UserLatitude, UserLongitude);
-            }
+            } //else if (Check.Equals(false))
+            //{
+            //    session.ClearSession();
+            //}
 
-            return session.LoggedIn();
+            //return session.LoggedIn();
+            return true;
         }
         public void Logout()
         {
@@ -110,5 +120,10 @@ namespace PTClient.Logic.LogicController
             }
             return true;
         }
+        public Boolean getCaptain()
+        {
+            return false;//return session.GetCaptain();
+        }
+
     }
 }

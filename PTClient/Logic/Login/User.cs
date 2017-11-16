@@ -27,6 +27,7 @@ namespace PTClient.Logic.Login
             username = Username;
             password = pw;
         }
+        public User() { }
         // indicates wheter or not this specific user should go down with his ship
 
 
