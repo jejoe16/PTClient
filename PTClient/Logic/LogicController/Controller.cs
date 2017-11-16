@@ -143,5 +143,9 @@ namespace PTClient.Logic.LogicController
             }
             return true;
         }
+        public bool getCaptain()
+        {
+            return session.GetCaptain();
+        }
     }
 }
