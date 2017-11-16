@@ -1,5 +1,8 @@
 ﻿using PTClient.API;
+using PTClient.GUI;
+using PTClient.GUI.Map;
 using PTClient.Logic.Login;
+using PTClient.Logic.Position;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,14 +14,21 @@ namespace PTClient.Logic.LogicController
 {
     class Controller : IController
     {
-        private Position.ITurbinePosition turbines = new Position.TurbinePosition();
+        private ITurbinePosition turbines = null;
         private static Controller controller = null;
         private IAPIController api = null;
         private ISession session = null;
+
         public Controller()
         {
             api = PTClient.API.APIController.GetAPIController();
+            turbines = new TurbinePosition();
+
             DownloadTurbines();
+            GetWindTurbineList();
+
+            
+
         }
 
         public static Controller GetController()
@@ -46,17 +56,27 @@ namespace PTClient.Logic.LogicController
             }
         }
 
-        public List<String> GetWindTurbineList()
+        private void GetWindTurbineList()
         {
             var turbinelist = turbines.GetTurbineName();
-            return turbinelist;
+
+
+            IMap map = new MapControl();
+
+            foreach (String Name in turbinelist)
+            {
+                map.AddTurbineMarker(Name, this.GetTurbineLatitude(Name), this.GetTurbineLongitude(Name));
+            }
+
+
+
         }
 
         public long GetTurbineLongitude(String Name)
         {
             return turbines.GetTurbineLongitude(Name);
         }
-         
+
         public long GetTurbineLatitude(String Name)
         {
             return turbines.GetTurbineLatitude(Name);
@@ -73,6 +93,18 @@ namespace PTClient.Logic.LogicController
                 long UserLongitude = turbines.GetTurbineLongitude(position);
                 long UserLatitude = turbines.GetTurbineLatitude(position);
                 session.SetUserPosition(UserLatitude, UserLongitude);
+
+                if (session.GetCaptain())
+                {
+                    CaptainScreen captainScreen = new CaptainScreen();
+                    captainScreen.Show();
+                }
+                else
+                {
+                    WorkerScreen workerScreen = new WorkerScreen();
+                    workerScreen.Show();
+                }
+
             }
 
             return session.LoggedIn();
@@ -86,7 +118,8 @@ namespace PTClient.Logic.LogicController
             if (session.LoggedIn().Equals(false) || session == null)
             {
                 return false;
-            } else
+            }
+            else
             {
                 api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), currentPos);
                 long UserLongitude = turbines.GetTurbineLongitude(currentPos);
