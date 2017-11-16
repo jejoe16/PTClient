@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace PTClient.GUI.Map
 {
-    public partial class Overview : Form
+    public partial class CaptainScreen : Form
     {
 
-        public Overview()
+        public CaptainScreen()
         {
             InitializeComponent();
         }

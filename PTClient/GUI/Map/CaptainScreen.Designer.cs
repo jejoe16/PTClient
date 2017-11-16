@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PTClient.GUI.Map
 {
-    partial class Overview
+    partial class CaptainScreen
     {
 
         /// <summary>

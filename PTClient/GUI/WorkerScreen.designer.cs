@@ -1,6 +1,6 @@
 ﻿namespace PTClient.GUI
 {
-    partial class Worker
+    partial class WorkerScreen
     {
         /// <summary>
         /// Required designer variable.

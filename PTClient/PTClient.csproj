@@ -103,12 +103,6 @@
   <ItemGroup>
     <Compile Include="API\APIController.cs" />
     <Compile Include="API\IAPIController.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="API\IO.Swagger\Api\DefaultApi.cs" />
     <Compile Include="API\IO.Swagger\Client\ApiClient.cs" />
     <Compile Include="API\IO.Swagger\Client\ApiException.cs" />
@@ -121,11 +115,11 @@
     <Compile Include="API\IO.Swagger\Model\InlineResponse400.cs" />
     <Compile Include="Logic\LogicController\Controller.cs" />
     <Compile Include="Logic\LogicController\IController.cs" />
-    <Compile Include="GUI\Login1.cs">
+    <Compile Include="GUI\LoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Login1.designer.cs">
-      <DependentUpon>Login1.cs</DependentUpon>
+    <Compile Include="GUI\LoginScreen.designer.cs">
+      <DependentUpon>LoginScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\Login\ISession.cs" />
     <Compile Include="Logic\Login\Session.cs" />
@@ -133,11 +127,11 @@
     <Compile Include="GUI\Map\IMap.cs" />
     <Compile Include="GUI\Map\MapControl.cs" />
     <Compile Include="GUI\Map\MapMarker.cs" />
-    <Compile Include="GUI\Map\Overview.cs">
+    <Compile Include="GUI\Map\CaptainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Map\Overview.Designer.cs">
-      <DependentUpon>Overview.cs</DependentUpon>
+    <Compile Include="GUI\Map\CaptainScreen.Designer.cs">
+      <DependentUpon>CaptainScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Map\TurbineMarker.cs" />
     <Compile Include="GUI\Map\VesselMarker.cs" />
@@ -155,17 +149,17 @@
     </Compile>
     <Compile Include="SimPositionProgram\ISimPosition.cs" />
     <Compile Include="SimPositionProgram\SimPosition.cs" />
-    <Compile Include="GUI\Worker.cs">
+    <Compile Include="GUI\WorkerScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Worker.designer.cs">
-      <DependentUpon>Worker.cs</DependentUpon>
+    <Compile Include="GUI\WorkerScreen.designer.cs">
+      <DependentUpon>WorkerScreen.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="GUI\Login1.resx">
-      <DependentUpon>Login1.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\LoginScreen.resx">
+      <DependentUpon>LoginScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Map\Overview.resx">
-      <DependentUpon>Overview.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Map\CaptainScreen.resx">
+      <DependentUpon>CaptainScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -180,8 +174,8 @@
     <EmbeddedResource Include="SimPositionProgram\GuiSimPos.resx">
       <DependentUpon>GuiSimPos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Worker.resx">
-      <DependentUpon>Worker.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\WorkerScreen.resx">
+      <DependentUpon>WorkerScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="API\IO.Swagger\packages.config" />
     <None Include="packages.config" />

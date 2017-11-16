@@ -10,9 +10,10 @@ using System.Windows.Forms;
 
 namespace PTClient.GUI
 {
-    public partial class Worker : Form
+    public partial class WorkerScreen : Form
     {
-        public Worker()
+        Logic.LogicController.Controller Controller = Logic.LogicController.Controller.GetController();
+        public WorkerScreen()
         {
             InitializeComponent();
 
@@ -21,18 +22,18 @@ namespace PTClient.GUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().Logout();
+            Controller.Logout();
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().CheckIn(currentPos);
+            Controller.CheckIn(currentPos);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().CheckOut(currentPos);
+            Controller.CheckOut(currentPos);
         }
     }
 }
