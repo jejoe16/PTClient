@@ -39,12 +39,8 @@ namespace PTClient.GUI.Map
             this.buttonCheckin = new System.Windows.Forms.Button();
             this.buttonCheckout = new System.Windows.Forms.Button();
             this.statusLabel = new System.Windows.Forms.Label();
-            this.textboxUsername = new System.Windows.Forms.TextBox();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gmap
@@ -59,6 +55,7 @@ namespace PTClient.GUI.Map
             this.gmap.MarkersEnabled = true;
             this.gmap.MaxZoom = 2;
             this.gmap.MinZoom = 2;
+            this.gmap.MouseWheelZoomEnabled = true;
             this.gmap.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             this.gmap.Name = "gmap";
             this.gmap.NegativeMode = false;
@@ -102,68 +99,32 @@ namespace PTClient.GUI.Map
             this.statusLabel.TabIndex = 3;
             this.statusLabel.Text = "Status";
             // 
-            // textboxUsername
-            // 
-            this.textboxUsername.Location = new System.Drawing.Point(683, 12);
-            this.textboxUsername.Name = "textboxUsername";
-            this.textboxUsername.Size = new System.Drawing.Size(100, 20);
-            this.textboxUsername.TabIndex = 4;
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(683, 63);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
-            this.textBoxPassword.TabIndex = 5;
-            // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Location = new System.Drawing.Point(628, 108);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 6;
-            this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(625, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Password:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(623, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Username:";
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // Overview
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(873, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 74);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Logoff";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // CaptainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 561);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.buttonLogin);
-            this.Controls.Add(this.textBoxPassword);
-            this.Controls.Add(this.textboxUsername);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.buttonCheckout);
             this.Controls.Add(this.buttonCheckin);
             this.Controls.Add(this.gmap);
-            this.Name = "Overview";
+            this.Name = "CaptainScreen";
             this.Text = "Overview";
             this.Load += new System.EventHandler(this.Onload);
             this.ResumeLayout(false);
@@ -177,12 +138,8 @@ namespace PTClient.GUI.Map
         private Button buttonCheckin;
         private Button buttonCheckout;
         private Label statusLabel;
-        private TextBox textboxUsername;
-        private TextBox textBoxPassword;
-        private Button buttonLogin;
-        private Label label2;
-        private Label label3;
         private ContextMenuStrip contextMenuStrip1;
+        private Button button1;
     }
 
 }
