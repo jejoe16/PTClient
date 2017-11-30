@@ -36,38 +36,25 @@ using System.ComponentModel.DataAnnotations;
 namespace PTClient.IO.Swagger.Model
 {
     /// <summary>
-    /// InlineResponse200
+    /// InlineResponse203
     /// </summary>
     [DataContract]
-    public partial class InlineResponse200 :  IEquatable<InlineResponse200>, IValidatableObject
+    public partial class InlineResponse203 :  IEquatable<InlineResponse203>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InlineResponse200" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse203" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        protected InlineResponse200() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InlineResponse200" /> class.
-        /// </summary>
-        /// <param name="Position">Position (required).</param>
-        public InlineResponse200(string Position = null)
+        /// <param name="Message">Message.</param>
+        public InlineResponse203(bool? Message = null)
         {
-            // to ensure "Position" is required (not null)
-            if (Position == null)
-            {
-                throw new InvalidDataException("Position is a required property for InlineResponse200 and cannot be null");
-            }
-            else
-            {
-                this.Position = Position;
-            }
+            this.Message = Message;
         }
         
         /// <summary>
-        /// Gets or Sets Position
+        /// Gets or Sets Message
         /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
-        public string Position { get; set; }
+        [DataMember(Name="message", EmitDefaultValue=false)]
+        public bool? Message { get; set; }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -75,8 +62,8 @@ namespace PTClient.IO.Swagger.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class InlineResponse200 {\n");
-            sb.Append("  Position: ").Append(Position).Append("\n");
+            sb.Append("class InlineResponse203 {\n");
+            sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -98,15 +85,15 @@ namespace PTClient.IO.Swagger.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as InlineResponse200);
+            return this.Equals(obj as InlineResponse203);
         }
 
         /// <summary>
-        /// Returns true if InlineResponse200 instances are equal
+        /// Returns true if InlineResponse203 instances are equal
         /// </summary>
-        /// <param name="other">Instance of InlineResponse200 to be compared</param>
+        /// <param name="other">Instance of InlineResponse203 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(InlineResponse200 other)
+        public bool Equals(InlineResponse203 other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -114,9 +101,9 @@ namespace PTClient.IO.Swagger.Model
 
             return 
                 (
-                    this.Position == other.Position ||
-                    this.Position != null &&
-                    this.Position.Equals(other.Position)
+                    this.Message == other.Message ||
+                    this.Message != null &&
+                    this.Message.Equals(other.Message)
                 );
         }
 
@@ -131,8 +118,8 @@ namespace PTClient.IO.Swagger.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Position != null)
-                    hash = hash * 59 + this.Position.GetHashCode();
+                if (this.Message != null)
+                    hash = hash * 59 + this.Message.GetHashCode();
                 return hash;
             }
         }

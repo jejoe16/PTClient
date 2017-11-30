@@ -8,7 +8,7 @@ namespace PTClient.GUI.Map
 {
     interface IMap
     {
-        void AddTurbineMarker(String Name, long Latitude, long Longitude);
+        void AddTurbineMarker(String Name, double Latitude, double Longitude);
 
     }
 }

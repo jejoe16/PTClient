@@ -9,14 +9,16 @@ namespace PTClient.GUI.Map
 {
     public partial class CaptainScreen : Form
     {
-
+        GUIController controller = GUIController.GetController();
         public CaptainScreen()
         {
+            controller.generateMap();
             InitializeComponent();
         }
 
         private void Onload(object sender, EventArgs e)
         {
+
             gmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
 
 
@@ -30,6 +32,7 @@ namespace PTClient.GUI.Map
 
         private void SetMarkers()
         {
+            
             GMap.NET.WindowsForms.GMapOverlay markersOverlay = new GMapOverlay("markers");
 
             gmap.Overlays.Add(markersOverlay);

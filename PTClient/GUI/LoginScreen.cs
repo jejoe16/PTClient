@@ -21,14 +21,15 @@ namespace PTClient.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             if (Logic.LogicController.Controller.GetController().Login(textBoxUsername.Text, textBoxPassword.Text) == true)
            {
-              if (Logic.LogicController.Controller.GetController().getCaptain() == true)
+              if (Logic.LogicController.Controller.GetController().CaptainCheck() == true)
                 {
-                    Map.CaptainScreen cap = new Map.CaptainScreen();
+                   Map.CaptainScreen cap = new Map.CaptainScreen();
                    cap.ShowDialog();
                 }
-                else if (Logic.LogicController.Controller.GetController().getCaptain() == false)
+                else if (Logic.LogicController.Controller.GetController().CaptainCheck() == false)
                 {
                    WorkerScreen wor = new WorkerScreen();
                     wor.ShowDialog();
@@ -39,6 +40,7 @@ namespace PTClient.GUI
             {
     
                 textBoxUsername.Text.Insert(1, "Mangler noget");
+
             }
         }
 

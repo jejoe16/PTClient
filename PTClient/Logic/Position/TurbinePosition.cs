@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PTClient.SharedResources;
 
 namespace PTClient.Logic.Position
 {
     class TurbinePosition : ITurbinePosition
     {
         private int radius = 100;
-        private List<WindTurbine> windturbines = new List<WindTurbine>();
+        private List<TurbineItem> windturbines = new List<TurbineItem>();
         private VesselPosition vessel = new VesselPosition();
 
         public void ShowPosDebugger()
@@ -18,64 +19,65 @@ namespace PTClient.Logic.Position
             vessel.ShowDebugger();
         }
 
-        public void AddTurbine(string name, long latitude,long longitude)
+        
+
+        public void AddTurbines(List<TurbineItem> turbines)
         {
-            WindTurbine wt;
-            windturbines.Add(wt = new WindTurbine(name,latitude, longitude));
+            windturbines = turbines;
         }
 
         public string GetNearWindTurbine()
         {
-            foreach (WindTurbine wts in windturbines)
+            foreach (TurbineItem wts in windturbines)
             {
                 double lat = vessel.GetLatitude(); // vessel lat 
                 double lon = vessel.GetLongitude(); // vessel long
-                double result = (Math.Pow((lat - wts.GetLatitude), 2) + Math.Pow((lon - wts.GetLongitude), 2));
+                double result = (Math.Pow((lat - (double)wts.Latitude), 2) + Math.Pow((lon - (double)wts.Longitude), 2));
 
                 if (result <= Math.Pow(radius, 2))
                 {
-                    return wts.GetName;
+                    return wts.Name;
                 }
             }
             return null;
         }
 
-        public List<WindTurbine> GetTurbineList()
+        public List<TurbineItem> GetTurbineList()
         {
             return windturbines;
         }
 
-        public List<String> GetTurbineName()
+        public List<String> GetTurbineNames()
         {
             List<String> TurbineNames = new List<String>();
-            foreach (WindTurbine wt in windturbines)
+            foreach (TurbineItem wt in windturbines)
             {
-                TurbineNames.Add(wt.GetName);
+                TurbineNames.Add(wt.Name);
             }
             return TurbineNames;
         }
 
-        public long GetTurbineLatitude(String Name)
+        public double GetTurbineLatitude(String Name)
         {
-            long Latitude = 0;
-            foreach (WindTurbine wt in windturbines)
+            double Latitude = 0;
+            foreach (TurbineItem wt in windturbines)
             {
-                if (wt.GetName.Equals(Name))
+                if (wt.Name.Equals(Name))
                 {
-                    Latitude = wt.GetLatitude;
+                    Latitude = (double)wt.Latitude;
                 }
             }
             return Latitude;
         }
 
-        public long GetTurbineLongitude(String Name)
+        public double GetTurbineLongitude(String Name)
         {
-            long Longitude = 0;
-            foreach (WindTurbine wt in windturbines)
+            double Longitude = 0;
+            foreach (TurbineItem wt in windturbines)
             {
-                if (wt.GetName.Equals(Name))
+                if (wt.Name.Equals(Name))
                 {
-                    Longitude = wt.GetLongitude;
+                    Longitude = (double)wt.Longitude;
                 }
             }
             return Longitude;

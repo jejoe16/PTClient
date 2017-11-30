@@ -36,38 +36,53 @@ using System.ComponentModel.DataAnnotations;
 namespace PTClient.IO.Swagger.Model
 {
     /// <summary>
-    /// InlineResponse200
+    /// InlineResponse201
     /// </summary>
     [DataContract]
-    public partial class InlineResponse200 :  IEquatable<InlineResponse200>, IValidatableObject
+    public partial class InlineResponse201 :  IEquatable<InlineResponse201>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InlineResponse200" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse201" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InlineResponse200() { }
+        protected InlineResponse201() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="InlineResponse200" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse201" /> class.
         /// </summary>
-        /// <param name="Position">Position (required).</param>
-        public InlineResponse200(string Position = null)
+        /// <param name="Confirm">Confirm (required).</param>
+        /// <param name="IsCaptain">IsCaptain (required).</param>
+        public InlineResponse201(bool? Confirm = null, bool? IsCaptain = null)
         {
-            // to ensure "Position" is required (not null)
-            if (Position == null)
+            // to ensure "Confirm" is required (not null)
+            if (Confirm == null)
             {
-                throw new InvalidDataException("Position is a required property for InlineResponse200 and cannot be null");
+                throw new InvalidDataException("Confirm is a required property for InlineResponse201 and cannot be null");
             }
             else
             {
-                this.Position = Position;
+                this.Confirm = Confirm;
+            }
+            // to ensure "IsCaptain" is required (not null)
+            if (IsCaptain == null)
+            {
+                throw new InvalidDataException("IsCaptain is a required property for InlineResponse201 and cannot be null");
+            }
+            else
+            {
+                this.IsCaptain = IsCaptain;
             }
         }
         
         /// <summary>
-        /// Gets or Sets Position
+        /// Gets or Sets Confirm
         /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
-        public string Position { get; set; }
+        [DataMember(Name="confirm", EmitDefaultValue=false)]
+        public bool? Confirm { get; set; }
+        /// <summary>
+        /// Gets or Sets IsCaptain
+        /// </summary>
+        [DataMember(Name="isCaptain", EmitDefaultValue=false)]
+        public bool? IsCaptain { get; set; }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -75,8 +90,9 @@ namespace PTClient.IO.Swagger.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class InlineResponse200 {\n");
-            sb.Append("  Position: ").Append(Position).Append("\n");
+            sb.Append("class InlineResponse201 {\n");
+            sb.Append("  Confirm: ").Append(Confirm).Append("\n");
+            sb.Append("  IsCaptain: ").Append(IsCaptain).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -98,15 +114,15 @@ namespace PTClient.IO.Swagger.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as InlineResponse200);
+            return this.Equals(obj as InlineResponse201);
         }
 
         /// <summary>
-        /// Returns true if InlineResponse200 instances are equal
+        /// Returns true if InlineResponse201 instances are equal
         /// </summary>
-        /// <param name="other">Instance of InlineResponse200 to be compared</param>
+        /// <param name="other">Instance of InlineResponse201 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(InlineResponse200 other)
+        public bool Equals(InlineResponse201 other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -114,9 +130,14 @@ namespace PTClient.IO.Swagger.Model
 
             return 
                 (
-                    this.Position == other.Position ||
-                    this.Position != null &&
-                    this.Position.Equals(other.Position)
+                    this.Confirm == other.Confirm ||
+                    this.Confirm != null &&
+                    this.Confirm.Equals(other.Confirm)
+                ) && 
+                (
+                    this.IsCaptain == other.IsCaptain ||
+                    this.IsCaptain != null &&
+                    this.IsCaptain.Equals(other.IsCaptain)
                 );
         }
 
@@ -131,8 +152,10 @@ namespace PTClient.IO.Swagger.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Position != null)
-                    hash = hash * 59 + this.Position.GetHashCode();
+                if (this.Confirm != null)
+                    hash = hash * 59 + this.Confirm.GetHashCode();
+                if (this.IsCaptain != null)
+                    hash = hash * 59 + this.IsCaptain.GetHashCode();
                 return hash;
             }
         }

@@ -9,14 +9,19 @@ namespace PTClient.Logic.Login
     class Session : ISession
     {
 
-        private User currentUser;
+        private User currentUser = null;
 
 
-        public Session(string Username, string Password, bool Captain)
+        
+        public Session()
+        {
+
+        }
+        public void createUser(string Username, string Password, bool Captain)
         {
             currentUser = new User(Captain, Password, Username);
         }
-        public Session() { currentUser = new User(); }
+
 
         public void ClearSession()
         {
@@ -33,20 +38,6 @@ namespace PTClient.Logic.Login
             return currentUser.Password;
         }
 
-        public string GetUptime()
-        {
-            throw new NotImplementedException();
-        }
-
-        public long GetUserLatitude()
-        {
-            return currentUser.Latitude;
-        }
-
-        public long GetUserLongtitude()
-        {
-            return currentUser.Longitude;
-        }
 
         public string GetUserName()
         {
@@ -78,10 +69,9 @@ namespace PTClient.Logic.Login
             currentUser.Username = username;
         }
 
-        public void SetUserPosition(long latitude, long longitude)
+        public void SetUserPosition(String position)
         {
-            currentUser.Longitude = longitude;
-            currentUser.Latitude = latitude;
+            currentUser.Position = position;
         }
     }
 }

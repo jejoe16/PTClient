@@ -8,12 +8,14 @@ namespace PTClient.Logic.LogicController
 {
     interface IController
     {
-        long GetTurbineLongitude(String Name);
-        long GetTurbineLatitude(String Name);
+        double GetTurbineLongitude(String Name);
+        double GetTurbineLatitude(String Name);
+        List<String> GetTurbineNames();
         Boolean Login(String username, String password);
         void Logout();
         Boolean CheckIn(String currentPos);
         Boolean CheckOut(String currentPoss);
+        Boolean CaptainCheck();
 
     }
 }

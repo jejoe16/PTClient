@@ -9,10 +9,10 @@ namespace PTClient.GUI.Map
     abstract class MapMarker
     {
         private string name;
-        private long latitude;
-        private long longitude;
+        private double latitude;
+        private double longitude;
 
-        public MapMarker(string name, long latitude, long longitude)
+        public MapMarker(string name, double latitude, double longitude)
         {
             this.name = name;
             this.latitude = latitude;
@@ -20,7 +20,7 @@ namespace PTClient.GUI.Map
         }
 
         public string Name { get => name; }
-        public long Latitude { get => latitude; }
-        public long Longitude { get => longitude; }
+        public double Latitude { get => latitude; }
+        public double Longitude { get => longitude; }
     }
 }

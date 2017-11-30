@@ -22,7 +22,7 @@ namespace PTClient.GUI
 
 
             Application.Run(new LoginScreen());
-            Controller control = Controller.GetController();
+            GUIController control = GUIController.GetController();
         }
 
     }

@@ -111,8 +111,12 @@
     <Compile Include="API\IO.Swagger\Client\ExceptionFactory.cs" />
     <Compile Include="API\IO.Swagger\Client\IApiAccessor.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse200.cs" />
-    <Compile Include="API\IO.Swagger\Model\InlineResponse2001.cs" />
-    <Compile Include="API\IO.Swagger\Model\InlineResponse400.cs" />
+    <Compile Include="API\IO.Swagger\Model\InlineResponse201.cs" />
+    <Compile Include="API\IO.Swagger\Model\InlineResponse202.cs" />
+    <Compile Include="API\IO.Swagger\Model\InlineResponse203.cs" />
+    <Compile Include="API\IO.Swagger\Model\InlineResponse204.cs" />
+    <Compile Include="GUI\GUIController.cs" />
+    <Compile Include="SharedResources\TurbineItem.cs" />
     <Compile Include="Logic\LogicController\Controller.cs" />
     <Compile Include="Logic\LogicController\IController.cs" />
     <Compile Include="GUI\LoginScreen.cs">
@@ -138,7 +142,6 @@
     <Compile Include="Logic\Position\ITurbinePosition.cs" />
     <Compile Include="Logic\Position\TurbinePosition.cs" />
     <Compile Include="Logic\Position\VesselPosition.cs" />
-    <Compile Include="Logic\Position\WindTurbine.cs" />
     <Compile Include="GUI\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimPositionProgram\GuiSimPos.cs">
@@ -196,7 +199,6 @@
     <Content Include="Images\vessel.png" />
     <Content Include="Images\wind.png" />
     <Content Include="API\IO.Swagger\IO.Swagger.csproj" />
-    <None Include="Resources\vessel.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

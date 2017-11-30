@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PTClient.SharedResources;
 
 namespace PTClient.Logic.LogicController
 {
@@ -23,12 +24,6 @@ namespace PTClient.Logic.LogicController
         {
             api = PTClient.API.APIController.GetAPIController();
             turbines = new TurbinePosition();
-
-            DownloadTurbines();
-            GetWindTurbineList();
-
-            
-
         }
 
         public static Controller GetController()
@@ -46,67 +41,42 @@ namespace PTClient.Logic.LogicController
         /// </summary>
         private void DownloadTurbines()
         {
-            var latitude = api.GetTurbinesLatitude();
-            var longitude = api.GetTurbinesLongitude();
-            var name = api.GetTurbinesName();
-
-            for (int i = 0; i < name.Count; i++)
-            {
-                turbines.AddTurbine(name[i], (long)latitude[i], (long)longitude[i]);
-            }
+            turbines.AddTurbines(api.getTurbines());
         }
 
-        private void GetWindTurbineList()
+
+        public List<String> GetTurbineNames()
         {
-            var turbinelist = turbines.GetTurbineName();
-
-
-            IMap map = new MapControl();
-
-            foreach (String Name in turbinelist)
-            {
-                map.AddTurbineMarker(Name, this.GetTurbineLatitude(Name), this.GetTurbineLongitude(Name));
-            }
-
-
-
+            DownloadTurbines();
+            return turbines.GetTurbineNames();
         }
 
-        public long GetTurbineLongitude(String Name)
+        public double GetTurbineLongitude(String Name)
         {
             return turbines.GetTurbineLongitude(Name);
         }
 
-        public long GetTurbineLatitude(String Name)
+        public double GetTurbineLatitude(String Name)
         {
             return turbines.GetTurbineLatitude(Name);
         }
 
         public Boolean Login(String username, String password)
         {
-            Session session;
-            session = new Session();
             Boolean Check = api.Login(username, password);
-            
+
+            Session session = new Session();
             if (Check.Equals(true))
             {
                 Boolean Captain = api.CaptainCheck();
-                //session = new Session(username, password, Captain);
-                session.SetUserName(username);
-                session.SetPassWord(password);
-                session.SetCaptain(Captain);
+                session.createUser(username, password, Captain);
                 String position = api.GetUserPosition();
-                long UserLongitude = turbines.GetTurbineLongitude(position);
-                long UserLatitude = turbines.GetTurbineLatitude(position);
-                session.SetUserPosition(UserLatitude, UserLongitude);
-
-                
-            
-
+                session.SetUserPosition(position);
             }
 
             return session.LoggedIn();
         }
+
         public void Logout()
         {
             session = null;
@@ -120,9 +90,7 @@ namespace PTClient.Logic.LogicController
             else
             {
                 api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), currentPos);
-                long UserLongitude = turbines.GetTurbineLongitude(currentPos);
-                long UserLatitude = turbines.GetTurbineLatitude(currentPos);
-                session.SetUserPosition(UserLatitude, UserLongitude);
+                session.SetUserPosition(currentPos);
             }
             return true;
         }
@@ -135,13 +103,14 @@ namespace PTClient.Logic.LogicController
             else
             {
                 api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), currentPos);
-                long UserLongitude = turbines.GetTurbineLongitude(currentPos);
-                long UserLatitude = turbines.GetTurbineLatitude(currentPos);
-                session.SetUserPosition(UserLatitude, UserLongitude);
+                session.SetUserPosition(currentPos);
             }
             return true;
         }
-        public bool getCaptain()
+
+
+        public bool CaptainCheck()
+
         {
             return session.GetCaptain();
         }

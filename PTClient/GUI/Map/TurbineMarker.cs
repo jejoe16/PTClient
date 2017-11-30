@@ -11,7 +11,7 @@ namespace PTClient.GUI.Map
     {
         private Bitmap image = PTClient.Properties.Resources.wind;
 
-        public TurbineMarker(string name, long latitude, long longitude) : base(name, latitude, longitude)
+        public TurbineMarker(string name, double latitude, double longitude) : base(name, latitude, longitude)
         {
         }
 
