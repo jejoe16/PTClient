@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PTClient.SharedResources;
 
 namespace PTClient.Logic.Position
 {
@@ -17,7 +18,7 @@ namespace PTClient.Logic.Position
         /// <param name="name">name of the wind turbine ex. A1</param>
         /// <param name="latitude">latitude position</param>
         /// <param name="longitude">longitude position</param>
-        void AddTurbine(string name, long latitude, long longitude);
+        void AddTurbines(List<TurbineItem> turbines);
 
         /// <summary>
         /// This method returns the nearst turbine to the vessel ex A1 if that is within a radius 200m of the vessel
@@ -29,15 +30,15 @@ namespace PTClient.Logic.Position
         /// returns a list of all turbines from the server
         /// </summary>
         /// <returns>ArrayList with instance of turbines</returns>
-        List<WindTurbine> GetTurbineList();
+        List<TurbineItem> GetTurbineList();
 
         /// <summary>
         /// Method to show the location debugger
         /// </summary>
         void ShowPosDebugger();
 
-        List<String> GetTurbineName();
-        long GetTurbineLongitude(String Name);
-        long GetTurbineLatitude(String Name);
+        List<String> GetTurbineNames();
+        double GetTurbineLongitude(String Name);
+        double GetTurbineLatitude(String Name);
     }
 }

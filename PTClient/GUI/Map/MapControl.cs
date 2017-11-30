@@ -14,7 +14,7 @@ namespace PTClient.GUI.Map
         private static List<Object> markers = new List<Object>();
       
 
-        public void AddTurbineMarker(String Name, long Latitude, long Longitude)
+        public void AddTurbineMarker(String Name, double Latitude, double Longitude)
         {
             markers.Add(new TurbineMarker(Name, Latitude, Longitude));
         }
@@ -34,8 +34,8 @@ namespace PTClient.GUI.Map
                 Bitmap Image = new Bitmap(obj.Image);
                 Bitmap resized = new Bitmap(Image, new Size(20, 40));
 
-                double lat = ConvertStoD(obj.Latitude.ToString());
-                double lon = ConvertStoD(obj.Longitude.ToString());
+                double lat = obj.Latitude;
+                double lon = obj.Longitude;
 
                 GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(lat,lon), new Bitmap(resized));
                 markerListDrawing.Add(marker);

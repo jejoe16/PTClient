@@ -21,8 +21,8 @@ namespace PTClient.GUI
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            Application.Run();
-            Controller control = Controller.GetController();
+            Application.Run(new LoginScreen());
+            GUIController control = GUIController.GetController();
         }
 
     }

@@ -26,7 +26,7 @@ namespace PTClient.GUI
            {
               if (Logic.LogicController.Controller.GetController().CaptainCheck() == true)
                 {
-                    Map.CaptainScreen cap = new Map.CaptainScreen();
+                   Map.CaptainScreen cap = new Map.CaptainScreen();
                    cap.ShowDialog();
                 }
                 else if (Logic.LogicController.Controller.GetController().CaptainCheck() == false)

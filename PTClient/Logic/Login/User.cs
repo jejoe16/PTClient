@@ -8,17 +8,14 @@ namespace PTClient.Logic.Login
 {
     public class User
     {
-        private Boolean captain;
+        private Boolean captain  = false;
         public Boolean Captain { get { return this.captain; } set { this.captain = value; } }
         private String username;
         public String Username { get { return this.username; } set { this.username = value; } }
         private String password;
         public String Password { get { return this.password; } set { this.password = value; } }
-
-        private long longitude;
-        public long Longitude { get { return this.longitude; } set { this.longitude = value; } }
-        private long latitude;
-        public long Latitude { get { return this.latitude; } set { this.latitude = value; } }
+        private String position;
+        public String Position { get { return this.position; } set { this.position = value; } }
 
 
         public User(Boolean capt, String username, String pw)

@@ -12,13 +12,11 @@ namespace PTClient.Logic.Login
         void SetUserName(String username);
         String GetPassword();
         void SetPassWord(String password);
-        String GetUptime();
         void ClearSession();
         void SetCaptain(bool capt);
         bool GetCaptain();
         bool LoggedIn();
-        void SetUserPosition(long latitude, long longitude);
-        long GetUserLongtitude();
-        long GetUserLatitude();
+        void SetUserPosition(String position);
+        
     }
 }

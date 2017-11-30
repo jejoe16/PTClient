@@ -32,42 +32,43 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
+using PTClient.SharedResources;
 
 namespace PTClient.IO.Swagger.Model
 {
     /// <summary>
-    /// InlineResponse200
+    /// InlineResponse202
     /// </summary>
     [DataContract]
-    public partial class InlineResponse200 :  IEquatable<InlineResponse200>, IValidatableObject
+    public partial class InlineResponse202 :  IEquatable<InlineResponse202>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InlineResponse200" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse202" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InlineResponse200() { }
+        protected InlineResponse202() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="InlineResponse200" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse202" /> class.
         /// </summary>
-        /// <param name="Position">Position (required).</param>
-        public InlineResponse200(string Position = null)
+        /// <param name="Turbines">Turbines (required).</param>
+        public InlineResponse202(List<TurbineItem> Turbines = null)
         {
-            // to ensure "Position" is required (not null)
-            if (Position == null)
+            // to ensure "Turbines" is required (not null)
+            if (Turbines == null)
             {
-                throw new InvalidDataException("Position is a required property for InlineResponse200 and cannot be null");
+                throw new InvalidDataException("Turbines is a required property for InlineResponse202 and cannot be null");
             }
             else
             {
-                this.Position = Position;
+                this.Turbines = Turbines;
             }
         }
         
         /// <summary>
-        /// Gets or Sets Position
+        /// Gets or Sets Turbines
         /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
-        public string Position { get; set; }
+        [DataMember(Name="turbines", EmitDefaultValue=false)]
+        public List<TurbineItem> Turbines { get; set; }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -75,8 +76,8 @@ namespace PTClient.IO.Swagger.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class InlineResponse200 {\n");
-            sb.Append("  Position: ").Append(Position).Append("\n");
+            sb.Append("class InlineResponse202 {\n");
+            sb.Append("  Turbines: ").Append(Turbines).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -98,15 +99,15 @@ namespace PTClient.IO.Swagger.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as InlineResponse200);
+            return this.Equals(obj as InlineResponse202);
         }
 
         /// <summary>
-        /// Returns true if InlineResponse200 instances are equal
+        /// Returns true if InlineResponse202 instances are equal
         /// </summary>
-        /// <param name="other">Instance of InlineResponse200 to be compared</param>
+        /// <param name="other">Instance of InlineResponse202 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(InlineResponse200 other)
+        public bool Equals(InlineResponse202 other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -114,9 +115,9 @@ namespace PTClient.IO.Swagger.Model
 
             return 
                 (
-                    this.Position == other.Position ||
-                    this.Position != null &&
-                    this.Position.Equals(other.Position)
+                    this.Turbines == other.Turbines ||
+                    this.Turbines != null &&
+                    this.Turbines.SequenceEqual(other.Turbines)
                 );
         }
 
@@ -131,8 +132,8 @@ namespace PTClient.IO.Swagger.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Position != null)
-                    hash = hash * 59 + this.Position.GetHashCode();
+                if (this.Turbines != null)
+                    hash = hash * 59 + this.Turbines.GetHashCode();
                 return hash;
             }
         }
