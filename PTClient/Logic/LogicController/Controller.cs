@@ -65,13 +65,14 @@ namespace PTClient.Logic.LogicController
         {
             Boolean Check = api.Login(username, password);
 
-            Session session = new Session();
+            session = new Session();
             if (Check.Equals(true))
             {
                 Boolean Captain = api.CaptainCheck();
+                
                 session.createUser(username, password, Captain);
-                String position = api.GetUserPosition();
-                session.SetUserPosition(position);
+                //String position = api.GetUserPosition();
+                //session.SetUserPosition(position);
             }
 
             return session.LoggedIn();
@@ -110,7 +111,6 @@ namespace PTClient.Logic.LogicController
 
 
         public bool CaptainCheck()
-
         {
             return session.GetCaptain();
         }

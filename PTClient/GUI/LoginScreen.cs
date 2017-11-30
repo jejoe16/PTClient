@@ -13,7 +13,7 @@ namespace PTClient.GUI
 {
     public partial class LoginScreen : Form
     {
-        
+        Controller control = Controller.GetController();
         public LoginScreen()
         {
             InitializeComponent();
@@ -21,22 +21,22 @@ namespace PTClient.GUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            if (Logic.LogicController.Controller.GetController().Login(textBoxUsername.Text, textBoxPassword.Text) == true)
+            Boolean LoginCheck = control.Login(textBoxUsername.Text, textBoxPassword.Text);
+            if (LoginCheck == true)
            {
-              if (Logic.LogicController.Controller.GetController().CaptainCheck() == true)
+              if (control.CaptainCheck() == true)
                 {
                    Map.CaptainScreen cap = new Map.CaptainScreen();
                    cap.ShowDialog();
                 }
-                else if (Logic.LogicController.Controller.GetController().CaptainCheck() == false)
+                else if (control.CaptainCheck() == false)
                 {
                    WorkerScreen wor = new WorkerScreen();
                     wor.ShowDialog();
                 }
 
             }
-            else if (Logic.LogicController.Controller.GetController().Login(textBoxUsername.Text, textBoxPassword.Text) == false)
+            else if (LoginCheck == false)
             {
     
                 textBoxUsername.Text.Insert(1, "Mangler noget");
