@@ -17,6 +17,8 @@ namespace PTClient.Logic.Login
         bool GetCaptain();
         bool LoggedIn();
         void SetUserPosition(String position);
-        
+        void createUser(string Username, string Password, bool Captain);
+
+
     }
 }

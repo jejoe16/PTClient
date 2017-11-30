@@ -19,7 +19,7 @@ namespace PTClient.Logic.Login
         }
         public void createUser(string Username, string Password, bool Captain)
         {
-            currentUser = new User(Captain, Password, Username);
+            currentUser = new User(Captain, Username, Password);
         }
 
 
