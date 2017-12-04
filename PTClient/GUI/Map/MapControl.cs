@@ -18,11 +18,7 @@ namespace PTClient.GUI.Map
         {
             markers.Add(new TurbineMarker(Name, Latitude, Longitude));
         }
-
-        public void SetVesselMarker()
-        {
-
-        }
+        
 
         public List<GMap.NET.WindowsForms.GMapMarker> DrawMarkers()
         {

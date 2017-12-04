@@ -37,9 +37,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(197, 35);
+            this.button1.Location = new System.Drawing.Point(211, 14);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 73);
+            this.button1.Size = new System.Drawing.Size(75, 30);
             this.button1.TabIndex = 0;
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
@@ -54,7 +54,7 @@
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(80, 92);
+            this.textBoxPassword.Location = new System.Drawing.Point(80, 66);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
             this.textBoxPassword.TabIndex = 3;
@@ -71,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 95);
+            this.label2.Location = new System.Drawing.Point(23, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 5;
@@ -81,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 156);
+            this.ClientSize = new System.Drawing.Size(315, 146);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxPassword);

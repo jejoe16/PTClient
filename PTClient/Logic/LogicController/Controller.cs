@@ -44,6 +44,11 @@ namespace PTClient.Logic.LogicController
             turbines.AddTurbines(api.getTurbines());
         }
 
+        public List<TurbineItem> GetTurbines()
+        {
+            DownloadTurbines();
+            return turbines.GetTurbineList();
+        }
 
         public List<String> GetTurbineNames()
         {

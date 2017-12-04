@@ -41,6 +41,8 @@ namespace PTClient.GUI.Map
             this.statusLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.EngineStartButton = new System.Windows.Forms.Button();
+            this.EngineStopButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gmap
@@ -93,7 +95,7 @@ namespace PTClient.GUI.Map
             // 
             this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(625, 157);
+            this.statusLabel.Location = new System.Drawing.Point(628, 20);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(56, 20);
             this.statusLabel.TabIndex = 3;
@@ -108,17 +110,40 @@ namespace PTClient.GUI.Map
             // 
             this.button1.Location = new System.Drawing.Point(873, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 74);
+            this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 4;
             this.button1.Text = "Logoff";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // EngineStartButton
+            // 
+            this.EngineStartButton.Location = new System.Drawing.Point(873, 63);
+            this.EngineStartButton.Name = "EngineStartButton";
+            this.EngineStartButton.Size = new System.Drawing.Size(75, 28);
+            this.EngineStartButton.TabIndex = 5;
+            this.EngineStartButton.Text = "Start Engine";
+            this.EngineStartButton.UseVisualStyleBackColor = true;
+            this.EngineStartButton.Click += new System.EventHandler(this.start_Click);
+            // 
+            // EngineStopButton
+            // 
+            this.EngineStopButton.Enabled = false;
+            this.EngineStopButton.Location = new System.Drawing.Point(873, 115);
+            this.EngineStopButton.Name = "EngineStopButton";
+            this.EngineStopButton.Size = new System.Drawing.Size(75, 28);
+            this.EngineStopButton.TabIndex = 6;
+            this.EngineStopButton.Text = "Stop Engine";
+            this.EngineStopButton.UseVisualStyleBackColor = true;
+            this.EngineStopButton.Click += new System.EventHandler(this.stop_Click);
             // 
             // CaptainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.Controls.Add(this.EngineStopButton);
+            this.Controls.Add(this.EngineStartButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.buttonCheckout);
@@ -140,6 +165,8 @@ namespace PTClient.GUI.Map
         private Label statusLabel;
         private ContextMenuStrip contextMenuStrip1;
         private Button button1;
+        private Button EngineStartButton;
+        private Button EngineStopButton;
     }
 
 }

@@ -39,7 +39,7 @@ namespace PTClient.GUI
             else if (LoginCheck == false)
             {
     
-                textBoxUsername.Text.Insert(1, "Mangler noget");
+                textBoxUsername.Text.Insert(1, "Username or Password is wrong");
 
             }
         }
