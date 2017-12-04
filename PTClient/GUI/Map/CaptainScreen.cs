@@ -96,7 +96,7 @@ namespace PTClient.GUI.Map
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
                 VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
                 Bitmap Image = new Bitmap(vessel.Image);
-                Bitmap resized = new Bitmap(Image, new Size(20, 40));
+                Bitmap resized = new Bitmap(Image, new Size(30, 50));
                 Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
                 GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
                 gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
