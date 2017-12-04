@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace PTClient.Logic.LogicController
 {
@@ -22,7 +24,6 @@ namespace PTClient.Logic.LogicController
 
         public Controller()
         {
-            api = PTClient.API.APIController.GetAPIController();
             turbines = new TurbinePosition();
         }
 
@@ -68,6 +69,7 @@ namespace PTClient.Logic.LogicController
 
         public Boolean Login(String username, String password)
         {
+            api = PTClient.API.APIController.GetAPIController();
             Boolean Check = api.Login(username, password);
 
             session = new Session();
@@ -118,6 +120,17 @@ namespace PTClient.Logic.LogicController
         public bool CaptainCheck()
         {
             return session.GetCaptain();
+        }
+
+        public bool CheckConnection()
+        {
+            Ping ping = new Ping();
+            PingReply pingReply = ping.Send(new IPAddress(new byte[] { 35, 187, 75, 150 }), 1000);
+            if (pingReply.Status == IPStatus.Success)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

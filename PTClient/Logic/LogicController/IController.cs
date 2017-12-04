@@ -18,6 +18,7 @@ namespace PTClient.Logic.LogicController
         Boolean CheckOut(String currentPoss);
         Boolean CaptainCheck();
         List<TurbineItem> GetTurbines();
+        Boolean CheckConnection();
 
     }
 }

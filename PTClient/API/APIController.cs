@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
+using System.Net.NetworkInformation;
+using System.Net;
 
 namespace PTClient.API
 {

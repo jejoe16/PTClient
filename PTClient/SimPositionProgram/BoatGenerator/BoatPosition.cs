@@ -161,7 +161,15 @@ namespace PTClient.SimPositionProgram.BoatGenerator
 
         public float getDirection()
         {
-            return ImageDirection;
+            try
+            {
+                boat_lock.AcquireReaderLock(10000);
+                return ImageDirection;
+            }
+            finally
+            {
+                boat_lock.ReleaseReaderLock();
+            }
         }
 
        
