@@ -11,7 +11,7 @@ namespace PTClient.GUI.Map
     {
         private Bitmap image = PTClient.Properties.Resources.vessel;
 
-        public VesselMarker(string name, long latitude, long longitude) : base(name, latitude, longitude)
+        public VesselMarker(string name, double latitude, double longitude) : base(name, latitude, longitude)
         {
 
         }

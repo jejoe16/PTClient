@@ -10,7 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
-using System.Threading;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace PTClient.Logic.LogicController
 {
@@ -20,13 +21,9 @@ namespace PTClient.Logic.LogicController
         private static Controller controller = null;
         private IAPIController api = null;
         private ISession session = null;
-        private Emergency.State state = new Emergency.State();
-        private Boolean emerChecker = false;
-        private Emergency.EmergencyRoute emergencyRoute = new Emergency.EmergencyRoute();
 
         public Controller()
         {
-            api = PTClient.API.APIController.GetAPIController();
             turbines = new TurbinePosition();
         }
 
@@ -48,6 +45,11 @@ namespace PTClient.Logic.LogicController
             turbines.AddTurbines(api.getTurbines());
         }
 
+        public List<TurbineItem> GetTurbines()
+        {
+            DownloadTurbines();
+            return turbines.GetTurbineList();
+        }
 
         public List<String> GetTurbineNames()
         {
@@ -67,6 +69,7 @@ namespace PTClient.Logic.LogicController
 
         public Boolean Login(String username, String password)
         {
+            api = PTClient.API.APIController.GetAPIController();
             Boolean Check = api.Login(username, password);
 
             session = new Session();
@@ -119,53 +122,15 @@ namespace PTClient.Logic.LogicController
             return session.GetCaptain();
         }
 
-        public bool CallEmergency()
+        public bool CheckConnection()
         {
-            state.Emergency = true ;
-            api.StateEmergency(session.GetUserName(), session.GetPassword());
-
-            return state.Emergency;
-        }
-        public List<Emergency.Point> GetRoute()
-        {
-            return emergencyRoute.getPickUpPoints();
-        }
-        public void setEmergency()
-        {
-            state.Emergency = true;
-        }
-
-        public void CheckEmergency()
-        {
-            if (emerChecker == false)
+            Ping ping = new Ping();
+            PingReply pingReply = ping.Send(new IPAddress(new byte[] { 35, 187, 75, 150 }), 1000);
+            if (pingReply.Status == IPStatus.Success)
             {
-                new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                while (true)
-                {
-                    VesselPosition currentVesselPosition = new VesselPosition();
-                    if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count > 1)
-                    {
-                        emergencyRoute.setRoute(api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()));
-                        Controller.GetController().setEmergency();
-                        break;
-                    }
-                    else if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count < 1)
-                    {
-                        Thread.Sleep(1000);
-                    }
-                }
-            }).Start();
-                emerChecker = true;
+                return true;
             }
-            
-            
-            
-        }
-        public Boolean CheckState()
-        {
-            return state.Emergency;
+            return false;
         }
     }
 }

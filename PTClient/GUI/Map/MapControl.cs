@@ -19,11 +19,7 @@ namespace PTClient.GUI.Map
         {
             markers.Add(new TurbineMarker(Name, Latitude, Longitude));
         }
-
-        public void SetVesselMarker()
-        {
-
-        }
+        
 
         public List<GMap.NET.WindowsForms.GMapMarker> DrawMarkers()
         {
@@ -33,7 +29,7 @@ namespace PTClient.GUI.Map
             foreach (TurbineMarker obj in markers)
             {
                 Bitmap Image = new Bitmap(obj.Image);
-                Bitmap resized = new Bitmap(Image, new Size(20, 40));
+                Bitmap resized = new Bitmap(Image, new Size(30, 40));
 
                 double lat = obj.Latitude;
                 double lon = obj.Longitude;
