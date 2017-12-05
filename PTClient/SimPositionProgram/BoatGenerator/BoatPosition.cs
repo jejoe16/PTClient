@@ -16,7 +16,19 @@ namespace PTClient.SimPositionProgram.BoatGenerator
         private double currentLongitude = 11.277545;
         private Direction[] NextDir = new Direction[] {Direction.East, Direction.NorthEast, Direction.SouthEast};
         private float ImageDirection = 0;
+        private static BoatPosition BoatPos;
         private ReaderWriterLock boat_lock = new ReaderWriterLock();
+
+
+        public static BoatPosition GetBoatPosition()
+
+        {
+            if (BoatPos == null)
+            {
+                BoatPos = new BoatPosition();
+            } 
+            return BoatPos;
+        }
 
         public void GenerateRandomPosition()
         {

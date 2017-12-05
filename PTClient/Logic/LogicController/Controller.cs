@@ -129,13 +129,26 @@ namespace PTClient.Logic.LogicController
 
         public bool CheckConnection()
         {
-            Ping ping = new Ping();
-            PingReply pingReply = ping.Send(new IPAddress(new byte[] { 35, 187, 75, 150 }), 1000);
-            if (pingReply.Status == IPStatus.Success)
-            {
-                return true;
-            }
-            return false;
+            //Ping ping = new Ping();
+            //PingReply pingReply = ping.Send(new IPAddress(new byte[] { 35, 187, 75, 150 }), 1000);
+            //if (pingReply.Status == IPStatus.Success)
+            //{
+            //    return true;
+            //}
+            //return false;
+            
+            
+                try
+                {
+                    WebClient client = new WebClient();
+                    client.DownloadData("35.187.75.150:12230");
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            
         }
 
         public bool CallEmergency()
@@ -154,34 +167,7 @@ namespace PTClient.Logic.LogicController
             state.Emergency = true;
         }
 
-        //public void CheckEmergency()
-        //{
-        //    if (emerChecker == false)
-        //    {
-        //        new Thread(() =>
-        //        {
-        //            Thread.CurrentThread.IsBackground = true;
-        //            while (true)
-        //            {
-        //                VesselPosition currentVesselPosition = new VesselPosition();
-        //                if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count > 1)
-        //                {
-        //                    emergencyRoute.setRoute(api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()));
-        //                    Controller.GetController().setEmergency();
-        //                    break;
-        //                }
-        //                else if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count < 1)
-        //                {
-        //                    Thread.Sleep(1000);
-        //                }
-        //            }
-        //        }).Start();
-        //        emerChecker = true;
-        //    }
-
-
-
-        //}
+        
         public Boolean CheckState()
         {
             return state.Emergency;
@@ -191,7 +177,7 @@ namespace PTClient.Logic.LogicController
             //checker om der fra apiet har en route, og hvis der bliver returneret en liste med en længde går videre.
 
             List<TurbineItem> turbineList = api.checkRoute(session.GetUserName(), session.GetPassword(), longi, lat);
-            if (turbineList.ToArray().Length == null) {
+            //if (turbineList.ToArray().Length == null) {
                 if (turbineList.ToArray().Length > 0)
                 {
                     emergencyRoute.setRoute(turbineList);
@@ -201,8 +187,8 @@ namespace PTClient.Logic.LogicController
                 {
                     return false;
                 }
-            }
-            return false;
+            //}
+            //return false;
             
         }
     }
