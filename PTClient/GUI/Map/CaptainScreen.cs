@@ -1,20 +1,24 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using PTClient.SimPositionProgram.BoatGenerator;
+using PTClient.Logic.Position;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using PTClient.SimPositionProgram.BoatGenerator;
+using PTClient.Logic.LogicController;
 
 namespace PTClient.GUI.Map
 {
     public partial class CaptainScreen : Form
     {
         GUIController controller = GUIController.GetController();
-        BoatPosition boat = new BoatPosition();
+        BoatPosition boat;
         Boolean boatStatus = true;
         GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
+        private Controller logicController = Controller.GetController();
 
         public CaptainScreen()
         {
@@ -32,6 +36,10 @@ namespace PTClient.GUI.Map
             gmap.MaxZoom = 50;
             gmap.Zoom = 10;
             SetMarkers();
+            boat = BoatPosition.GetBoatPosition();
+            ThreadStart route = new ThreadStart(SetRouteThread);
+            Thread RouteThread = new Thread(route);
+            RouteThread.Start();
         }
 
         private void SetMarkers()
@@ -104,8 +112,43 @@ namespace PTClient.GUI.Map
             }
             
         }
+        private void SetRouteThread()
+        {        
+            while (true)
+            {            
+                if (logicController.ExistRouteapi(boat.GetNextLatitude(),boat.GetNextLongtitude()))
+                {
+                    logicController.setEmergency();
+                    logicController.GetRoute();
 
-        
+                    break;
+                }
+                else if (!logicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongtitude()))
+                {
+                    Thread.Sleep(1000);
+                }
+            }
+                    
+            if (logicController.CheckState())
+            {
+                List<Logic.Emergency.Point> PickUpPoints = Logic.LogicController.Controller.GetController().GetRoute();
+                GMapOverlay routes = new GMapOverlay("routes");
+                List<PointLatLng> points = new List<PointLatLng>();
+                foreach (var Point in PickUpPoints)
+                {
+                    points.Add(new PointLatLng(Point.getLatt(), Point.getLong()));
+                }
+                GMapRoute route = new GMapRoute(points, "Emergency route");
+                route.Stroke = new Pen(Color.Red, 3);
+                routes.Routes.Add(route);
+                gmap.Overlays.Add(routes);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            logicController.setEmergency();
+        }
     }
 
     

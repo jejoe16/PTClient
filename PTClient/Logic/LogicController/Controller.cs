@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using PTClient.SharedResources;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Threading;
+using PTClient.Logic.Emergency;
 
 namespace PTClient.Logic.LogicController
 {
@@ -21,6 +23,9 @@ namespace PTClient.Logic.LogicController
         private static Controller controller = null;
         private IAPIController api = null;
         private ISession session = null;
+        private State state = new State();
+        //private Boolean emerChecker = false;
+        private EmergencyRoute emergencyRoute = new EmergencyRoute();
 
         public Controller()
         {
@@ -69,7 +74,7 @@ namespace PTClient.Logic.LogicController
 
         public Boolean Login(String username, String password)
         {
-            api = PTClient.API.APIController.GetAPIController();
+            api = APIController.GetAPIController();
             Boolean Check = api.Login(username, password);
 
             session = new Session();
@@ -131,6 +136,74 @@ namespace PTClient.Logic.LogicController
                 return true;
             }
             return false;
+        }
+
+        public bool CallEmergency()
+        {
+            state.Emergency = true;
+            api.StateEmergency(session.GetUserName(), session.GetPassword());
+
+            return state.Emergency;
+        }
+        public List<Emergency.Point> GetRoute()
+        {
+            return emergencyRoute.getPickUpPoints();
+        }
+        public void setEmergency()
+        {
+            state.Emergency = true;
+        }
+
+        //public void CheckEmergency()
+        //{
+        //    if (emerChecker == false)
+        //    {
+        //        new Thread(() =>
+        //        {
+        //            Thread.CurrentThread.IsBackground = true;
+        //            while (true)
+        //            {
+        //                VesselPosition currentVesselPosition = new VesselPosition();
+        //                if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count > 1)
+        //                {
+        //                    emergencyRoute.setRoute(api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()));
+        //                    Controller.GetController().setEmergency();
+        //                    break;
+        //                }
+        //                else if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count < 1)
+        //                {
+        //                    Thread.Sleep(1000);
+        //                }
+        //            }
+        //        }).Start();
+        //        emerChecker = true;
+        //    }
+
+
+
+        //}
+        public Boolean CheckState()
+        {
+            return state.Emergency;
+        }
+        public Boolean ExistRouteapi(double lat, double longi)
+        {
+            //checker om der fra apiet har en route, og hvis der bliver returneret en liste med en længde går videre.
+
+            List<TurbineItem> turbineList = api.checkRoute(session.GetUserName(), session.GetPassword(), longi, lat);
+            if (turbineList.ToArray().Length == null) {
+                if (turbineList.ToArray().Length > 0)
+                {
+                    emergencyRoute.setRoute(turbineList);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+            
         }
     }
 }

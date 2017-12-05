@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using PTClient.SimPositionProgram.BoatGenerator;
 
 namespace PTClient.GUI
 {
@@ -17,6 +18,7 @@ namespace PTClient.GUI
         private IMap map = new MapControl();
         private IController controller = Controller.GetController();
         private System.Object lockThis = new System.Object();
+        private BoatPosition boat = BoatPosition.GetBoatPosition();
         public GUIController()
         {
 

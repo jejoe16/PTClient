@@ -19,6 +19,7 @@ namespace PTClient.Logic.Login
         }
         public void createUser(string Username, string Password, bool Captain)
         {
+            String User = Username;
             currentUser = new User(Captain, Username, Password);
         }
 
@@ -41,6 +42,7 @@ namespace PTClient.Logic.Login
 
         public string GetUserName()
         {
+            String User = currentUser.Username;
             return currentUser.Username;
         }
 

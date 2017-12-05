@@ -19,7 +19,17 @@ namespace PTClient.SimPositionProgram.BoatGenerator
         private Direction[] NextDir = new Direction[] {Direction.East, Direction.NorthEast, Direction.SouthEast};
         private float ImageDirection = 0;
         private ReaderWriterLock boat_lock = new ReaderWriterLock();
+        private static BoatPosition BoatPos = null;
 
+
+        public static BoatPosition GetBoatPosition()
+        {
+            if(BoatPos == null)
+            {
+                BoatPos = new BoatPosition();
+            }
+            return BoatPos;
+        }
         public void generateNewPosition()
         {
             
