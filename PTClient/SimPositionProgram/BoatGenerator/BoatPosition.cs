@@ -12,8 +12,6 @@ namespace PTClient.SimPositionProgram.BoatGenerator
     class BoatPosition:IBoatPosition
     {
         private IController control = Controller.GetController();
-        private Random rand = new Random();
-        private MapPolygon map = new MapPolygon();
         private double currentLatitude = 56.588423;
         private double currentLongitude = 11.277545;
         private Direction[] NextDir = new Direction[] {Direction.East, Direction.NorthEast, Direction.SouthEast};
@@ -25,7 +23,7 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             try
             {
                 boat_lock.AcquireWriterLock(10000);
-                
+                Random rand = new Random();
                 int Dir = (int)NextDir[rand.Next(NextDir.Length)];
 
                 Boolean Valid = Move(Dir);
@@ -145,6 +143,7 @@ namespace PTClient.SimPositionProgram.BoatGenerator
 
         private Boolean ValidatePosition(double Longitude, double Latitude)
         {
+            MapPolygon map = new MapPolygon();
             foreach (TurbineItem item in control.GetTurbines())
             {
                 if(item.Latitude.Equals(Latitude) && item.Longitude.Equals(Longitude))

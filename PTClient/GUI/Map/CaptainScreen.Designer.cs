@@ -43,7 +43,6 @@ namespace PTClient.GUI.Map
             this.button1 = new System.Windows.Forms.Button();
             this.EngineStartButton = new System.Windows.Forms.Button();
             this.EngineStopButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureSouthEast = new System.Windows.Forms.PictureBox();
             this.pictureSouth = new System.Windows.Forms.PictureBox();
             this.pictureSouthWest = new System.Windows.Forms.PictureBox();
@@ -52,7 +51,6 @@ namespace PTClient.GUI.Map
             this.pictureNorthWest = new System.Windows.Forms.PictureBox();
             this.pictureEast = new System.Windows.Forms.PictureBox();
             this.pictureNorth = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthWest)).BeginInit();
@@ -136,33 +134,24 @@ namespace PTClient.GUI.Map
             // 
             // EngineStartButton
             // 
-            this.EngineStartButton.Location = new System.Drawing.Point(873, 63);
+            this.EngineStartButton.Location = new System.Drawing.Point(752, 273);
             this.EngineStartButton.Name = "EngineStartButton";
-            this.EngineStartButton.Size = new System.Drawing.Size(75, 28);
+            this.EngineStartButton.Size = new System.Drawing.Size(65, 30);
             this.EngineStartButton.TabIndex = 5;
-            this.EngineStartButton.Text = "Start Engine";
+            this.EngineStartButton.Text = "Start";
             this.EngineStartButton.UseVisualStyleBackColor = true;
             this.EngineStartButton.Click += new System.EventHandler(this.start_Click);
             // 
             // EngineStopButton
             // 
             this.EngineStopButton.Enabled = false;
-            this.EngineStopButton.Location = new System.Drawing.Point(873, 115);
+            this.EngineStopButton.Location = new System.Drawing.Point(752, 309);
             this.EngineStopButton.Name = "EngineStopButton";
-            this.EngineStopButton.Size = new System.Drawing.Size(75, 28);
+            this.EngineStopButton.Size = new System.Drawing.Size(65, 28);
             this.EngineStopButton.TabIndex = 6;
-            this.EngineStopButton.Text = "Stop Engine";
+            this.EngineStopButton.Text = "Stop";
             this.EngineStopButton.UseVisualStyleBackColor = true;
             this.EngineStopButton.Click += new System.EventHandler(this.stop_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(766, 178);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "label1";
             // 
             // pictureSouthEast
             // 
@@ -244,22 +233,11 @@ namespace PTClient.GUI.Map
             this.pictureNorth.TabStop = false;
             this.pictureNorth.Click += new System.EventHandler(this.pictureBoxDir_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(752, 274);
-            this.button2.Name = "StopMiddle";
-            this.button2.Size = new System.Drawing.Size(65, 63);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Stop";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // CaptainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 561);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureSouthEast);
             this.Controls.Add(this.pictureSouth);
             this.Controls.Add(this.pictureSouthWest);
@@ -268,7 +246,6 @@ namespace PTClient.GUI.Map
             this.Controls.Add(this.pictureNorthWest);
             this.Controls.Add(this.pictureEast);
             this.Controls.Add(this.pictureNorth);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.EngineStopButton);
             this.Controls.Add(this.EngineStartButton);
             this.Controls.Add(this.button1);
@@ -302,7 +279,6 @@ namespace PTClient.GUI.Map
         private Button button1;
         private Button EngineStartButton;
         private Button EngineStopButton;
-        private Label label1;
         private PictureBox pictureNorth;
         private PictureBox pictureEast;
         private PictureBox pictureNorthWest;
@@ -311,7 +287,6 @@ namespace PTClient.GUI.Map
         private PictureBox pictureSouthWest;
         private PictureBox pictureSouth;
         private PictureBox pictureSouthEast;
-        private Button button2;
     }
 
 }
