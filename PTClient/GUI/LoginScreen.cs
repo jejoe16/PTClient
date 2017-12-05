@@ -24,13 +24,14 @@ namespace PTClient.GUI
                 Boolean LoginCheck = control.Login(textBoxUsername.Text, textBoxPassword.Text);
                 if (LoginCheck == true)
                 {
-                    if (control.CaptainCheck() == true)
+                    Boolean CaptainCheck = control.CaptainCheck();
+                    if (CaptainCheck == true)
                     {
 
                         Map.CaptainScreen cap = new Map.CaptainScreen();
                         cap.ShowDialog();
                     }
-                    else if (control.CaptainCheck() == false)
+                    else if (CaptainCheck == false)
                     {
                         WorkerScreen wor = new WorkerScreen();
                         wor.ShowDialog();

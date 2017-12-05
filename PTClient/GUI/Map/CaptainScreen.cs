@@ -1,24 +1,23 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using PTClient.Logic.Position;
+using PTClient.SimPositionProgram.BoatGenerator;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using PTClient.SimPositionProgram.BoatGenerator;
-using PTClient.Logic.LogicController;
+using PTClient.SharedResources;
 
 namespace PTClient.GUI.Map
 {
     public partial class CaptainScreen : Form
     {
-        GUIController controller = GUIController.GetController();
-        BoatPosition boat;
-        Boolean boatStatus = true;
-        GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
-        private Controller logicController = Controller.GetController();
+        private GUIController controller = GUIController.GetController();
+        private BoatPosition boat = new BoatPosition();
+        private Boolean boatStatus = true;
+        private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
+        private volatile int Dir;
+        private Thread thread;
 
         public CaptainScreen()
         {
@@ -28,7 +27,6 @@ namespace PTClient.GUI.Map
 
         private void Onload(object sender, EventArgs e)
         {
-
             gmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             gmap.SetPositionByKeywords("anholt");
@@ -36,10 +34,6 @@ namespace PTClient.GUI.Map
             gmap.MaxZoom = 50;
             gmap.Zoom = 10;
             SetMarkers();
-            boat = BoatPosition.GetBoatPosition();
-            ThreadStart route = new ThreadStart(SetRouteThread);
-            Thread RouteThread = new Thread(route);
-            RouteThread.Start();
         }
 
         private void SetMarkers()
@@ -59,10 +53,6 @@ namespace PTClient.GUI.Map
             
         }
 
-        public static void SetVesselMarker()
-        {
-
-        }
 
         private void buttonCheckin_Click(object sender, EventArgs e)
         {
@@ -82,25 +72,35 @@ namespace PTClient.GUI.Map
 
         private void start_Click(object sender, EventArgs e)
         {
+            boatStatus = false;
+            if (thread != null)
+            {
+                thread.Join();
+                disableButton();
+            }
             EngineStartButton.Enabled = false;
             EngineStopButton.Enabled = true;
-            ThreadPool.QueueUserWorkItem(BoatThreadCallBack);
+            Thread.Sleep(2000);
+            thread = new Thread(new ThreadStart(BoatThreadCallBack));
+            thread.Start();
+            enableButton();
         }
 
         private void stop_Click(object sender, EventArgs e)
         {
             boatStatus = false;
+            thread.Join();
             EngineStartButton.Enabled = true;
             EngineStopButton.Enabled = false;
         }
 
-        private void BoatThreadCallBack(Object ThreadContext)
+        private void BoatThreadCallBack()
         {
             boatStatus = true;
             
             while (boatStatus)
             {
-                boat.generateNewPosition();
+                boat.GenerateRandomPosition();
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
                 VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
                 Bitmap Image = new Bitmap(vessel.Image);
@@ -112,42 +112,104 @@ namespace PTClient.GUI.Map
             }
             
         }
-        private void SetRouteThread()
-        {        
-            while (true)
-            {            
-                if (logicController.ExistRouteapi(boat.GetNextLatitude(),boat.GetNextLongtitude()))
-                {
-                    logicController.setEmergency();
-                    logicController.GetRoute();
 
-                    break;
-                }
-                else if (!logicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongtitude()))
-                {
-                    Thread.Sleep(1000);
-                }
-            }
-                    
-            if (logicController.CheckState())
+        private void DirectionThreadCallBack()
+        {
+            boatStatus = true;
+            while (boatStatus)
             {
-                List<Logic.Emergency.Point> PickUpPoints = Logic.LogicController.Controller.GetController().GetRoute();
-                GMapOverlay routes = new GMapOverlay("routes");
-                List<PointLatLng> points = new List<PointLatLng>();
-                foreach (var Point in PickUpPoints)
-                {
-                    points.Add(new PointLatLng(Point.getLatt(), Point.getLong()));
-                }
-                GMapRoute route = new GMapRoute(points, "Emergency route");
-                route.Stroke = new Pen(Color.Red, 3);
-                routes.Routes.Add(route);
-                gmap.Overlays.Add(routes);
+                boat.GoDirection(Dir);
+                gmap.Invoke(new Action(() => vesselOverlay.Clear()));
+                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
+                Bitmap Image = new Bitmap(vessel.Image);
+                Bitmap resized = new Bitmap(Image, new Size(30, 50));
+                Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
+                GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
+                gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
+                Thread.Sleep(2000);
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void pictureBoxDir_Click(object sender, EventArgs e)
         {
-            logicController.setEmergency();
+            boatStatus = false;
+            if(thread != null)
+            {
+                thread.Join();
+                disableButton();
+            }
+            ThreadStart start;
+            EngineStopButton.Enabled = true;
+            
+            PictureBox box = sender as PictureBox; 
+            if(box.Name == pictureNorth.Name)
+            {
+                Dir = (int)Direction.North;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureNorthEast.Name)
+            {
+                Dir = (int)Direction.NorthEast;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureEast.Name)
+            {
+                Dir = (int)Direction.East;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouthEast.Name)
+            {
+                Dir = (int)Direction.SouthEast;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouth.Name)
+            {
+                Dir = (int)Direction.South;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouthWest.Name)
+            {
+                Dir = (int)Direction.SouthWest;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureWest.Name)
+            {
+                Dir = (int)Direction.West;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else
+            {
+                Dir = (int)Direction.NorthWest;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+
+            thread = new Thread(start);
+            thread.Start();
+            enableButton();
+        }
+
+        private void disableButton()
+        {
+            pictureNorth.Visible = false;
+            pictureNorthWest.Visible = false;
+            pictureNorthEast.Visible = false;
+            pictureEast.Visible = false;
+            pictureSouthEast.Visible = false;
+            pictureSouth.Visible = false;
+            pictureSouthWest.Visible = false;
+            pictureWest.Visible = false;
+        }
+
+        private void enableButton()
+        {
+            pictureNorth.Visible = true;
+            pictureNorthWest.Visible = true;
+            pictureNorthEast.Visible = true;
+            pictureEast.Visible = true;
+            pictureSouthEast.Visible = true;
+            pictureSouth.Visible = true;
+            pictureSouthWest.Visible = true;
+            pictureWest.Visible = true;
         }
     }
 
