@@ -43,6 +43,22 @@ namespace PTClient.GUI.Map
             this.button1 = new System.Windows.Forms.Button();
             this.EngineStartButton = new System.Windows.Forms.Button();
             this.EngineStopButton = new System.Windows.Forms.Button();
+            this.pictureSouthEast = new System.Windows.Forms.PictureBox();
+            this.pictureSouth = new System.Windows.Forms.PictureBox();
+            this.pictureSouthWest = new System.Windows.Forms.PictureBox();
+            this.pictureWest = new System.Windows.Forms.PictureBox();
+            this.pictureNorthEast = new System.Windows.Forms.PictureBox();
+            this.pictureNorthWest = new System.Windows.Forms.PictureBox();
+            this.pictureEast = new System.Windows.Forms.PictureBox();
+            this.pictureNorth = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSouthWest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureWest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureNorthEast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureNorthWest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureNorth)).BeginInit();
             this.SuspendLayout();
             // 
             // gmap
@@ -118,30 +134,118 @@ namespace PTClient.GUI.Map
             // 
             // EngineStartButton
             // 
-            this.EngineStartButton.Location = new System.Drawing.Point(873, 63);
+            this.EngineStartButton.Location = new System.Drawing.Point(752, 273);
             this.EngineStartButton.Name = "EngineStartButton";
-            this.EngineStartButton.Size = new System.Drawing.Size(75, 28);
+            this.EngineStartButton.Size = new System.Drawing.Size(65, 30);
             this.EngineStartButton.TabIndex = 5;
-            this.EngineStartButton.Text = "Start Engine";
+            this.EngineStartButton.Text = "Start";
             this.EngineStartButton.UseVisualStyleBackColor = true;
             this.EngineStartButton.Click += new System.EventHandler(this.start_Click);
             // 
             // EngineStopButton
             // 
             this.EngineStopButton.Enabled = false;
-            this.EngineStopButton.Location = new System.Drawing.Point(873, 115);
+            this.EngineStopButton.Location = new System.Drawing.Point(752, 309);
             this.EngineStopButton.Name = "EngineStopButton";
-            this.EngineStopButton.Size = new System.Drawing.Size(75, 28);
+            this.EngineStopButton.Size = new System.Drawing.Size(65, 28);
             this.EngineStopButton.TabIndex = 6;
-            this.EngineStopButton.Text = "Stop Engine";
+            this.EngineStopButton.Text = "Stop";
             this.EngineStopButton.UseVisualStyleBackColor = true;
             this.EngineStopButton.Click += new System.EventHandler(this.stop_Click);
+            // 
+            // pictureSouthEast
+            // 
+            this.pictureSouthEast.Image = global::PTClient.Properties.Resources.arrow_southeast;
+            this.pictureSouthEast.Location = new System.Drawing.Point(823, 343);
+            this.pictureSouthEast.Name = "pictureSouthEast";
+            this.pictureSouthEast.Size = new System.Drawing.Size(65, 64);
+            this.pictureSouthEast.TabIndex = 16;
+            this.pictureSouthEast.TabStop = false;
+            this.pictureSouthEast.Click += new System.EventHandler(this.pictureBoxDir_Click);
+            // 
+            // pictureSouth
+            // 
+            this.pictureSouth.Image = global::PTClient.Properties.Resources.arrow_south;
+            this.pictureSouth.Location = new System.Drawing.Point(752, 343);
+            this.pictureSouth.Name = "pictureSouth";
+            this.pictureSouth.Size = new System.Drawing.Size(65, 64);
+            this.pictureSouth.TabIndex = 15;
+            this.pictureSouth.TabStop = false;
+            this.pictureSouth.Click += new System.EventHandler(this.pictureBoxDir_Click);
+            // 
+            // pictureSouthWest
+            // 
+            this.pictureSouthWest.Image = global::PTClient.Properties.Resources.arrow_southwest;
+            this.pictureSouthWest.Location = new System.Drawing.Point(681, 343);
+            this.pictureSouthWest.Name = "pictureSouthWest";
+            this.pictureSouthWest.Size = new System.Drawing.Size(65, 64);
+            this.pictureSouthWest.TabIndex = 14;
+            this.pictureSouthWest.TabStop = false;
+            this.pictureSouthWest.Click += new System.EventHandler(this.pictureBoxDir_Click);
+            // 
+            // pictureWest
+            // 
+            this.pictureWest.Image = global::PTClient.Properties.Resources.arrow_west;
+            this.pictureWest.Location = new System.Drawing.Point(681, 273);
+            this.pictureWest.Name = "pictureWest";
+            this.pictureWest.Size = new System.Drawing.Size(65, 64);
+            this.pictureWest.TabIndex = 13;
+            this.pictureWest.TabStop = false;
+            this.pictureWest.Click += new System.EventHandler(this.pictureBoxDir_Click);
+            // 
+            // pictureNorthEast
+            // 
+            this.pictureNorthEast.Image = global::PTClient.Properties.Resources.arrow_northeast;
+            this.pictureNorthEast.Location = new System.Drawing.Point(823, 203);
+            this.pictureNorthEast.Name = "pictureNorthEast";
+            this.pictureNorthEast.Size = new System.Drawing.Size(65, 64);
+            this.pictureNorthEast.TabIndex = 12;
+            this.pictureNorthEast.TabStop = false;
+            this.pictureNorthEast.Click += new System.EventHandler(this.pictureBoxDir_Click);
+            // 
+            // pictureNorthWest
+            // 
+            this.pictureNorthWest.Image = global::PTClient.Properties.Resources.arrow_northwest;
+            this.pictureNorthWest.Location = new System.Drawing.Point(681, 203);
+            this.pictureNorthWest.Name = "pictureNorthWest";
+            this.pictureNorthWest.Size = new System.Drawing.Size(65, 64);
+            this.pictureNorthWest.TabIndex = 11;
+            this.pictureNorthWest.TabStop = false;
+            this.pictureNorthWest.Click += new System.EventHandler(this.pictureBoxDir_Click);
+            // 
+            // pictureEast
+            // 
+            this.pictureEast.Image = global::PTClient.Properties.Resources.arrow_east;
+            this.pictureEast.Location = new System.Drawing.Point(823, 273);
+            this.pictureEast.Name = "pictureEast";
+            this.pictureEast.Size = new System.Drawing.Size(65, 64);
+            this.pictureEast.TabIndex = 10;
+            this.pictureEast.TabStop = false;
+            this.pictureEast.Click += new System.EventHandler(this.pictureBoxDir_Click);
+            // 
+            // pictureNorth
+            // 
+            this.pictureNorth.Image = global::PTClient.Properties.Resources.arrow_north;
+            this.pictureNorth.Location = new System.Drawing.Point(752, 203);
+            this.pictureNorth.Name = "pictureNorth";
+            this.pictureNorth.Size = new System.Drawing.Size(65, 64);
+            this.pictureNorth.TabIndex = 9;
+            this.pictureNorth.TabStop = false;
+            this.pictureNorth.Click += new System.EventHandler(this.pictureBoxDir_Click);
             // 
             // CaptainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.Controls.Add(this.pictureSouthEast);
+            this.Controls.Add(this.pictureSouth);
+            this.Controls.Add(this.pictureSouthWest);
+            this.Controls.Add(this.pictureWest);
+            this.Controls.Add(this.pictureNorthEast);
+            this.Controls.Add(this.pictureNorthWest);
+            this.Controls.Add(this.pictureEast);
+            this.Controls.Add(this.pictureNorth);
             this.Controls.Add(this.EngineStopButton);
             this.Controls.Add(this.EngineStartButton);
             this.Controls.Add(this.button1);
@@ -152,6 +256,14 @@ namespace PTClient.GUI.Map
             this.Name = "CaptainScreen";
             this.Text = "Overview";
             this.Load += new System.EventHandler(this.Onload);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureSouthWest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureWest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureNorthEast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureNorthWest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureNorth)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,6 +279,14 @@ namespace PTClient.GUI.Map
         private Button button1;
         private Button EngineStartButton;
         private Button EngineStopButton;
+        private PictureBox pictureNorth;
+        private PictureBox pictureEast;
+        private PictureBox pictureNorthWest;
+        private PictureBox pictureNorthEast;
+        private PictureBox pictureWest;
+        private PictureBox pictureSouthWest;
+        private PictureBox pictureSouth;
+        private PictureBox pictureSouthEast;
     }
 
 }
