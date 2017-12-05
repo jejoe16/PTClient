@@ -145,7 +145,7 @@
     <Compile Include="GUI\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimPositionProgram\BoatGenerator\BoatPosition.cs" />
-    <Compile Include="SimPositionProgram\BoatGenerator\Direction.cs" />
+    <Compile Include="SharedResources\Direction.cs" />
     <Compile Include="SimPositionProgram\GuiSimPos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +200,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\arrow_north.png" />
+    <None Include="Images\arrow_east.png" />
+    <None Include="Images\arrow_west.png" />
+    <None Include="Images\arrow_south.png" />
+    <None Include="Images\arrow_southeast.png" />
+    <None Include="Images\arrow_southwest.png" />
+    <None Include="Images\arrow_northwest.png" />
+    <None Include="Images\arrow_northeast.png" />
     <Content Include="Images\vessel.png" />
     <Content Include="Images\wind.png" />
     <Content Include="API\IO.Swagger\IO.Swagger.csproj" />

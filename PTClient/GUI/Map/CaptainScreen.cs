@@ -6,15 +6,17 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using PTClient.SharedResources;
 
 namespace PTClient.GUI.Map
 {
     public partial class CaptainScreen : Form
     {
-        GUIController controller = GUIController.GetController();
-        BoatPosition boat = new BoatPosition();
-        Boolean boatStatus = true;
-        GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
+        private GUIController controller = GUIController.GetController();
+        private BoatPosition boat = new BoatPosition();
+        private Boolean boatStatus = true;
+        private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
+        private volatile int Dir;
 
         public CaptainScreen()
         {
@@ -24,7 +26,6 @@ namespace PTClient.GUI.Map
 
         private void Onload(object sender, EventArgs e)
         {
-
             gmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             gmap.SetPositionByKeywords("anholt");
@@ -74,6 +75,7 @@ namespace PTClient.GUI.Map
 
         private void start_Click(object sender, EventArgs e)
         {
+            boatStatus = false;
             EngineStartButton.Enabled = false;
             EngineStopButton.Enabled = true;
             ThreadPool.QueueUserWorkItem(BoatThreadCallBack);
@@ -92,7 +94,7 @@ namespace PTClient.GUI.Map
             
             while (boatStatus)
             {
-                boat.generateNewPosition();
+                boat.GenerateRandomPosition();
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
                 VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
                 Bitmap Image = new Bitmap(vessel.Image);
@@ -105,7 +107,75 @@ namespace PTClient.GUI.Map
             
         }
 
-        
+        private void DirectionThreadCallBack(Object ThreadContext)
+        {
+            boatStatus = true;
+            while (boatStatus)
+            {
+                boat.GoDirection(Dir);
+                gmap.Invoke(new Action(() => vesselOverlay.Clear()));
+                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
+                Bitmap Image = new Bitmap(vessel.Image);
+                Bitmap resized = new Bitmap(Image, new Size(30, 50));
+                Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
+                GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
+                gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
+                Thread.Sleep(2000);
+            }
+        }
+
+        private void pictureBoxDir_Click(object sender, EventArgs e)
+        {
+            boatStatus = false;
+            EngineStopButton.Enabled = true;
+            PictureBox box = sender as PictureBox; 
+            if(box.Name == pictureNorth.Name)
+            {
+                Dir = (int)Direction.North;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureNorthEast.Name)
+            {
+                Dir = (int)Direction.NorthEast;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureEast.Name)
+            {
+                Dir = (int)Direction.East;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouthEast.Name)
+            {
+                Dir = (int)Direction.SouthEast;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouth.Name)
+            {
+                Dir = (int)Direction.South;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouthWest.Name)
+            {
+                Dir = (int)Direction.SouthWest;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureWest.Name)
+            {
+                Dir = (int)Direction.West;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureNorthWest.Name)
+            {
+                Dir = (int)Direction.NorthWest;
+                ThreadPool.QueueUserWorkItem(DirectionThreadCallBack);
+            } 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            boatStatus = false;
+            EngineStopButton.Enabled = false;
+        }
     }
 
     

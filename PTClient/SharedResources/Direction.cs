@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.SimPositionProgram.BoatGenerator
+namespace PTClient.SharedResources
 {
     enum Direction:int
     {

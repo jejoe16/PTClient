@@ -118,10 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="arrow_northwest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_northwest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_south" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_south.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_southwest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_southwest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_southeast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_southeast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_north" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_north.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_east" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_east.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="vessel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\vessel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wind" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\wind.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_west" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_west.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow_northeast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\arrow_northeast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
