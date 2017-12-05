@@ -116,6 +116,9 @@
     <Compile Include="API\IO.Swagger\Model\InlineResponse203.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse204.cs" />
     <Compile Include="GUI\GUIController.cs" />
+    <Compile Include="Logic\Emergency\EmergencyRoute.cs" />
+    <Compile Include="Logic\Emergency\Point.cs" />
+    <Compile Include="Logic\Emergency\State.cs" />
     <Compile Include="SharedResources\TurbineItem.cs" />
     <Compile Include="Logic\LogicController\Controller.cs" />
     <Compile Include="Logic\LogicController\IController.cs" />

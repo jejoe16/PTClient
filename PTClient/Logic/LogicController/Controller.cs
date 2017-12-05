@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
+using System.Threading;
 
 namespace PTClient.Logic.LogicController
 {
@@ -19,6 +20,9 @@ namespace PTClient.Logic.LogicController
         private static Controller controller = null;
         private IAPIController api = null;
         private ISession session = null;
+        private Emergency.State state = new Emergency.State();
+        private Boolean emerChecker = false;
+        private Emergency.EmergencyRoute emergencyRoute = new Emergency.EmergencyRoute();
 
         public Controller()
         {
@@ -113,6 +117,55 @@ namespace PTClient.Logic.LogicController
         public bool CaptainCheck()
         {
             return session.GetCaptain();
+        }
+
+        public bool CallEmergency()
+        {
+            state.Emergency = true ;
+            api.StateEmergency(session.GetUserName(), session.GetPassword());
+
+            return state.Emergency;
+        }
+        public List<Emergency.Point> GetRoute()
+        {
+            return emergencyRoute.getPickUpPoints();
+        }
+        public void setEmergency()
+        {
+            state.Emergency = true;
+        }
+
+        public void CheckEmergency()
+        {
+            if (emerChecker == false)
+            {
+                new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                while (true)
+                {
+                    VesselPosition currentVesselPosition = new VesselPosition();
+                    if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count > 1)
+                    {
+                        emergencyRoute.setRoute(api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()));
+                        Controller.GetController().setEmergency();
+                        break;
+                    }
+                    else if (api.checkRoute(Controller.GetController().session.GetUserName(), Controller.GetController().session.GetPassword(), currentVesselPosition.GetLatitude(), currentVesselPosition.GetLongitude()).Count < 1)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                }
+            }).Start();
+                emerChecker = true;
+            }
+            
+            
+            
+        }
+        public Boolean CheckState()
+        {
+            return state.Emergency;
         }
     }
 }

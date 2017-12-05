@@ -2,6 +2,7 @@
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -32,8 +33,23 @@ namespace PTClient.GUI.Map
 
         private void SetMarkers()
         {
-            
-            GMap.NET.WindowsForms.GMapOverlay markersOverlay = new GMapOverlay("markers");
+
+            if (Logic.LogicController.Controller.GetController().CheckState())
+            {
+                List<Logic.Emergency.Point> PickUpPoints = Logic.LogicController.Controller.GetController().GetRoute();
+                GMapOverlay routes = new GMapOverlay("routes");
+                List<PointLatLng> points = new List<PointLatLng>();
+                foreach (var Point in PickUpPoints)
+                {
+                    points.Add(new PointLatLng(Point.getLatt(), Point.getLong()));
+                }
+                GMapRoute route = new GMapRoute(points, "Emergency route");
+                route.Stroke = new Pen(Color.Red, 3);
+                routes.Routes.Add(route);
+                gmap.Overlays.Add(routes);
+            }else
+            {
+GMap.NET.WindowsForms.GMapOverlay markersOverlay = new GMapOverlay("markers");
 
             gmap.Overlays.Add(markersOverlay);
 
@@ -43,6 +59,9 @@ namespace PTClient.GUI.Map
             {
                 markersOverlay.Markers.Add(mark);
             }
+            }
+            
+            
             
         }
 
@@ -60,6 +79,22 @@ namespace PTClient.GUI.Map
         {
             Logic.LogicController.Controller.GetController().Logout();
             this.Close();
+        }
+
+        private void gmap_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Logic.LogicController.Controller.GetController().CallEmergency();
+            
+        }
+
+        private void setRoute(List<Logic.Emergency.Point> PickUpPoints)
+        {
+            SetMarkers();
         }
     }
 }
