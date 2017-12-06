@@ -109,11 +109,16 @@
     <Compile Include="API\IO.Swagger\Client\ApiResponse.cs" />
     <Compile Include="API\IO.Swagger\Client\Configuration.cs" />
     <Compile Include="API\IO.Swagger\Client\ExceptionFactory.cs" />
+    <Compile Include="API\IO.Swagger\Client\GlobalConfiguration.cs" />
     <Compile Include="API\IO.Swagger\Client\IApiAccessor.cs" />
+    <Compile Include="API\IO.Swagger\Client\IReadableConfiguration.cs" />
+    <Compile Include="API\IO.Swagger\Client\JsonSubTypes.cs" />
+    <Compile Include="API\IO.Swagger\Client\SwaggerDateConverter.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse200.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse201.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse202.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse2021.cs" />
+    <Compile Include="API\IO.Swagger\Model\InlineResponse2022.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse203.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse204.cs" />
     <Compile Include="GUI\GUIController.cs" />
@@ -192,6 +197,7 @@
     <EmbeddedResource Include="GUI\WorkerScreen.resx">
       <DependentUpon>WorkerScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="API\IO.Swagger\IO.Swagger.nuspec" />
     <None Include="API\IO.Swagger\packages.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

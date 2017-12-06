@@ -20,59 +20,44 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using SwaggerDateConverter = IO.Swagger.Client.SwaggerDateConverter;
+using SwaggerDateConverter = PTClient.IO.Swagger.Client.SwaggerDateConverter;
+using PTClient.SharedResources;
 
-namespace IO.Swagger.Model
+namespace PTClient.IO.Swagger.Model
 {
     /// <summary>
-    /// WorkerItem
+    /// InlineResponse2022
     /// </summary>
     [DataContract]
-    public partial class WorkerItem :  IEquatable<WorkerItem>, IValidatableObject
+    public partial class InlineResponse2022 :  IEquatable<InlineResponse2022>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WorkerItem" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse2022" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected WorkerItem() { }
+        protected InlineResponse2022() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="WorkerItem" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse2022" /> class.
         /// </summary>
-        /// <param name="Name">Name (required).</param>
-        /// <param name="Position">Position (required).</param>
-        public WorkerItem(string Name = default(string), string Position = default(string))
+        /// <param name="Turbines">Turbines (required).</param>
+        public InlineResponse2022(List<TurbineItem> Turbines = default(List<TurbineItem>))
         {
-            // to ensure "Name" is required (not null)
-            if (Name == null)
+            // to ensure "Turbines" is required (not null)
+            if (Turbines == null)
             {
-                throw new InvalidDataException("Name is a required property for WorkerItem and cannot be null");
+                throw new InvalidDataException("Turbines is a required property for InlineResponse2022 and cannot be null");
             }
             else
             {
-                this.Name = Name;
-            }
-            // to ensure "Position" is required (not null)
-            if (Position == null)
-            {
-                throw new InvalidDataException("Position is a required property for WorkerItem and cannot be null");
-            }
-            else
-            {
-                this.Position = Position;
+                this.Turbines = Turbines;
             }
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets Turbines
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Position
-        /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
-        public string Position { get; set; }
+        [DataMember(Name="turbines", EmitDefaultValue=false)]
+        public List<TurbineItem> Turbines { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -81,9 +66,8 @@ namespace IO.Swagger.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WorkerItem {\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Position: ").Append(Position).Append("\n");
+            sb.Append("class InlineResponse2022 {\n");
+            sb.Append("  Turbines: ").Append(Turbines).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,29 +88,24 @@ namespace IO.Swagger.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as WorkerItem);
+            return this.Equals(input as InlineResponse2022);
         }
 
         /// <summary>
-        /// Returns true if WorkerItem instances are equal
+        /// Returns true if InlineResponse2022 instances are equal
         /// </summary>
-        /// <param name="input">Instance of WorkerItem to be compared</param>
+        /// <param name="input">Instance of InlineResponse2022 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WorkerItem input)
+        public bool Equals(InlineResponse2022 input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Position == input.Position ||
-                    (this.Position != null &&
-                    this.Position.Equals(input.Position))
+                    this.Turbines == input.Turbines ||
+                    this.Turbines != null &&
+                    this.Turbines.SequenceEqual(input.Turbines)
                 );
         }
 
@@ -139,10 +118,8 @@ namespace IO.Swagger.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Position != null)
-                    hashCode = hashCode * 59 + this.Position.GetHashCode();
+                if (this.Turbines != null)
+                    hashCode = hashCode * 59 + this.Turbines.GetHashCode();
                 return hashCode;
             }
         }
