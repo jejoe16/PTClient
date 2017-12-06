@@ -141,7 +141,7 @@ namespace PTClient.Logic.LogicController
                 try
                 {
                     WebClient client = new WebClient();
-                    client.DownloadData("35.187.75.150:12230");
+                    client.DownloadData("HTTP://35.187.75.150:12230");
                     return true;
                 }
                 catch
