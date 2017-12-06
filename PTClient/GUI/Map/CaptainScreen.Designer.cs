@@ -87,26 +87,6 @@ namespace PTClient.GUI.Map
             this.gmap.TabIndex = 0;
             this.gmap.Zoom = 0D;
             // 
-            // buttonCheckin
-            // 
-            this.buttonCheckin.Location = new System.Drawing.Point(652, 496);
-            this.buttonCheckin.Name = "buttonCheckin";
-            this.buttonCheckin.Size = new System.Drawing.Size(75, 23);
-            this.buttonCheckin.TabIndex = 1;
-            this.buttonCheckin.Text = "Checkin";
-            this.buttonCheckin.UseVisualStyleBackColor = true;
-            this.buttonCheckin.Click += new System.EventHandler(this.buttonCheckin_Click);
-            // 
-            // buttonCheckout
-            // 
-            this.buttonCheckout.Location = new System.Drawing.Point(873, 496);
-            this.buttonCheckout.Name = "buttonCheckout";
-            this.buttonCheckout.Size = new System.Drawing.Size(75, 23);
-            this.buttonCheckout.TabIndex = 2;
-            this.buttonCheckout.Text = "Checkout";
-            this.buttonCheckout.UseVisualStyleBackColor = true;
-            this.buttonCheckout.Click += new System.EventHandler(this.buttonCheckout_Click);
-            // 
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
@@ -130,7 +110,7 @@ namespace PTClient.GUI.Map
             this.button1.TabIndex = 4;
             this.button1.Text = "Logoff";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Logout_Click);
             // 
             // EngineStartButton
             // 

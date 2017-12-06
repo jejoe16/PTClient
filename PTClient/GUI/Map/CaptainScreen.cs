@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PTClient.SharedResources;
+using PTClient.Logic.LogicController;
 
 namespace PTClient.GUI.Map
 {
@@ -18,6 +19,7 @@ namespace PTClient.GUI.Map
         private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
         private volatile int Dir;
         private Thread thread;
+        private IController LogicController = Controller.GetController();
 
         public CaptainScreen()
         {
@@ -54,19 +56,10 @@ namespace PTClient.GUI.Map
         }
 
 
-        private void buttonCheckin_Click(object sender, EventArgs e)
+        private void Logout_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().CheckIn("mangler i capt gui");
-        }
-
-        private void buttonCheckout_Click(object sender, EventArgs e)
-        {
-            Logic.LogicController.Controller.GetController().CheckOut("Mangler i capt gui");
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Logic.LogicController.Controller.GetController().Logout();
+            LogicController.Logout();
+            thread.Abort();
             this.Close();
         }
 
@@ -76,14 +69,12 @@ namespace PTClient.GUI.Map
             if (thread != null)
             {
                 thread.Join();
-                disableButton();
             }
             EngineStartButton.Enabled = false;
             EngineStopButton.Enabled = true;
             Thread.Sleep(2000);
             thread = new Thread(new ThreadStart(BoatThreadCallBack));
             thread.Start();
-            enableButton();
         }
 
         private void stop_Click(object sender, EventArgs e)
@@ -132,12 +123,13 @@ namespace PTClient.GUI.Map
 
         private void pictureBoxDir_Click(object sender, EventArgs e)
         {
+            
             boatStatus = false;
-            if(thread != null)
+            if (thread != null)
             {
-                thread.Join();
-                disableButton();
+                thread.Abort();
             }
+            
             ThreadStart start;
             EngineStopButton.Enabled = true;
             
@@ -185,32 +177,14 @@ namespace PTClient.GUI.Map
 
             thread = new Thread(start);
             thread.Start();
-            enableButton();
         }
 
-        private void disableButton()
+        private void CaptainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            pictureNorth.Visible = false;
-            pictureNorthWest.Visible = false;
-            pictureNorthEast.Visible = false;
-            pictureEast.Visible = false;
-            pictureSouthEast.Visible = false;
-            pictureSouth.Visible = false;
-            pictureSouthWest.Visible = false;
-            pictureWest.Visible = false;
+            thread.Abort();
+            e.Cancel = true;
         }
 
-        private void enableButton()
-        {
-            pictureNorth.Visible = true;
-            pictureNorthWest.Visible = true;
-            pictureNorthEast.Visible = true;
-            pictureEast.Visible = true;
-            pictureSouthEast.Visible = true;
-            pictureSouth.Visible = true;
-            pictureSouthWest.Visible = true;
-            pictureWest.Visible = true;
-        }
     }
 
     
