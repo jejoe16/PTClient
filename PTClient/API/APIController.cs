@@ -21,6 +21,7 @@ namespace PTClient.API
         private InlineResponse202 response202 = null;
         private InlineResponse203 response203 = null;
         private InlineResponse204 response204 = null;
+        private InlineResponse2021 response2021 = null;
 
         APIController()
         {
@@ -34,6 +35,7 @@ namespace PTClient.API
                 apicontroller = new APIController();
             }
             return apicontroller;
+           
         }
 
         public Boolean CaptainCheck()
@@ -47,7 +49,11 @@ namespace PTClient.API
             return response202.Turbines;
         }
 
-       
+       public List<WorkerItem> getWorkerListItem()
+        {
+            response2021 = api.GetAllWorkersGet();
+            return response2021.Workers;
+        }
 
         public String GetUserPosition()
         {
@@ -88,6 +94,5 @@ namespace PTClient.API
         {
             api.EmergencyUsernamePasswordPost(Username, Password);
         }
-        
     }
 }

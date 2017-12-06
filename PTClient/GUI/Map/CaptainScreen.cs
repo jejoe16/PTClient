@@ -7,8 +7,8 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PTClient.SharedResources;
-using PTClient.Logic.LogicController;
 using System.Collections.Generic;
+using PTClient.Logic.LogicController;
 
 namespace PTClient.GUI.Map
 {
@@ -20,7 +20,6 @@ namespace PTClient.GUI.Map
         private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
         private volatile int Dir;
         private Thread thread;
-        private Controller logicController = Controller.GetController();
 
         public CaptainScreen()
         {
@@ -37,10 +36,9 @@ namespace PTClient.GUI.Map
             gmap.MaxZoom = 50;
             gmap.Zoom = 10;
             SetMarkers();
-            boat = BoatPosition.GetBoatPosition();
-            //ThreadStart route = new ThreadStart(SetRouteThread);
-            //Thread RouteThread = new Thread(route);
-            //RouteThread.Start();
+            ThreadStart route = new ThreadStart(UpdateWorkerList);
+            Thread RouteThread = new Thread(route);
+            RouteThread.Start();
         }
 
         private void SetMarkers()
@@ -59,7 +57,6 @@ namespace PTClient.GUI.Map
             }
             
         }
-
 
         private void buttonCheckin_Click(object sender, EventArgs e)
         {
@@ -219,41 +216,26 @@ namespace PTClient.GUI.Map
             pictureWest.Visible = true;
         }
 
-        private void SetRouteThread()
+        private void WorkerLocations_SelectedIndexChanged(object sender, EventArgs e, List<WorkerItem> list)
         {
-            while (true)
+
+        }
+
+        private void UpdateWorkerList()
+        {
+            IController logicControl = Controller.GetController();
+
+            List<WorkerItem> list = logicControl.GetWorkerListItems();
+
+            foreach (WorkerItem workerItem in list)
             {
-                if (logicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongtitude()))
-                {
-                    logicController.setEmergency();
-                    logicController.GetRoute();
-
-                    break;
-                }
-                else if (!logicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongtitude()))
-                {
-                    Thread.Sleep(1000);
-                }
-                if (logicController.CheckState())
-                {
-                    List<Logic.Emergency.Point> PickUpPoints = logicController.GetRoute();
-                    GMapOverlay routes = new GMapOverlay("routes");
-                    List<PointLatLng> points = new List<PointLatLng>();
-                    foreach (var Point in PickUpPoints)
-                    {
-                        points.Add(new PointLatLng(Point.getLatt(), Point.getLong()));
-                    }
-                    GMapRoute route = new GMapRoute(points, "Emergency route");
-                    route.Stroke = new Pen(Color.Red, 3);
-                    routes.Routes.Add(route);
-                    gmap.Overlays.Add(routes);
-                }
+                ListViewItem item = new ListViewItem(workerItem.Name);
+                item.SubItems.Add(workerItem.Position);
+                
+                gmap.Invoke(new Action(() => WorkerLocations.Items.Add(item)));
             }
+            Thread.Sleep(5000);
         }
 
-        private void Emergency_Click(object sender, EventArgs e)
-        {
-            logicController.setEmergency();
-        }
-    } 
+    }
 }

@@ -36,6 +36,46 @@ namespace PTClient.IO.Swagger.Api
     /// </summary>
     public interface IDefaultApi : IApiAccessor
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// returns all the users position
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of InlineResponse2021</returns>
+        ApiResponse<InlineResponse2021> GetAllWorkersGetWithHttpInfo();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// returns all the users position
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of InlineResponse2021</returns>
+        System.Threading.Tasks.Task<InlineResponse2021> GetAllWorkersGetAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// returns all the users position
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (InlineResponse2021)</returns>
+        System.Threading.Tasks.Task<ApiResponse<InlineResponse2021>> GetAllWorkersGetAsyncWithHttpInfo();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// returns all the users position
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>InlineResponse2021</returns>
+        InlineResponse2021 GetAllWorkersGet();
+
         #region Synchronous Operations
         /// <summary>
         /// 
@@ -1082,6 +1122,133 @@ namespace PTClient.IO.Swagger.Api
         {
              ApiResponse<InlineResponse202> localVarResponse = TurbineGetWithHttpInfo();
              return localVarResponse.Data;
+        }
+
+
+
+
+
+        /// <summary>
+        ///  returns all the users position
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>InlineResponse2021</returns>
+        public InlineResponse2021 GetAllWorkersGet()
+        {
+            ApiResponse<InlineResponse2021> localVarResponse = GetAllWorkersGetWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  returns all the users position
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of InlineResponse2021</returns>
+        public ApiResponse<InlineResponse2021> GetAllWorkersGetWithHttpInfo()
+        {
+
+            var localVarPath = "/getAllWorkers";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAllWorkersGet", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2021>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2021)Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2021)));
+        }
+
+        /// <summary>
+        ///  returns all the users position
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of InlineResponse2021</returns>
+        public async System.Threading.Tasks.Task<InlineResponse2021> GetAllWorkersGetAsync()
+        {
+            ApiResponse<InlineResponse2021> localVarResponse = await GetAllWorkersGetAsyncWithHttpInfo();
+            return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        ///  returns all the users position
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (InlineResponse2021)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<InlineResponse2021>> GetAllWorkersGetAsyncWithHttpInfo()
+        {
+
+            var localVarPath = "/getAllWorkers";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new Dictionary<String, String>();
+            var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAllWorkersGet", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2021>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2021)Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2021)));
         }
 
         /// <summary>

@@ -19,6 +19,7 @@ namespace PTClient.Logic.LogicController
         Boolean CaptainCheck();
         List<TurbineItem> GetTurbines();
         Boolean CheckConnection();
+        List<WorkerItem> GetWorkerListItems();
 
     }
 }
