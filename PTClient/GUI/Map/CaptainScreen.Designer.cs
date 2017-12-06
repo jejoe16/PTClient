@@ -55,6 +55,7 @@ namespace PTClient.GUI.Map
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.SimPos = new System.Windows.Forms.Button();
+            this.Emergency = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthWest)).BeginInit();
@@ -257,12 +258,23 @@ namespace PTClient.GUI.Map
             this.SimPos.UseVisualStyleBackColor = true;
             this.SimPos.Click += new System.EventHandler(this.SimPosBot_Click);
             // 
+            // Emergency
+            // 
+            this.Emergency.Location = new System.Drawing.Point(623, 526);
+            this.Emergency.Name = "Emergency";
+            this.Emergency.Size = new System.Drawing.Size(206, 23);
+            this.Emergency.TabIndex = 18;
+            this.Emergency.Text = "Emergency";
+            this.Emergency.UseVisualStyleBackColor = true;
+            this.Emergency.Click += new System.EventHandler(this.button2_Click);
+            // 
             // CaptainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 561);
             this.Controls.Add(this.SimPos);
+            this.Controls.Add(this.Emergency);
             this.Controls.Add(this.WorkerLocations);
             this.Controls.Add(this.pictureSouthEast);
             this.Controls.Add(this.pictureSouth);
@@ -314,6 +326,8 @@ namespace PTClient.GUI.Map
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private Button SimPos;
+        private Button Emergency;
+
     }
 
 }

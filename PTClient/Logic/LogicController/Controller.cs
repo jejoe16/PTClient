@@ -157,12 +157,12 @@ namespace PTClient.Logic.LogicController
             return state.Emergency;
         }
 
-        public List<Emergency.Point> GetRoute()
+        public List<Point> GetRoute()
         {
             return emergencyRoute.getPickUpPoints();
         }
 
-        public void setEmergency()
+        public void SetEmergency()
         {
             state.Emergency = true;
         }
