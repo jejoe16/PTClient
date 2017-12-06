@@ -73,8 +73,7 @@ namespace PTClient.GUI.Map
             this.gmap.GrayScaleMode = false;
             this.gmap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gmap.LevelsKeepInMemmory = 5;
-            this.gmap.Location = new System.Drawing.Point(18, 18);
-            this.gmap.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gmap.Location = new System.Drawing.Point(12, 12);
             this.gmap.MarkersEnabled = true;
             this.gmap.MaxZoom = 2;
             this.gmap.MinZoom = 2;
@@ -88,16 +87,15 @@ namespace PTClient.GUI.Map
             this.gmap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gmap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gmap.ShowTileGridLines = false;
-            this.gmap.Size = new System.Drawing.Size(873, 811);
+            this.gmap.Size = new System.Drawing.Size(582, 527);
             this.gmap.TabIndex = 0;
             this.gmap.Zoom = 0D;
             // 
             // buttonCheckin
             // 
-            this.buttonCheckin.Location = new System.Drawing.Point(933, 794);
-            this.buttonCheckin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonCheckin.Location = new System.Drawing.Point(622, 516);
             this.buttonCheckin.Name = "buttonCheckin";
-            this.buttonCheckin.Size = new System.Drawing.Size(112, 35);
+            this.buttonCheckin.Size = new System.Drawing.Size(75, 23);
             this.buttonCheckin.TabIndex = 1;
             this.buttonCheckin.Text = "Checkin";
             this.buttonCheckin.UseVisualStyleBackColor = true;
@@ -105,10 +103,9 @@ namespace PTClient.GUI.Map
             // 
             // buttonCheckout
             // 
-            this.buttonCheckout.Location = new System.Drawing.Point(1131, 794);
-            this.buttonCheckout.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonCheckout.Location = new System.Drawing.Point(754, 516);
             this.buttonCheckout.Name = "buttonCheckout";
-            this.buttonCheckout.Size = new System.Drawing.Size(112, 35);
+            this.buttonCheckout.Size = new System.Drawing.Size(75, 23);
             this.buttonCheckout.TabIndex = 2;
             this.buttonCheckout.Text = "Checkout";
             this.buttonCheckout.UseVisualStyleBackColor = true;
@@ -118,10 +115,9 @@ namespace PTClient.GUI.Map
             // 
             this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(928, 22);
-            this.statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLabel.Location = new System.Drawing.Point(619, 14);
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(79, 29);
+            this.statusLabel.Size = new System.Drawing.Size(56, 20);
             this.statusLabel.TabIndex = 3;
             this.statusLabel.Text = "Status";
             // 
@@ -133,10 +129,9 @@ namespace PTClient.GUI.Map
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1131, 18);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Location = new System.Drawing.Point(754, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 43);
+            this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 4;
             this.button1.Text = "Logoff";
             this.button1.UseVisualStyleBackColor = true;
@@ -144,10 +139,9 @@ namespace PTClient.GUI.Map
             // 
             // EngineStartButton
             // 
-            this.EngineStartButton.Location = new System.Drawing.Point(1039, 554);
-            this.EngineStartButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EngineStartButton.Location = new System.Drawing.Point(693, 360);
             this.EngineStartButton.Name = "EngineStartButton";
-            this.EngineStartButton.Size = new System.Drawing.Size(98, 46);
+            this.EngineStartButton.Size = new System.Drawing.Size(65, 30);
             this.EngineStartButton.TabIndex = 5;
             this.EngineStartButton.Text = "Start";
             this.EngineStartButton.UseVisualStyleBackColor = true;
@@ -156,10 +150,9 @@ namespace PTClient.GUI.Map
             // EngineStopButton
             // 
             this.EngineStopButton.Enabled = false;
-            this.EngineStopButton.Location = new System.Drawing.Point(1039, 609);
-            this.EngineStopButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EngineStopButton.Location = new System.Drawing.Point(693, 396);
             this.EngineStopButton.Name = "EngineStopButton";
-            this.EngineStopButton.Size = new System.Drawing.Size(98, 43);
+            this.EngineStopButton.Size = new System.Drawing.Size(65, 28);
             this.EngineStopButton.TabIndex = 6;
             this.EngineStopButton.Text = "Stop";
             this.EngineStopButton.UseVisualStyleBackColor = true;
@@ -168,10 +161,9 @@ namespace PTClient.GUI.Map
             // pictureSouthEast
             // 
             this.pictureSouthEast.Image = global::PTClient.Properties.Resources.arrow_southeast;
-            this.pictureSouthEast.Location = new System.Drawing.Point(1145, 662);
-            this.pictureSouthEast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureSouthEast.Location = new System.Drawing.Point(763, 430);
             this.pictureSouthEast.Name = "pictureSouthEast";
-            this.pictureSouthEast.Size = new System.Drawing.Size(98, 98);
+            this.pictureSouthEast.Size = new System.Drawing.Size(65, 64);
             this.pictureSouthEast.TabIndex = 16;
             this.pictureSouthEast.TabStop = false;
             this.pictureSouthEast.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -179,10 +171,9 @@ namespace PTClient.GUI.Map
             // pictureSouth
             // 
             this.pictureSouth.Image = global::PTClient.Properties.Resources.arrow_south;
-            this.pictureSouth.Location = new System.Drawing.Point(1039, 662);
-            this.pictureSouth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureSouth.Location = new System.Drawing.Point(693, 430);
             this.pictureSouth.Name = "pictureSouth";
-            this.pictureSouth.Size = new System.Drawing.Size(98, 98);
+            this.pictureSouth.Size = new System.Drawing.Size(65, 64);
             this.pictureSouth.TabIndex = 15;
             this.pictureSouth.TabStop = false;
             this.pictureSouth.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -190,10 +181,9 @@ namespace PTClient.GUI.Map
             // pictureSouthWest
             // 
             this.pictureSouthWest.Image = global::PTClient.Properties.Resources.arrow_southwest;
-            this.pictureSouthWest.Location = new System.Drawing.Point(933, 662);
-            this.pictureSouthWest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureSouthWest.Location = new System.Drawing.Point(622, 430);
             this.pictureSouthWest.Name = "pictureSouthWest";
-            this.pictureSouthWest.Size = new System.Drawing.Size(98, 98);
+            this.pictureSouthWest.Size = new System.Drawing.Size(65, 64);
             this.pictureSouthWest.TabIndex = 14;
             this.pictureSouthWest.TabStop = false;
             this.pictureSouthWest.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -201,10 +191,9 @@ namespace PTClient.GUI.Map
             // pictureWest
             // 
             this.pictureWest.Image = global::PTClient.Properties.Resources.arrow_west;
-            this.pictureWest.Location = new System.Drawing.Point(933, 554);
-            this.pictureWest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureWest.Location = new System.Drawing.Point(622, 360);
             this.pictureWest.Name = "pictureWest";
-            this.pictureWest.Size = new System.Drawing.Size(98, 98);
+            this.pictureWest.Size = new System.Drawing.Size(65, 64);
             this.pictureWest.TabIndex = 13;
             this.pictureWest.TabStop = false;
             this.pictureWest.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -212,10 +201,9 @@ namespace PTClient.GUI.Map
             // pictureNorthEast
             // 
             this.pictureNorthEast.Image = global::PTClient.Properties.Resources.arrow_northeast;
-            this.pictureNorthEast.Location = new System.Drawing.Point(1145, 446);
-            this.pictureNorthEast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureNorthEast.Location = new System.Drawing.Point(763, 290);
             this.pictureNorthEast.Name = "pictureNorthEast";
-            this.pictureNorthEast.Size = new System.Drawing.Size(98, 98);
+            this.pictureNorthEast.Size = new System.Drawing.Size(65, 64);
             this.pictureNorthEast.TabIndex = 12;
             this.pictureNorthEast.TabStop = false;
             this.pictureNorthEast.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -223,10 +211,9 @@ namespace PTClient.GUI.Map
             // pictureNorthWest
             // 
             this.pictureNorthWest.Image = global::PTClient.Properties.Resources.arrow_northwest;
-            this.pictureNorthWest.Location = new System.Drawing.Point(933, 446);
-            this.pictureNorthWest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureNorthWest.Location = new System.Drawing.Point(622, 290);
             this.pictureNorthWest.Name = "pictureNorthWest";
-            this.pictureNorthWest.Size = new System.Drawing.Size(98, 98);
+            this.pictureNorthWest.Size = new System.Drawing.Size(65, 64);
             this.pictureNorthWest.TabIndex = 11;
             this.pictureNorthWest.TabStop = false;
             this.pictureNorthWest.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -234,10 +221,9 @@ namespace PTClient.GUI.Map
             // pictureEast
             // 
             this.pictureEast.Image = global::PTClient.Properties.Resources.arrow_east;
-            this.pictureEast.Location = new System.Drawing.Point(1145, 554);
-            this.pictureEast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureEast.Location = new System.Drawing.Point(763, 360);
             this.pictureEast.Name = "pictureEast";
-            this.pictureEast.Size = new System.Drawing.Size(98, 98);
+            this.pictureEast.Size = new System.Drawing.Size(65, 64);
             this.pictureEast.TabIndex = 10;
             this.pictureEast.TabStop = false;
             this.pictureEast.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -245,10 +231,9 @@ namespace PTClient.GUI.Map
             // pictureNorth
             // 
             this.pictureNorth.Image = global::PTClient.Properties.Resources.arrow_north;
-            this.pictureNorth.Location = new System.Drawing.Point(1039, 446);
-            this.pictureNorth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureNorth.Location = new System.Drawing.Point(693, 290);
             this.pictureNorth.Name = "pictureNorth";
-            this.pictureNorth.Size = new System.Drawing.Size(98, 98);
+            this.pictureNorth.Size = new System.Drawing.Size(65, 64);
             this.pictureNorth.TabIndex = 9;
             this.pictureNorth.TabStop = false;
             this.pictureNorth.Click += new System.EventHandler(this.pictureBoxDir_Click);
@@ -260,12 +245,14 @@ namespace PTClient.GUI.Map
             this.columnHeader2});
             this.WorkerLocations.FullRowSelect = true;
             this.WorkerLocations.GridLines = true;
-            this.WorkerLocations.Location = new System.Drawing.Point(933, 84);
+            this.WorkerLocations.Location = new System.Drawing.Point(622, 55);
+            this.WorkerLocations.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.WorkerLocations.Name = "WorkerLocations";
-            this.WorkerLocations.Size = new System.Drawing.Size(310, 340);
+            this.WorkerLocations.Size = new System.Drawing.Size(208, 222);
             this.WorkerLocations.TabIndex = 17;
             this.WorkerLocations.UseCompatibleStateImageBehavior = false;
             this.WorkerLocations.View = System.Windows.Forms.View.Details;
+
             // 
             // columnHeader1
             // 
@@ -279,9 +266,9 @@ namespace PTClient.GUI.Map
             // 
             // CaptainScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1283, 863);
+            this.ClientSize = new System.Drawing.Size(855, 561);
             this.Controls.Add(this.WorkerLocations);
             this.Controls.Add(this.pictureSouthEast);
             this.Controls.Add(this.pictureSouth);
@@ -298,7 +285,6 @@ namespace PTClient.GUI.Map
             this.Controls.Add(this.buttonCheckout);
             this.Controls.Add(this.buttonCheckin);
             this.Controls.Add(this.gmap);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "CaptainScreen";
             this.Text = "Overview";
             this.Load += new System.EventHandler(this.Onload);

@@ -12,17 +12,13 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using SwaggerDateConverter = IO.Swagger.Client.SwaggerDateConverter;
+using PTClient.SharedResources;
 
-namespace IO.Swagger.Model
+namespace PTClient.IO.Swagger.Model
 {
     /// <summary>
     /// InlineResponse2021
@@ -38,25 +34,25 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="InlineResponse2021" /> class.
         /// </summary>
-        /// <param name="Turbines">Turbines (required).</param>
-        public InlineResponse2021(List<TurbineItem> Turbines = default(List<TurbineItem>))
+        /// <param name="Workers">Workers (required).</param>
+        public InlineResponse2021(List<WorkerItem> Workers = default(List<WorkerItem>))
         {
-            // to ensure "Turbines" is required (not null)
-            if (Turbines == null)
+            // to ensure "Workers" is required (not null)
+            if (Workers == null)
             {
-                throw new InvalidDataException("Turbines is a required property for InlineResponse2021 and cannot be null");
+                throw new InvalidDataException("Workers is a required property for InlineResponse2021 and cannot be null");
             }
             else
             {
-                this.Turbines = Turbines;
+                this.Workers = Workers;
             }
         }
         
         /// <summary>
-        /// Gets or Sets Turbines
+        /// Gets or Sets Workers
         /// </summary>
-        [DataMember(Name="turbines", EmitDefaultValue=false)]
-        public List<TurbineItem> Turbines { get; set; }
+        [DataMember(Name="workers", EmitDefaultValue=false)]
+        public List<WorkerItem> Workers { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,7 +62,7 @@ namespace IO.Swagger.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2021 {\n");
-            sb.Append("  Turbines: ").Append(Turbines).Append("\n");
+            sb.Append("  Workers: ").Append(Workers).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -102,9 +98,9 @@ namespace IO.Swagger.Model
 
             return 
                 (
-                    this.Turbines == input.Turbines ||
-                    this.Turbines != null &&
-                    this.Turbines.SequenceEqual(input.Turbines)
+                    this.Workers == input.Workers ||
+                    this.Workers != null &&
+                    this.Workers.SequenceEqual(input.Workers)
                 );
         }
 
@@ -117,8 +113,8 @@ namespace IO.Swagger.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Turbines != null)
-                    hashCode = hashCode * 59 + this.Turbines.GetHashCode();
+                if (this.Workers != null)
+                    hashCode = hashCode * 59 + this.Workers.GetHashCode();
                 return hashCode;
             }
         }

@@ -113,6 +113,7 @@
     <Compile Include="API\IO.Swagger\Model\InlineResponse200.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse201.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse202.cs" />
+    <Compile Include="API\IO.Swagger\Model\InlineResponse2021.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse203.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse204.cs" />
     <Compile Include="GUI\GUIController.cs" />

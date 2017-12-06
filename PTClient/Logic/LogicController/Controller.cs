@@ -56,6 +56,12 @@ namespace PTClient.Logic.LogicController
             return turbines.GetTurbineList();
         }
 
+        public List<WorkerItem> GetWorkerListItems()
+        {
+            api = APIController.GetAPIController();
+            return api.getWorkerListItem();
+        }
+
         public List<String> GetTurbineNames()
         {
             DownloadTurbines();
@@ -137,19 +143,19 @@ namespace PTClient.Logic.LogicController
             //    return true;
             //}
             //return false;
-            
-            
-                try
-                {
-                    WebClient client = new WebClient();
-                    client.DownloadData("35.187.75.150:12230");
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            
+
+
+            try
+            {
+                WebClient client = new WebClient();
+                client.DownloadData("http://35.187.75.150:12230");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
 
         public bool CallEmergency()
@@ -159,20 +165,22 @@ namespace PTClient.Logic.LogicController
 
             return state.Emergency;
         }
+
         public List<Emergency.Point> GetRoute()
         {
             return emergencyRoute.getPickUpPoints();
         }
+
         public void setEmergency()
         {
             state.Emergency = true;
         }
 
-        
         public Boolean CheckState()
         {
             return state.Emergency;
         }
+
         public Boolean ExistRouteapi(double lat, double longi)
         {
             //checker om der fra apiet har en route, og hvis der bliver returneret en liste med en længde går videre.

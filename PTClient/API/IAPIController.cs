@@ -11,6 +11,8 @@ namespace PTClient.API
     interface IAPIController
     {
         List<TurbineItem> getTurbines();
+
+        List<WorkerItem> getWorkerListItem();
         Boolean Login(String UserName, String PassWord);
         String GetUserPosition();
         Boolean CaptainCheck();
