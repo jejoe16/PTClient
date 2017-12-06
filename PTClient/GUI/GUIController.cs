@@ -13,25 +13,18 @@ namespace PTClient.GUI
 {
     class GUIController
     {
-        private static GUIController GUIcontroller = null;
+        
         private IMap map = new MapControl();
-        private IController controller = Controller.GetController();
+        private IController controller = new Controller();
         private System.Object lockThis = new System.Object();
         public GUIController()
         {
 
         }
 
-        public static object Executors { get; private set; }
-
-        public static GUIController GetController()
+        public IController GetLogicController()
         {
-            if(GUIcontroller == null)
-            {
-                GUIcontroller = new GUIController();
-            }
-
-            return GUIcontroller;
+            return controller;
         }
 
         public void generateMap() 

@@ -87,6 +87,20 @@ namespace PTClient.GUI.Map
             this.gmap.TabIndex = 0;
             this.gmap.Zoom = 0D;
             // 
+            // buttonCheckin
+            // 
+            this.buttonCheckin.Location = new System.Drawing.Point(0, 0);
+            this.buttonCheckin.Name = "buttonCheckin";
+            this.buttonCheckin.Size = new System.Drawing.Size(75, 23);
+            this.buttonCheckin.TabIndex = 0;
+            // 
+            // buttonCheckout
+            // 
+            this.buttonCheckout.Location = new System.Drawing.Point(0, 0);
+            this.buttonCheckout.Name = "buttonCheckout";
+            this.buttonCheckout.Size = new System.Drawing.Size(75, 23);
+            this.buttonCheckout.TabIndex = 0;
+            // 
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
@@ -230,11 +244,10 @@ namespace PTClient.GUI.Map
             this.Controls.Add(this.EngineStartButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.statusLabel);
-            this.Controls.Add(this.buttonCheckout);
-            this.Controls.Add(this.buttonCheckin);
             this.Controls.Add(this.gmap);
             this.Name = "CaptainScreen";
             this.Text = "Overview";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CaptainScreen_FormClosing);
             this.Load += new System.EventHandler(this.Onload);
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).EndInit();

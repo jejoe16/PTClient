@@ -44,7 +44,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Login_Click);
             // 
             // textBoxUsername
             // 
@@ -100,7 +100,6 @@
             this.Controls.Add(this.button1);
             this.Name = "LoginScreen";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

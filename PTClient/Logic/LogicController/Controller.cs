@@ -18,7 +18,6 @@ namespace PTClient.Logic.LogicController
     class Controller : IController
     {
         private ITurbinePosition turbines = null;
-        private static Controller controller = null;
         private IAPIController api = null;
         private ISession session = null;
 
@@ -27,15 +26,6 @@ namespace PTClient.Logic.LogicController
             turbines = new TurbinePosition();
         }
 
-        public static Controller GetController()
-        {
-            if (controller == null)
-            {
-                controller = new Controller();
-            }
-
-            return controller;
-        }
 
         /// <summary>
         /// downloads the list of turbines from the server and adds them to the client 
@@ -67,22 +57,24 @@ namespace PTClient.Logic.LogicController
             return turbines.GetTurbineLatitude(Name);
         }
 
+
+        public void NewSession(String Username, String Password)
+        {
+            api = APIController.GetAPIController();
+            Boolean logincheck = api.Login(Username, Password);
+            Boolean Captain = api.CaptainCheck();
+            session = new Session();
+            session.createUser(Username, Password, Captain);
+        }
+
         public Boolean Login(String username, String password)
         {
-            api = PTClient.API.APIController.GetAPIController();
-            Boolean Check = api.Login(username, password);
-
+            api = APIController.GetAPIController();
+            Boolean logincheck = api.Login(username, password);
+            Boolean Captain = api.CaptainCheck();
             session = new Session();
-            if (Check.Equals(true))
-            {
-                Boolean Captain = api.CaptainCheck();
-                
-                session.createUser(username, password, Captain);
-                //String position = api.GetUserPosition();
-                //session.SetUserPosition(position);
-            }
-
-            return session.LoggedIn();
+            session.createUser(username, password, Captain);
+            return logincheck;
         }
 
         public void Logout()

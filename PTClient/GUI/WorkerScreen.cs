@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PTClient.Logic.LogicController;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,28 +13,31 @@ namespace PTClient.GUI
 {
     public partial class WorkerScreen : Form
     {
-        
-        public WorkerScreen()
+        GUIController GUIControl = new GUIController();
+        IController control;
+        public WorkerScreen(String Username, String Password)
         {
             InitializeComponent();
+            control = GUIControl.GetLogicController();
+            control.NewSession(Username, Password);
 
         }
         private String currentPos = "nowhere";
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().Logout();
+            control.Logout();
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().CheckIn(currentPos);
+            control.CheckIn(currentPos);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().CheckOut(currentPos);
+            control.CheckOut(currentPos);
         }
     }
 }

@@ -13,18 +13,21 @@ namespace PTClient.GUI.Map
 {
     public partial class CaptainScreen : Form
     {
-        private GUIController controller = GUIController.GetController();
+        private GUIController controller = new GUIController();
         private BoatPosition boat = new BoatPosition();
         private Boolean boatStatus = true;
         private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
         private volatile int Dir;
         private Thread thread;
-        private IController LogicController = Controller.GetController();
+        private IController LogicController;
 
-        public CaptainScreen()
+        public CaptainScreen(String Username, String Password)
         {
+            LogicController = controller.GetLogicController();
+            LogicController.NewSession(Username, Password);
             controller.generateMap();
             InitializeComponent();
+            
         }
 
         private void Onload(object sender, EventArgs e)
@@ -179,12 +182,12 @@ namespace PTClient.GUI.Map
             thread.Start();
         }
 
+     
+
         private void CaptainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             thread.Abort();
-            e.Cancel = true;
         }
-
     }
 
     
