@@ -38,7 +38,6 @@ namespace PTClient.GUI.Map
             this.gmap = new GMap.NET.WindowsForms.GMapControl();
             this.buttonCheckin = new System.Windows.Forms.Button();
             this.buttonCheckout = new System.Windows.Forms.Button();
-            this.statusLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.EngineStartButton = new System.Windows.Forms.Button();
@@ -52,6 +51,7 @@ namespace PTClient.GUI.Map
             this.pictureEast = new System.Windows.Forms.PictureBox();
             this.pictureNorth = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.statusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthWest)).BeginInit();
@@ -107,16 +107,6 @@ namespace PTClient.GUI.Map
             this.buttonCheckout.Text = "Checkout";
             this.buttonCheckout.UseVisualStyleBackColor = true;
             this.buttonCheckout.Click += new System.EventHandler(this.buttonCheckout_Click);
-            // 
-            // statusLabel
-            // 
-            this.statusLabel.AutoSize = true;
-            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(628, 20);
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(56, 20);
-            this.statusLabel.TabIndex = 3;
-            this.statusLabel.Text = "Status";
             // 
             // contextMenuStrip1
             // 
@@ -234,7 +224,7 @@ namespace PTClient.GUI.Map
             this.pictureNorth.TabStop = false;
             this.pictureNorth.Click += new System.EventHandler(this.pictureBoxDir_Click);
             // 
-            // Emergency
+            // button2
             // 
             this.button2.Location = new System.Drawing.Point(873, 47);
             this.button2.Name = "button2";
@@ -243,6 +233,16 @@ namespace PTClient.GUI.Map
             this.button2.Text = "Emergency";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Emergency_Click);
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.Location = new System.Drawing.Point(628, 20);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(56, 20);
+            this.statusLabel.TabIndex = 3;
+            this.statusLabel.Text = "Status";
             // 
             // CaptainScreen
             // 
@@ -286,7 +286,6 @@ namespace PTClient.GUI.Map
         private GMap.NET.WindowsForms.GMapControl gmap;
         private Button buttonCheckin;
         private Button buttonCheckout;
-        private Label statusLabel;
         private ContextMenuStrip contextMenuStrip1;
         private Button button1;
         private Button EngineStartButton;
@@ -300,6 +299,7 @@ namespace PTClient.GUI.Map
         private PictureBox pictureSouth;
         private PictureBox pictureSouthEast;
         private Button button2;
+        private Label statusLabel;
     }
 
 }

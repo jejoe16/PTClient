@@ -38,9 +38,9 @@ namespace PTClient.GUI.Map
             gmap.Zoom = 10;
             SetMarkers();
             boat = BoatPosition.GetBoatPosition();
-            //ThreadStart route = new ThreadStart(SetRouteThread);
-            //Thread RouteThread = new Thread(route);
-            //RouteThread.Start();
+            ThreadStart route = new ThreadStart(SetRouteThread);
+            Thread RouteThread = new Thread(route);
+            RouteThread.Start();
         }
 
         private void SetMarkers()
