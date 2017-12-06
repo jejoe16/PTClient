@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PTClient.SharedResources;
+using System.Collections.Generic;
 
 namespace PTClient.GUI.Map
 {
@@ -52,7 +53,6 @@ namespace PTClient.GUI.Map
             }
             
         }
-
 
         private void buttonCheckin_Click(object sender, EventArgs e)
         {
@@ -211,7 +211,15 @@ namespace PTClient.GUI.Map
             pictureSouthWest.Visible = true;
             pictureWest.Visible = true;
         }
-    }
 
-    
+        private void WorkerLocations_SelectedIndexChanged(object sender, EventArgs e, List<WorkerItem> list)
+        {
+            foreach (WorkerItem workerItem in list)
+            {
+                ListViewItem item = new ListViewItem(workerItem.UserName);
+                item.SubItems.Add(workerItem.Location);
+                WorkerLocations.Items.Add(item);
+            }
+        }
+    }
 }

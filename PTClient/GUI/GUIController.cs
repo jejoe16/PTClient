@@ -17,9 +17,9 @@ namespace PTClient.GUI
         private IMap map = new MapControl();
         private IController controller = Controller.GetController();
         private System.Object lockThis = new System.Object();
+
         public GUIController()
         {
-
         }
 
         public static object Executors { get; private set; }
@@ -51,7 +51,6 @@ namespace PTClient.GUI
 
                 using (Graphics g = Graphics.FromImage(bmp))
                     g.DrawImageUnscaled(rotateMe, (rotateMe.Width / 4), (rotateMe.Height / 4), bmp.Width, bmp.Height);
-
                 
                 rotateMe = bmp;
                 Bitmap rotatedImage = new Bitmap(rotateMe.Width, rotateMe.Height);
@@ -63,8 +62,7 @@ namespace PTClient.GUI
                     g.TranslateTransform(-rotateMe.Width / 2, -rotateMe.Height / 2); 
                     g.DrawImage(rotateMe, new Point(0, 0));                          
                 }
-
-                
+       
                 return rotatedImage;
             }
         }
