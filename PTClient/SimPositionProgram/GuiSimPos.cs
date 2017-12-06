@@ -1,6 +1,8 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
+using PTClient.GUI;
 using PTClient.GUI.Map;
+using PTClient.SimPositionProgram.BoatGenerator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,8 @@ namespace PTClient.SimPosition
 {
     public partial class GuiSimPos : Form
     {
+ 
+        IBoatPosition Boat = BoatPosition.GetBoatPosition();
         public GuiSimPos()
         {
             InitializeComponent();
@@ -86,6 +90,7 @@ namespace PTClient.SimPosition
         {
             lat = gMapSim.Position.Lat;
             lon = gMapSim.Position.Lng;
+            Boat.SetPosition(lat, lon);
             latLabel.Text = String.Concat(lat);
             longLabel.Text = String.Concat(lon);
         }

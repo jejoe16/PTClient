@@ -120,6 +120,9 @@
     <Compile Include="Logic\Emergency\EmergencyRoute.cs" />
     <Compile Include="Logic\Emergency\Point.cs" />
     <Compile Include="Logic\Emergency\State.cs" />
+    <Compile Include="Logic\LogicController\ClientExtension.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SharedResources\TurbineItem.cs" />
     <Compile Include="Logic\LogicController\Controller.cs" />
     <Compile Include="Logic\LogicController\IController.cs" />

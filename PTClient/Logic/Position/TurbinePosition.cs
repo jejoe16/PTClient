@@ -26,13 +26,12 @@ namespace PTClient.Logic.Position
             windturbines = turbines;
         }
 
-        public string GetNearWindTurbine()
+        public string GetNearWindTurbine(Double latitude, Double longitude)
         {
             foreach (TurbineItem wts in windturbines)
             {
-                double lat = vessel.GetLatitude(); // vessel lat 
-                double lon = vessel.GetLongitude(); // vessel long
-                double result = (Math.Pow((lat - (double)wts.Latitude), 2) + Math.Pow((lon - (double)wts.Longitude), 2));
+           
+                double result = (Math.Pow((latitude - (double)wts.Latitude), 2) + Math.Pow((longitude - (double)wts.Longitude), 2));
 
                 if (result <= Math.Pow(radius, 2))
                 {
@@ -46,6 +45,8 @@ namespace PTClient.Logic.Position
         {
             return windturbines;
         }
+
+        
 
         public List<String> GetTurbineNames()
         {

@@ -164,7 +164,7 @@ namespace PTClient.SimPositionProgram.BoatGenerator
         }
 
 
-        public double GetNextLongtitude()
+        public double GetNextLongitude()
         {
             try
             {
@@ -202,7 +202,21 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             }
         }
 
-       
+        public void SetPosition(double Latitude, double Longitude)
+        {
+            try
+            {
+                boat_lock.AcquireWriterLock(10000);
+                currentLatitude = Latitude;
+                currentLongitude = Longitude;
+
+            }
+            finally
+            {
+                boat_lock.ReleaseWriterLock();
+            }
+            
+        }
     }
 
 }

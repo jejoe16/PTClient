@@ -56,6 +56,8 @@ namespace PTClient.Logic.LogicController
             return turbines.GetTurbineNames();
         }
 
+        
+
         public double GetTurbineLongitude(String Name)
         {
             return turbines.GetTurbineLongitude(Name);
@@ -92,7 +94,7 @@ namespace PTClient.Logic.LogicController
             session = null;
         }
 
-        public Boolean CheckIn(String currentPos)
+        public Boolean CheckIn(Double latitude, Double longitude)
         {
             if (session.LoggedIn().Equals(false) || session == null)
             {
@@ -100,13 +102,20 @@ namespace PTClient.Logic.LogicController
             }
             else
             {
-                api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), currentPos);
-                session.SetUserPosition(currentPos);
+                String wt = turbines.GetNearWindTurbine(latitude, longitude);
+                if (wt != null)
+                {
+                    api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), wt);
+                    session.SetUserPosition(wt);
+                } else
+                {
+                    return false;
+                }
             }
             return true;
         }
 
-        public Boolean CheckOut(String currentPos)
+        public Boolean CheckOut()
         {
             if (session.LoggedIn().Equals(false) || session == null)
             {
@@ -114,8 +123,8 @@ namespace PTClient.Logic.LogicController
             }
             else
             {
-                api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), currentPos);
-                session.SetUserPosition(currentPos);
+                api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), "Harbor/Vessel");
+                session.SetUserPosition("Harbor/Vessel");
             }
             return true;
         }
@@ -129,7 +138,7 @@ namespace PTClient.Logic.LogicController
         {
             try
             {
-                WebClient client = new WebClient();
+                ClientExtension client = new ClientExtension();
                 client.DownloadData("http://35.187.75.150:12230");
                 return true;
             }

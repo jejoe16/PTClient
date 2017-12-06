@@ -9,17 +9,19 @@ using System.Windows.Forms;
 using PTClient.SharedResources;
 using System.Collections.Generic;
 using PTClient.Logic.LogicController;
+using PTClient.SimPosition;
 
 namespace PTClient.GUI.Map
 {
     public partial class CaptainScreen : Form
     {
         private GUIController controller = new GUIController();
-        private BoatPosition boat = new BoatPosition();
+        private IBoatPosition boat = BoatPosition.GetBoatPosition();
         private Boolean boatStatus = true;
         private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
         private volatile int Dir;
         private Thread thread;
+        private Thread RouteThread;
         private IController LogicController;
 
         public CaptainScreen(String Username, String Password)
@@ -41,7 +43,7 @@ namespace PTClient.GUI.Map
             gmap.Zoom = 10;
             SetMarkers();
             ThreadStart route = new ThreadStart(UpdateWorkerList);
-            Thread RouteThread = new Thread(route);
+            RouteThread = new Thread(route);
             RouteThread.Start();
         }
 
@@ -67,7 +69,11 @@ namespace PTClient.GUI.Map
         private void Logout_Click(object sender, EventArgs e)
         {
             LogicController.Logout();
-            thread.Abort();
+            if (thread != null)
+            {
+                thread.Abort();
+            }
+            RouteThread.Abort();
             this.Close();
         }
 
@@ -101,13 +107,13 @@ namespace PTClient.GUI.Map
             {
                 boat.GenerateRandomPosition();
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
-                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
+                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongitude());
                 Bitmap Image = new Bitmap(vessel.Image);
                 Bitmap resized = new Bitmap(Image, new Size(30, 50));
                 Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
                 GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
                 gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
-                Thread.Sleep(2000);
+                Thread.Sleep(1500);
             }
             
         }
@@ -119,13 +125,13 @@ namespace PTClient.GUI.Map
             {
                 boat.GoDirection(Dir);
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
-                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
+                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongitude());
                 Bitmap Image = new Bitmap(vessel.Image);
                 Bitmap resized = new Bitmap(Image, new Size(30, 50));
                 Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
                 GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
                 gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
-                Thread.Sleep(2000);
+                Thread.Sleep(1500);
             }
         }
 
@@ -187,29 +193,51 @@ namespace PTClient.GUI.Map
             thread.Start();
         }
 
-     
+        private void SimPosBot_Click(object sender, EventArgs e)
+        {
+            ThreadStart starter = new ThreadStart(BootSimScreen);
+            Thread thread = new Thread(starter);
+            thread.Start();
+        }
+
+        private void BootSimScreen()
+        {
+            GuiSimPos sim = new GuiSimPos();
+            sim.ShowDialog();
+        }
+
 
         private void CaptainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            thread.Abort();
+            if (thread != null)
+            {
+                thread.Abort();
+            }
+            RouteThread.Abort();
         }
 
         
 
         private void UpdateWorkerList()
         {
-
-            List<WorkerItem> list = LogicController.GetWorkerListItems();
-
-            foreach (WorkerItem workerItem in list)
+            while (true)
             {
-                ListViewItem item = new ListViewItem(workerItem.Name);
-                item.SubItems.Add(workerItem.Position);
-                
-                gmap.Invoke(new Action(() => WorkerLocations.Items.Add(item)));
+                List<WorkerItem> list = LogicController.GetWorkerListItems();
+                gmap.Invoke(new Action(() => WorkerLocations.Items.Clear()));
+                foreach (WorkerItem workerItem in list)
+                {
+                    ListViewItem item = new ListViewItem(workerItem.Name);
+                    item.SubItems.Add(workerItem.Position);
+
+                    gmap.Invoke(new Action(() => WorkerLocations.Items.Add(item)));
+                }
+                Thread.Sleep(5000);
             }
-            Thread.Sleep(5000);
         }
 
+        private void statusLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
