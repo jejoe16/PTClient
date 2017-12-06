@@ -20,6 +20,7 @@ namespace PTClient.SimPositionProgram.BoatGenerator
         private ReaderWriterLock boat_lock = new ReaderWriterLock();
 
 
+
         public static BoatPosition GetBoatPosition()
 
         {

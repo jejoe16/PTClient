@@ -55,6 +55,7 @@ namespace PTClient.GUI.Map
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthWest)).BeginInit();
@@ -93,7 +94,7 @@ namespace PTClient.GUI.Map
             // 
             // buttonCheckin
             // 
-            this.buttonCheckin.Location = new System.Drawing.Point(622, 516);
+            this.buttonCheckin.Location = new System.Drawing.Point(622, 500);
             this.buttonCheckin.Name = "buttonCheckin";
             this.buttonCheckin.Size = new System.Drawing.Size(75, 23);
             this.buttonCheckin.TabIndex = 1;
@@ -103,7 +104,7 @@ namespace PTClient.GUI.Map
             // 
             // buttonCheckout
             // 
-            this.buttonCheckout.Location = new System.Drawing.Point(754, 516);
+            this.buttonCheckout.Location = new System.Drawing.Point(754, 500);
             this.buttonCheckout.Name = "buttonCheckout";
             this.buttonCheckout.Size = new System.Drawing.Size(75, 23);
             this.buttonCheckout.TabIndex = 2;
@@ -246,13 +247,12 @@ namespace PTClient.GUI.Map
             this.WorkerLocations.FullRowSelect = true;
             this.WorkerLocations.GridLines = true;
             this.WorkerLocations.Location = new System.Drawing.Point(622, 55);
-            this.WorkerLocations.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WorkerLocations.Margin = new System.Windows.Forms.Padding(2);
             this.WorkerLocations.Name = "WorkerLocations";
             this.WorkerLocations.Size = new System.Drawing.Size(208, 222);
             this.WorkerLocations.TabIndex = 17;
             this.WorkerLocations.UseCompatibleStateImageBehavior = false;
             this.WorkerLocations.View = System.Windows.Forms.View.Details;
-
             // 
             // columnHeader1
             // 
@@ -264,11 +264,22 @@ namespace PTClient.GUI.Map
             this.columnHeader2.Text = "Location";
             this.columnHeader2.Width = 154;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(623, 526);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(206, 23);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Emergency";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // CaptainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 561);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.WorkerLocations);
             this.Controls.Add(this.pictureSouthEast);
             this.Controls.Add(this.pictureSouth);
@@ -323,6 +334,7 @@ namespace PTClient.GUI.Map
         private HelpProvider helpProvider1;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
+        private Button button2;
     }
 
 }

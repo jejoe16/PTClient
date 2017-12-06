@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
+using PTClient.Logic.Emergency;
 
 namespace PTClient.Logic.LogicController
 {
@@ -20,6 +21,11 @@ namespace PTClient.Logic.LogicController
         List<TurbineItem> GetTurbines();
         Boolean CheckConnection();
         List<WorkerItem> GetWorkerListItems();
+        Boolean ExistRouteapi(double lat, double longi);
+        Boolean CheckState();
+        void SetEmergency();
+        List<Point> GetRoute();
+        bool CallEmergency();
 
     }
 }
