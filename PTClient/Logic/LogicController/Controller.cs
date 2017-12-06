@@ -94,6 +94,7 @@ namespace PTClient.Logic.LogicController
         {
             session = null;
         }
+
         public Boolean CheckIn(String currentPos)
         {
             if (session.LoggedIn().Equals(false) || session == null)
@@ -107,6 +108,7 @@ namespace PTClient.Logic.LogicController
             }
             return true;
         }
+
         public Boolean CheckOut(String currentPos)
         {
             if (session.LoggedIn().Equals(false) || session == null)
@@ -120,7 +122,6 @@ namespace PTClient.Logic.LogicController
             }
             return true;
         }
-
 
         public bool CaptainCheck()
         {
