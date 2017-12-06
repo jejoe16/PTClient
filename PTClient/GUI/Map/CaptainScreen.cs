@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PTClient.SharedResources;
+using System.Collections.Generic;
 using PTClient.Logic.LogicController;
 
 namespace PTClient.GUI.Map
@@ -39,6 +40,9 @@ namespace PTClient.GUI.Map
             gmap.MaxZoom = 50;
             gmap.Zoom = 10;
             SetMarkers();
+            ThreadStart route = new ThreadStart(UpdateWorkerList);
+            Thread RouteThread = new Thread(route);
+            RouteThread.Start();
         }
 
         private void SetMarkers()
@@ -57,6 +61,7 @@ namespace PTClient.GUI.Map
             }
             
         }
+
 
 
         private void Logout_Click(object sender, EventArgs e)
@@ -188,7 +193,23 @@ namespace PTClient.GUI.Map
         {
             thread.Abort();
         }
-    }
 
-    
+        
+
+        private void UpdateWorkerList()
+        {
+
+            List<WorkerItem> list = LogicController.GetWorkerListItems();
+
+            foreach (WorkerItem workerItem in list)
+            {
+                ListViewItem item = new ListViewItem(workerItem.Name);
+                item.SubItems.Add(workerItem.Position);
+                
+                gmap.Invoke(new Action(() => WorkerLocations.Items.Add(item)));
+            }
+            Thread.Sleep(5000);
+        }
+
+    }
 }

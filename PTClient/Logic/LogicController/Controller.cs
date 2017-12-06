@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
 using System.Net;
-using System.Net.NetworkInformation;
+using PTClient.Logic.Emergency;
 
 namespace PTClient.Logic.LogicController
 {
@@ -20,6 +20,9 @@ namespace PTClient.Logic.LogicController
         private ITurbinePosition turbines = null;
         private IAPIController api = null;
         private ISession session = null;
+        
+        private State state = new State();
+        private EmergencyRoute emergencyRoute = new EmergencyRoute();
 
         public Controller()
         {
@@ -41,6 +44,12 @@ namespace PTClient.Logic.LogicController
             return turbines.GetTurbineList();
         }
 
+        public List<WorkerItem> GetWorkerListItems()
+        {
+            api = APIController.GetAPIController();
+            return api.getWorkerListItem();
+        }
+
         public List<String> GetTurbineNames()
         {
             DownloadTurbines();
@@ -56,6 +65,7 @@ namespace PTClient.Logic.LogicController
         {
             return turbines.GetTurbineLatitude(Name);
         }
+
 
 
         public void NewSession(String Username, String Password)
@@ -81,6 +91,7 @@ namespace PTClient.Logic.LogicController
         {
             session = null;
         }
+
         public Boolean CheckIn(String currentPos)
         {
             if (session.LoggedIn().Equals(false) || session == null)
@@ -94,6 +105,7 @@ namespace PTClient.Logic.LogicController
             }
             return true;
         }
+
         public Boolean CheckOut(String currentPos)
         {
             if (session.LoggedIn().Equals(false) || session == null)
@@ -108,7 +120,6 @@ namespace PTClient.Logic.LogicController
             return true;
         }
 
-
         public bool CaptainCheck()
         {
             return session.GetCaptain();
@@ -116,13 +127,60 @@ namespace PTClient.Logic.LogicController
 
         public bool CheckConnection()
         {
-            Ping ping = new Ping();
-            PingReply pingReply = ping.Send(new IPAddress(new byte[] { 35, 187, 75, 150 }), 1000);
-            if (pingReply.Status == IPStatus.Success)
+            try
             {
+                WebClient client = new WebClient();
+                client.DownloadData("http://35.187.75.150:12230");
                 return true;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool CallEmergency()
+        {
+            state.Emergency = true;
+            api.StateEmergency(session.GetUserName(), session.GetPassword());
+
+            return state.Emergency;
+        }
+
+        public List<Emergency.Point> GetRoute()
+        {
+            return emergencyRoute.getPickUpPoints();
+        }
+
+        public void setEmergency()
+        {
+            state.Emergency = true;
+        }
+
+        public Boolean CheckState()
+        {
+            return state.Emergency;
+        }
+
+        public Boolean ExistRouteapi(double lat, double longi)
+        {
+            //checker om der fra apiet har en route, og hvis der bliver returneret en liste med en længde går videre.
+
+            List<TurbineItem> turbineList = api.checkRoute(session.GetUserName(), session.GetPassword(), longi, lat);
+            //if (turbineList.ToArray().Length == null) {
+                if (turbineList.ToArray().Length > 0)
+                {
+                    emergencyRoute.setRoute(turbineList);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            //}
+            //return false;
+            
         }
     }
 }

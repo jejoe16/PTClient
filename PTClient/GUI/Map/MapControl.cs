@@ -1,4 +1,5 @@
 ﻿using GMap.NET;
+using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using System;
 using System.Collections.Generic;
@@ -55,5 +56,7 @@ namespace PTClient.GUI.Map
             sb.Insert(2,",");
             return double.Parse(sb.ToString());
         }
+
+        
     }
 }

@@ -17,6 +17,7 @@ namespace PTClient.GUI
         private IMap map = new MapControl();
         private IController controller = new Controller();
         private System.Object lockThis = new System.Object();
+        private BoatPosition boat = BoatPosition.GetBoatPosition();
         public GUIController()
         {
 
