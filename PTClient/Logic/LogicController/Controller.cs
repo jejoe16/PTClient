@@ -138,7 +138,7 @@ namespace PTClient.Logic.LogicController
         {
             try
             {
-                ClientExtension client = new ClientExtension();
+                WebClient client = new WebClient();
                 client.DownloadData("http://35.187.75.150:12230");
                 return true;
             }

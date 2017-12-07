@@ -6,13 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
 
+
 namespace PTClient.Logic.Position
 {
     class TurbinePosition : ITurbinePosition
     {
-        private int radius = 100;
+        private double MinDistance = 0.5;
         private List<TurbineItem> windturbines = new List<TurbineItem>();
         private VesselPosition vessel = new VesselPosition();
+        private DistanceCalc DistanceCalculator = new DistanceCalc();
 
         public void ShowPosDebugger()
         {
@@ -28,12 +30,13 @@ namespace PTClient.Logic.Position
 
         public string GetNearWindTurbine(Double latitude, Double longitude)
         {
+
             foreach (TurbineItem wts in windturbines)
             {
-           
-                double result = (Math.Pow((latitude - (double)wts.Latitude), 2) + Math.Pow((longitude - (double)wts.Longitude), 2));
+                
+                double distance = DistanceCalculator.distance(latitude, longitude, (double)wts.Latitude, (double)wts.Longitude);
 
-                if (result <= Math.Pow(radius, 2))
+                if (distance <= MinDistance)
                 {
                     return wts.Name;
                 }
@@ -83,6 +86,8 @@ namespace PTClient.Logic.Position
             }
             return Longitude;
         }
+
+
 
 
 

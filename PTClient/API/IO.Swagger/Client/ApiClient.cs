@@ -108,7 +108,7 @@ namespace PTClient.IO.Swagger.Client
 
         // Creates and sets up a RestRequest prior to a call.
         private RestRequest PrepareRequest(
-            String path, RestSharp.Method method, List<KeyValuePair<String, String>> queryParams, Object postBody,
+            String path, RestSharp.Method method, Dictionary<String, String> queryParams, Object postBody,
             Dictionary<String, String> headerParams, Dictionary<String, String> formParams,
             Dictionary<String, FileParameter> fileParams, Dictionary<String, String> pathParams,
             String contentType)
@@ -116,23 +116,23 @@ namespace PTClient.IO.Swagger.Client
             var request = new RestRequest(path, method);
 
             // add path parameter, if any
-            foreach(var param in pathParams)
+            foreach (var param in pathParams)
                 request.AddParameter(param.Key, param.Value, ParameterType.UrlSegment);
 
             // add header parameter, if any
-            foreach(var param in headerParams)
+            foreach (var param in headerParams)
                 request.AddHeader(param.Key, param.Value);
 
             // add query parameter, if any
-            foreach(var param in queryParams)
+            foreach (var param in queryParams)
                 request.AddQueryParameter(param.Key, param.Value);
 
             // add form parameter, if any
-            foreach(var param in formParams)
+            foreach (var param in formParams)
                 request.AddParameter(param.Key, param.Value);
 
             // add file parameter, if any
-            foreach(var param in fileParams)
+            foreach (var param in fileParams)
             {
                 FileParameter file = new FileParameter
                 {
@@ -142,12 +142,20 @@ namespace PTClient.IO.Swagger.Client
                     ContentType = param.Value.ContentType,
                     ContentLength = param.Value.ContentLength
                 };
+                //request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentType);
                 request.Files.Add(file);
             }
 
             if (postBody != null) // http body (model or byte[]) parameter
             {
-                request.AddParameter(contentType, postBody, ParameterType.RequestBody);
+                if (postBody.GetType() == typeof(String))
+                {
+                    request.AddParameter("application/json", postBody, ParameterType.RequestBody);
+                }
+                else if (postBody.GetType() == typeof(byte[]))
+                {
+                    request.AddParameter(contentType, postBody, ParameterType.RequestBody);
+                }
             }
 
             return request;
@@ -167,7 +175,7 @@ namespace PTClient.IO.Swagger.Client
         /// <param name="contentType">Content Type of the request</param>
         /// <returns>Object</returns>
         public Object CallApi(
-            String path, RestSharp.Method method, List<KeyValuePair<String, String>> queryParams, Object postBody,
+            String path, RestSharp.Method method, Dictionary<String, String> queryParams, Object postBody,
             Dictionary<String, String> headerParams, Dictionary<String, String> formParams,
             Dictionary<String, FileParameter> fileParams, Dictionary<String, String> pathParams,
             String contentType)
@@ -202,7 +210,7 @@ namespace PTClient.IO.Swagger.Client
         /// <param name="contentType">Content type.</param>
         /// <returns>The Task instance.</returns>
         public async System.Threading.Tasks.Task<Object> CallApiAsync(
-            String path, RestSharp.Method method, List<KeyValuePair<String, String>> queryParams, Object postBody,
+            String path, RestSharp.Method method, Dictionary<String, String> queryParams, Object postBody,
             Dictionary<String, String> headerParams, Dictionary<String, String> formParams,
             Dictionary<String, FileParameter> fileParams, Dictionary<String, String> pathParams,
             String contentType)
@@ -247,7 +255,7 @@ namespace PTClient.IO.Swagger.Client
         /// </summary>
         /// <param name="obj">The parameter (header, path, query, form).</param>
         /// <returns>Formatted string.</returns>
-        public string ParameterToString(object obj)
+        public string ParameterToString(object obj, IFormatProvider provider)
         {
             if (obj is DateTime)
                 // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
@@ -273,7 +281,43 @@ namespace PTClient.IO.Swagger.Client
                 return flattenedString.ToString();
             }
             else
-                return Convert.ToString (obj);
+                return Convert.ToString (obj, provider);
+        }
+
+        /// <summary>
+        /// If parameter is DateTime, output in a formatted string (default ISO 8601), customizable with Configuration.DateTime.
+        /// If parameter is a list, join the list with ",".
+        /// Otherwise just return the string.
+        /// </summary>
+        /// <param name="obj">The parameter (header, path, query, form).</param>
+        /// <returns>Formatted string.</returns>
+        public string ParameterToString(object obj)
+        {
+            if (obj is DateTime)
+                // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
+                // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
+                // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
+                // For example: 2009-06-15T13:45:30.0000000
+                return ((DateTime)obj).ToString(Configuration.DateTimeFormat);
+            else if (obj is DateTimeOffset)
+                // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
+                // Defaults to an ISO 8601, using the known as a Round-trip date/time pattern ("o")
+                // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
+                // For example: 2009-06-15T13:45:30.0000000
+                return ((DateTimeOffset)obj).ToString(Configuration.DateTimeFormat);
+            else if (obj is IList)
+            {
+                var flattenedString = new StringBuilder();
+                foreach (var param in (IList)obj)
+                {
+                    if (flattenedString.Length > 0)
+                        flattenedString.Append(",");
+                    flattenedString.Append(param);
+                }
+                return flattenedString.ToString();
+            }
+            else
+                return Convert.ToString(obj);
         }
 
         /// <summary>

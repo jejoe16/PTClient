@@ -474,7 +474,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/emergency/{username}/{password}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -547,7 +547,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/emergency/{username}/{password}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -610,7 +610,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/getAllWorkers";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -672,7 +672,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/getAllWorkers";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -738,7 +738,7 @@ namespace PTClient.IO.Swagger.Api
         /// <returns>ApiResponse of InlineResponse204</returns>
         public ApiResponse< InlineResponse204 > GetRouteUsernamePasswordBoatLatitudeBoatLongitudeGetWithHttpInfo (string username, string password, double? boatLatitude, double? boatLongitude)
         {
-            // verify the required parameter 'username' is set
+                        // verify the required parameter 'username' is set
             if (username == null)
                 throw new ApiException(400, "Missing required parameter 'username' when calling DefaultApi->GetRouteUsernamePasswordBoatLatitudeBoatLongitudeGet");
             // verify the required parameter 'password' is set
@@ -753,7 +753,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/getRoute/{username}/{password}/{boatLatitude}/{boatLongitude}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -773,18 +773,21 @@ namespace PTClient.IO.Swagger.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
             if (username != null) localVarPathParams.Add("username", Configuration.ApiClient.ParameterToString(username)); // path parameter
             if (password != null) localVarPathParams.Add("password", Configuration.ApiClient.ParameterToString(password)); // path parameter
-            if (boatLatitude != null) localVarPathParams.Add("boatLatitude", Configuration.ApiClient.ParameterToString(boatLatitude)); // path parameter
-            if (boatLongitude != null) localVarPathParams.Add("boatLongitude", Configuration.ApiClient.ParameterToString(boatLongitude)); // path parameter
-
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
+            if (boatLatitude != null) localVarPathParams.Add("boatLatitude", Configuration.ApiClient.ParameterToString(boatLatitude, culture)); // path parameter
+            if (boatLongitude != null) localVarPathParams.Add("boatLongitude", Configuration.ApiClient.ParameterToString(boatLongitude, culture)); // path parameter
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -792,9 +795,8 @@ namespace PTClient.IO.Swagger.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<InlineResponse204>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (InlineResponse204) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse204)));
+            return new ApiResponse<InlineResponse204>(localVarStatusCode, localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse204)Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse204)));
         }
 
         /// <summary>
@@ -839,7 +841,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/getRoute/{username}/{password}/{boatLatitude}/{boatLongitude}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -914,7 +916,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/getUserPosition/{username}/{password}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -988,7 +990,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/getUserPosition/{username}/{password}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -1061,7 +1063,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/login/{username}/{password}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -1135,7 +1137,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/login/{username}/{password}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -1198,7 +1200,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/turbine";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -1260,7 +1262,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/turbine";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -1336,7 +1338,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/updateLocation/{username}/{password}/{position}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();
@@ -1416,7 +1418,7 @@ namespace PTClient.IO.Swagger.Api
 
             var localVarPath = "/updateLocation/{username}/{password}/{position}";
             var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<String, String>();
             var localVarFileParams = new Dictionary<String, FileParameter>();

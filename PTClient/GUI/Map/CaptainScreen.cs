@@ -23,6 +23,7 @@ namespace PTClient.GUI.Map
         private volatile int Dir;
         private Thread thread;
         private Thread RouteThread;
+        private Thread workerThread;
         private IController LogicController;
 
         public CaptainScreen(String Username, String Password)
@@ -45,12 +46,12 @@ namespace PTClient.GUI.Map
             SetMarkers();
 
             ThreadStart worker = new ThreadStart(UpdateWorkerList);
-            Thread workerThread = new Thread(worker);
+            workerThread = new Thread(worker);
             workerThread.Start();
 
             boat = BoatPosition.GetBoatPosition();
             ThreadStart route = new ThreadStart(SetRouteThread);
-            Thread RouteThread = new Thread(route);
+            RouteThread = new Thread(route);
             RouteThread.Start();
 
         }
@@ -81,7 +82,11 @@ namespace PTClient.GUI.Map
             {
                 thread.Abort();
             }
-            RouteThread.Abort();
+            if (RouteThread != null)
+            {
+                RouteThread.Abort();
+                workerThread.Abort();
+            }
             this.Close();
         }
 
@@ -221,7 +226,11 @@ namespace PTClient.GUI.Map
             {
                 thread.Abort();
             }
-            RouteThread.Abort();
+            if (RouteThread != null)
+            {
+                RouteThread.Abort();
+                workerThread.Abort();
+            }
         }
 
         
