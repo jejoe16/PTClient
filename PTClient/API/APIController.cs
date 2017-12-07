@@ -10,6 +10,7 @@ using PTClient.SharedResources;
 using System.Net.NetworkInformation;
 using System.Net;
 
+
 namespace PTClient.API
 {
     class APIController : IAPIController
@@ -22,6 +23,7 @@ namespace PTClient.API
         private InlineResponse203 response203 = null;
         private InlineResponse204 response204 = null;
         private InlineResponse2021 response2021 = null;
+        private InlineResponse2022 response2022 = null;
 
         APIController()
         {
@@ -45,8 +47,8 @@ namespace PTClient.API
 
         public List<TurbineItem> getTurbines()
         {
-            response202 = api.TurbineGet();
-            return response202.Turbines;
+            response2022 = api.TurbineGet();
+            return response2022.Turbines;
         }
 
        public List<WorkerItem> getWorkerListItem()
@@ -77,7 +79,7 @@ namespace PTClient.API
         public Boolean UpdateUserPosition(string Username, string Password, string Position)
         {
             
-            response203 = api.UpdateLocationUsernamePasswordPositionPost(Username, Password, Position);
+            response203 = api.UpdateLocationUsernamePasswordPositionGet(Username, Password, Position);
 
             return (bool)response203.Message;
 

@@ -24,7 +24,7 @@ namespace PTClient.Logic.Position
         /// This method returns the nearst turbine to the vessel ex A1 if that is within a radius 200m of the vessel
         /// </summary>
         /// <returns>return the turbine name ex. A1, if no turbine is within radius, a null is returned</returns>
-        string GetNearWindTurbine();
+        string GetNearWindTurbine(Double latitude, Double longitude);
 
         /// <summary>
         /// returns a list of all turbines from the server

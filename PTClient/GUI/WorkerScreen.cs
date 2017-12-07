@@ -1,39 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PTClient.Logic.LogicController;
+using PTClient.SimPositionProgram.BoatGenerator;
+using System;
 using System.Windows.Forms;
 
 namespace PTClient.GUI
 {
     public partial class WorkerScreen : Form
     {
-        
-        public WorkerScreen()
+        GUIController GUIControl = new GUIController();
+        IController controller;
+        IBoatPosition Boat = BoatPosition.GetBoatPosition();
+        public WorkerScreen(String Username, String Password)
         {
             InitializeComponent();
+            controller = GUIControl.GetLogicController();
+            controller.NewSession(Username, Password);
+            GUIControl.generateMap();
 
         }
-        private String currentPos = "nowhere";
+
+        
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().Logout();
+            controller.Logout();
             this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().CheckIn(currentPos);
+            Boolean check = controller.CheckIn(Boat.GetNextLatitude(), Boat.GetNextLongitude());
+            if (check == false)
+            {
+                CheckLabel.Text = "No turbines nearby!" + Boat.GetNextLatitude() + " + " + Boat.GetNextLongitude();
+            } else
+            {
+                CheckLabel.Text = "Position Updated";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().CheckOut(currentPos);
+            Boolean check = controller.CheckOut();
+            if (check == true)
+            {
+                CheckLabel.Text = "Position Updated";
+            }
         }
+
+        
+
+        
     }
 }

@@ -38,7 +38,6 @@ namespace PTClient.GUI.Map
             this.gmap = new GMap.NET.WindowsForms.GMapControl();
             this.buttonCheckin = new System.Windows.Forms.Button();
             this.buttonCheckout = new System.Windows.Forms.Button();
-            this.statusLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.EngineStartButton = new System.Windows.Forms.Button();
@@ -55,7 +54,8 @@ namespace PTClient.GUI.Map
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SimPos = new System.Windows.Forms.Button();
+            this.Emergency = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthWest)).BeginInit();
@@ -94,33 +94,17 @@ namespace PTClient.GUI.Map
             // 
             // buttonCheckin
             // 
-            this.buttonCheckin.Location = new System.Drawing.Point(622, 500);
+            this.buttonCheckin.Location = new System.Drawing.Point(0, 0);
             this.buttonCheckin.Name = "buttonCheckin";
             this.buttonCheckin.Size = new System.Drawing.Size(75, 23);
-            this.buttonCheckin.TabIndex = 1;
-            this.buttonCheckin.Text = "Checkin";
-            this.buttonCheckin.UseVisualStyleBackColor = true;
-            this.buttonCheckin.Click += new System.EventHandler(this.buttonCheckin_Click);
+            this.buttonCheckin.TabIndex = 0;
             // 
             // buttonCheckout
             // 
-            this.buttonCheckout.Location = new System.Drawing.Point(754, 500);
+            this.buttonCheckout.Location = new System.Drawing.Point(0, 0);
             this.buttonCheckout.Name = "buttonCheckout";
             this.buttonCheckout.Size = new System.Drawing.Size(75, 23);
-            this.buttonCheckout.TabIndex = 2;
-            this.buttonCheckout.Text = "Checkout";
-            this.buttonCheckout.UseVisualStyleBackColor = true;
-            this.buttonCheckout.Click += new System.EventHandler(this.buttonCheckout_Click);
-            // 
-            // statusLabel
-            // 
-            this.statusLabel.AutoSize = true;
-            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Location = new System.Drawing.Point(619, 14);
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(56, 20);
-            this.statusLabel.TabIndex = 3;
-            this.statusLabel.Text = "Status";
+            this.buttonCheckout.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
@@ -130,13 +114,13 @@ namespace PTClient.GUI.Map
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(754, 12);
+            this.button1.Location = new System.Drawing.Point(736, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 4;
             this.button1.Text = "Logoff";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Logout_Click);
             // 
             // EngineStartButton
             // 
@@ -264,22 +248,33 @@ namespace PTClient.GUI.Map
             this.columnHeader2.Text = "Location";
             this.columnHeader2.Width = 154;
             // 
-            // button2
+            // SimPos
             // 
-            this.button2.Location = new System.Drawing.Point(623, 526);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(206, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Emergency";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.SimPos.Location = new System.Drawing.Point(636, 15);
+            this.SimPos.Name = "SimPos";
+            this.SimPos.Size = new System.Drawing.Size(75, 23);
+            this.SimPos.TabIndex = 18;
+            this.SimPos.Text = "SimPos";
+            this.SimPos.UseVisualStyleBackColor = true;
+            this.SimPos.Click += new System.EventHandler(this.SimPosBot_Click);
+            // 
+            // Emergency
+            // 
+            this.Emergency.Location = new System.Drawing.Point(623, 526);
+            this.Emergency.Name = "Emergency";
+            this.Emergency.Size = new System.Drawing.Size(206, 23);
+            this.Emergency.TabIndex = 18;
+            this.Emergency.Text = "Emergency";
+            this.Emergency.UseVisualStyleBackColor = true;
+            this.Emergency.Click += new System.EventHandler(this.button2_Click);
             // 
             // CaptainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 561);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.SimPos);
+            this.Controls.Add(this.Emergency);
             this.Controls.Add(this.WorkerLocations);
             this.Controls.Add(this.pictureSouthEast);
             this.Controls.Add(this.pictureSouth);
@@ -292,12 +287,10 @@ namespace PTClient.GUI.Map
             this.Controls.Add(this.EngineStopButton);
             this.Controls.Add(this.EngineStartButton);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.statusLabel);
-            this.Controls.Add(this.buttonCheckout);
-            this.Controls.Add(this.buttonCheckin);
             this.Controls.Add(this.gmap);
             this.Name = "CaptainScreen";
             this.Text = "Overview";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CaptainScreen_FormClosing);
             this.Load += new System.EventHandler(this.Onload);
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).EndInit();
@@ -308,7 +301,6 @@ namespace PTClient.GUI.Map
             ((System.ComponentModel.ISupportInitialize)(this.pictureEast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNorth)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -317,7 +309,6 @@ namespace PTClient.GUI.Map
         private GMap.NET.WindowsForms.GMapControl gmap;
         private Button buttonCheckin;
         private Button buttonCheckout;
-        private Label statusLabel;
         private ContextMenuStrip contextMenuStrip1;
         private Button button1;
         private Button EngineStartButton;
@@ -334,7 +325,9 @@ namespace PTClient.GUI.Map
         private HelpProvider helpProvider1;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
-        private Button button2;
+        private Button SimPos;
+        private Button Emergency;
+
     }
 
 }

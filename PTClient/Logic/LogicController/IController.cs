@@ -15,11 +15,14 @@ namespace PTClient.Logic.LogicController
         List<String> GetTurbineNames();
         Boolean Login(String username, String password);
         void Logout();
-        Boolean CheckIn(String currentPos);
-        Boolean CheckOut(String currentPoss);
+        Boolean CheckIn(Double latitude, Double longitude);
+        Boolean CheckOut();
         Boolean CaptainCheck();
         List<TurbineItem> GetTurbines();
         Boolean CheckConnection();
+
+        void NewSession(String Username, String Password);
+
         List<WorkerItem> GetWorkerListItems();
         Boolean ExistRouteapi(double lat, double longi);
         Boolean CheckState();

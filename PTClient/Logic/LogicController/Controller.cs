@@ -11,8 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using PTClient.SharedResources;
 using System.Net;
-using System.Net.NetworkInformation;
-using System.Threading;
 using PTClient.Logic.Emergency;
 
 namespace PTClient.Logic.LogicController
@@ -20,11 +18,10 @@ namespace PTClient.Logic.LogicController
     class Controller : IController
     {
         private ITurbinePosition turbines = null;
-        private static Controller controller = null;
         private IAPIController api = null;
         private ISession session = null;
+        
         private State state = new State();
-        //private Boolean emerChecker = false;
         private EmergencyRoute emergencyRoute = new EmergencyRoute();
 
         public Controller()
@@ -32,15 +29,6 @@ namespace PTClient.Logic.LogicController
             turbines = new TurbinePosition();
         }
 
-        public static Controller GetController()
-        {
-            if (controller == null)
-            {
-                controller = new Controller();
-            }
-
-            return controller;
-        }
 
         /// <summary>
         /// downloads the list of turbines from the server and adds them to the client 
@@ -68,6 +56,8 @@ namespace PTClient.Logic.LogicController
             return turbines.GetTurbineNames();
         }
 
+        
+
         public double GetTurbineLongitude(String Name)
         {
             return turbines.GetTurbineLongitude(Name);
@@ -78,22 +68,25 @@ namespace PTClient.Logic.LogicController
             return turbines.GetTurbineLatitude(Name);
         }
 
+
+
+        public void NewSession(String Username, String Password)
+        {
+            api = APIController.GetAPIController();
+            Boolean logincheck = api.Login(Username, Password);
+            Boolean Captain = api.CaptainCheck();
+            session = new Session();
+            session.createUser(Username, Password, Captain);
+        }
+
         public Boolean Login(String username, String password)
         {
             api = APIController.GetAPIController();
-            Boolean Check = api.Login(username, password);
-
+            Boolean logincheck = api.Login(username, password);
+            Boolean Captain = api.CaptainCheck();
             session = new Session();
-            if (Check.Equals(true))
-            {
-                Boolean Captain = api.CaptainCheck();
-                
-                session.createUser(username, password, Captain);
-                //String position = api.GetUserPosition();
-                //session.SetUserPosition(position);
-            }
-
-            return session.LoggedIn();
+            session.createUser(username, password, Captain);
+            return logincheck;
         }
 
         public void Logout()
@@ -101,7 +94,7 @@ namespace PTClient.Logic.LogicController
             session = null;
         }
 
-        public Boolean CheckIn(String currentPos)
+        public Boolean CheckIn(Double latitude, Double longitude)
         {
             if (session.LoggedIn().Equals(false) || session == null)
             {
@@ -109,13 +102,20 @@ namespace PTClient.Logic.LogicController
             }
             else
             {
-                api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), currentPos);
-                session.SetUserPosition(currentPos);
+                String wt = turbines.GetNearWindTurbine(latitude, longitude);
+                if (wt != null)
+                {
+                    api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), wt);
+                    session.SetUserPosition(wt);
+                } else
+                {
+                    return false;
+                }
             }
             return true;
         }
 
-        public Boolean CheckOut(String currentPos)
+        public Boolean CheckOut()
         {
             if (session.LoggedIn().Equals(false) || session == null)
             {
@@ -123,8 +123,8 @@ namespace PTClient.Logic.LogicController
             }
             else
             {
-                api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), currentPos);
-                session.SetUserPosition(currentPos);
+                api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), "Harbor/Vessel");
+                session.SetUserPosition("Harbor/Vessel");
             }
             return true;
         }
@@ -136,15 +136,6 @@ namespace PTClient.Logic.LogicController
 
         public bool CheckConnection()
         {
-            //Ping ping = new Ping();
-            //PingReply pingReply = ping.Send(new IPAddress(new byte[] { 35, 187, 75, 150 }), 1000);
-            //if (pingReply.Status == IPStatus.Success)
-            //{
-            //    return true;
-            //}
-            //return false;
-
-
             try
             {
                 WebClient client = new WebClient();

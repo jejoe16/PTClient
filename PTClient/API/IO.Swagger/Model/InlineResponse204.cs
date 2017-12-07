@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = PTClient.IO.Swagger.Client.SwaggerDateConverter;
 using PTClient.SharedResources;
 
 namespace PTClient.IO.Swagger.Model

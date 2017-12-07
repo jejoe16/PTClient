@@ -9,23 +9,30 @@ using System.Windows.Forms;
 using PTClient.SharedResources;
 using System.Collections.Generic;
 using PTClient.Logic.LogicController;
+using PTClient.SimPosition;
 
 namespace PTClient.GUI.Map
 {
     public partial class CaptainScreen : Form
     {
-        private GUIController controller = GUIController.GetController();
-        private BoatPosition boat = new BoatPosition();
+        private GUIController controller = new GUIController();
+        private IBoatPosition boat = BoatPosition.GetBoatPosition();
         private Boolean boatStatus = true;
         private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
         private GMapOverlay routes = new GMapOverlay("routes");
         private volatile int Dir;
         private Thread thread;
+        private Thread RouteThread;
+        private Thread workerThread;
+        private IController LogicController;
 
-        public CaptainScreen()
+        public CaptainScreen(String Username, String Password)
         {
+            LogicController = controller.GetLogicController();
+            LogicController.NewSession(Username, Password);
             controller.generateMap();
             InitializeComponent();
+            
         }
 
         private void Onload(object sender, EventArgs e)
@@ -37,13 +44,14 @@ namespace PTClient.GUI.Map
             gmap.MaxZoom = 50;
             gmap.Zoom = 10;
             SetMarkers();
+
             ThreadStart worker = new ThreadStart(UpdateWorkerList);
-            Thread workerThread = new Thread(worker);
+            workerThread = new Thread(worker);
             workerThread.Start();
 
             boat = BoatPosition.GetBoatPosition();
             ThreadStart route = new ThreadStart(SetRouteThread);
-            Thread RouteThread = new Thread(route);
+            RouteThread = new Thread(route);
             RouteThread.Start();
 
         }
@@ -65,19 +73,20 @@ namespace PTClient.GUI.Map
             
         }
 
-        private void buttonCheckin_Click(object sender, EventArgs e)
-        {
-            Logic.LogicController.Controller.GetController().CheckIn("mangler i capt gui");
-        }
 
-        private void buttonCheckout_Click(object sender, EventArgs e)
-        {
-            Logic.LogicController.Controller.GetController().CheckOut("Mangler i capt gui");
-        }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Logout_Click(object sender, EventArgs e)
         {
-            Logic.LogicController.Controller.GetController().Logout();
+            LogicController.Logout();
+            if (thread != null)
+            {
+                thread.Abort();
+            }
+            if (RouteThread != null)
+            {
+                RouteThread.Abort();
+                workerThread.Abort();
+            }
             this.Close();
         }
 
@@ -87,14 +96,12 @@ namespace PTClient.GUI.Map
             if (thread != null)
             {
                 thread.Join();
-                disableButton();
             }
             EngineStartButton.Enabled = false;
             EngineStopButton.Enabled = true;
             Thread.Sleep(2000);
             thread = new Thread(new ThreadStart(BoatThreadCallBack));
             thread.Start();
-            enableButton();
         }
 
         private void stop_Click(object sender, EventArgs e)
@@ -113,13 +120,13 @@ namespace PTClient.GUI.Map
             {
                 boat.GenerateRandomPosition();
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
-                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
+                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongitude());
                 Bitmap Image = new Bitmap(vessel.Image);
                 Bitmap resized = new Bitmap(Image, new Size(30, 50));
                 Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
                 GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
                 gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
-                Thread.Sleep(2000);
+                Thread.Sleep(1500);
             }
             
         }
@@ -131,24 +138,25 @@ namespace PTClient.GUI.Map
             {
                 boat.GoDirection(Dir);
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
-                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongtitude());
+                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongitude());
                 Bitmap Image = new Bitmap(vessel.Image);
                 Bitmap resized = new Bitmap(Image, new Size(30, 50));
                 Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
                 GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
                 gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
-                Thread.Sleep(2000);
+                Thread.Sleep(1500);
             }
         }
 
         private void pictureBoxDir_Click(object sender, EventArgs e)
         {
+            
             boatStatus = false;
-            if(thread != null)
+            if (thread != null)
             {
-                thread.Join();
-                disableButton();
+                thread.Abort();
             }
+            
             ThreadStart start;
             EngineStopButton.Enabled = true;
             
@@ -196,80 +204,79 @@ namespace PTClient.GUI.Map
 
             thread = new Thread(start);
             thread.Start();
-            enableButton();
         }
 
-        private void disableButton()
+        private void SimPosBot_Click(object sender, EventArgs e)
         {
-            pictureNorth.Visible = false;
-            pictureNorthWest.Visible = false;
-            pictureNorthEast.Visible = false;
-            pictureEast.Visible = false;
-            pictureSouthEast.Visible = false;
-            pictureSouth.Visible = false;
-            pictureSouthWest.Visible = false;
-            pictureWest.Visible = false;
+            ThreadStart starter = new ThreadStart(BootSimScreen);
+            Thread thread = new Thread(starter);
+            thread.Start();
         }
 
-        private void enableButton()
+        private void BootSimScreen()
         {
-            pictureNorth.Visible = true;
-            pictureNorthWest.Visible = true;
-            pictureNorthEast.Visible = true;
-            pictureEast.Visible = true;
-            pictureSouthEast.Visible = true;
-            pictureSouth.Visible = true;
-            pictureSouthWest.Visible = true;
-            pictureWest.Visible = true;
+            GuiSimPos sim = new GuiSimPos();
+            sim.ShowDialog();
         }
 
-        private void WorkerLocations_SelectedIndexChanged(object sender, EventArgs e, List<WorkerItem> list)
+
+        private void CaptainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if (thread != null)
+            {
+                thread.Abort();
+            }
+            if (RouteThread != null)
+            {
+                RouteThread.Abort();
+                workerThread.Abort();
+            }
         }
+
+        
 
         private void UpdateWorkerList()
         {
-            IController logicControl = Controller.GetController();
-
-            List<WorkerItem> list = logicControl.GetWorkerListItems();
-
-            foreach (WorkerItem workerItem in list)
+            while (true)
             {
-                ListViewItem item = new ListViewItem(workerItem.Name);
-                item.SubItems.Add(workerItem.Position);
-                
-                gmap.Invoke(new Action(() => WorkerLocations.Items.Add(item)));
+                List<WorkerItem> list = LogicController.GetWorkerListItems();
+                gmap.Invoke(new Action(() => WorkerLocations.Items.Clear()));
+                foreach (WorkerItem workerItem in list)
+                {
+                    ListViewItem item = new ListViewItem(workerItem.Name);
+                    item.SubItems.Add(workerItem.Position);
+
+                    gmap.Invoke(new Action(() => WorkerLocations.Items.Add(item)));
+                }
+                Thread.Sleep(5000);
             }
-            Thread.Sleep(5000);
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
-            IController logicController = Controller.GetController();
-            logicController.CallEmergency();
+            LogicController.CallEmergency();
         }
 
 
         private void SetRouteThread()
         {
-            IController logicController = Controller.GetController();
             List<Logic.Emergency.Point> PickUpPoints = new List<Logic.Emergency.Point>();
             while (true)
             {
-                if (logicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongtitude()))
+                if (LogicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongitude()))
                 {
-                    logicController.SetEmergency();
-                    PickUpPoints = logicController.GetRoute();
+                    LogicController.SetEmergency();
+                    PickUpPoints = LogicController.GetRoute();
                     
                     break;
                 }
-                else if (!logicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongtitude()))
+                else if (!LogicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongitude()))
                 {
                     Thread.Sleep(2000);
                 }
                
-            } if (logicController.CheckState())
+            } if (LogicController.CheckState())
 
                 {
                 gmap.Overlays.Add(routes);
@@ -286,6 +293,7 @@ namespace PTClient.GUI.Map
                     gmap.Overlays.Add(routes);
                 }
         }
+
 
     }
 }
