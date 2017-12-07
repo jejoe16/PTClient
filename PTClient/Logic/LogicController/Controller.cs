@@ -124,7 +124,7 @@ namespace PTClient.Logic.LogicController
             else
             {
                 api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), "Harbor/Vessel");
-                session.SetUserPosition("Harbor/Vessel");
+                session.SetUserPosition("null");
             }
             return true;
         }
