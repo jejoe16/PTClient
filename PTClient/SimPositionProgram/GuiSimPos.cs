@@ -17,7 +17,7 @@ namespace PTClient.SimPosition
 {
     public partial class GuiSimPos : Form
     {
- 
+
         IBoatPosition Boat = BoatPosition.GetBoatPosition();
         public GuiSimPos()
         {
@@ -29,7 +29,11 @@ namespace PTClient.SimPosition
 
         public double Lat { get => lat; }
         public double Lon { get => lon; }
-
+        /// <summary>
+        /// Init code that sets the default screen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnLoad(object sender, EventArgs e)
         {
             gMapSim.MapProvider = GMap.NET.MapProviders.OpenStreet4UMapProvider.Instance;
@@ -85,7 +89,11 @@ namespace PTClient.SimPosition
             gMapSim.Update();
 
         }
-
+        /// <summary>
+        /// Updates the position when a user clicks on a position.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SetPosition_Click(object sender, EventArgs e)
         {
             lat = gMapSim.Position.Lat;

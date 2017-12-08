@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PTClient.SharedResources;
 using PTClient.Logic.Emergency;
 
@@ -20,9 +17,7 @@ namespace PTClient.Logic.LogicController
         Boolean CaptainCheck();
         List<TurbineItem> GetTurbines();
         Boolean CheckConnection();
-
         void NewSession(String Username, String Password);
-
         List<WorkerItem> GetWorkerListItems();
         Boolean ExistRouteapi(double lat, double longi);
         Boolean CheckState();

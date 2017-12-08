@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PTClient.SharedResources;
 
 
@@ -13,15 +9,8 @@ namespace PTClient.Logic.Position
     {
         private double MinDistance = 0.5;
         private List<TurbineItem> windturbines = new List<TurbineItem>();
-        private VesselPosition vessel = new VesselPosition();
         private DistanceCalc DistanceCalculator = new DistanceCalc();
 
-        public void ShowPosDebugger()
-        {
-            vessel.ShowDebugger();
-        }
-
-        
 
         public void AddTurbines(List<TurbineItem> turbines)
         {
@@ -34,7 +23,7 @@ namespace PTClient.Logic.Position
             foreach (TurbineItem wts in windturbines)
             {
                 
-                double distance = DistanceCalculator.distance(latitude, longitude, (double)wts.Latitude, (double)wts.Longitude);
+                double distance = DistanceCalculator.Distance(latitude, longitude, (double)wts.Latitude, (double)wts.Longitude);
 
                 if (distance <= MinDistance)
                 {

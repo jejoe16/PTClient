@@ -122,6 +122,7 @@
     <Compile Include="API\IO.Swagger\Model\InlineResponse203.cs" />
     <Compile Include="API\IO.Swagger\Model\InlineResponse204.cs" />
     <Compile Include="GUI\GUIController.cs" />
+    <Compile Include="GUI\Map\VesselMarker.cs" />
     <Compile Include="Logic\Emergency\EmergencyRoute.cs" />
     <Compile Include="Logic\Emergency\Point.cs" />
     <Compile Include="Logic\Emergency\State.cs" />
@@ -148,31 +149,29 @@
       <DependentUpon>CaptainScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Map\TurbineMarker.cs" />
-    <Compile Include="GUI\Map\VesselMarker.cs" />
     <Compile Include="Logic\Position\ITurbinePosition.cs" />
     <Compile Include="Logic\Position\TurbinePosition.cs" />
-    <Compile Include="Logic\Position\VesselPosition.cs" />
     <Compile Include="GUI\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedResources\WorkerItem.cs" />
     <Compile Include="SimPositionProgram\BoatGenerator\BoatPosition.cs" />
     <Compile Include="SharedResources\Direction.cs" />
-    <Compile Include="SimPositionProgram\GuiSimPos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SimPositionProgram\GuiSimPos.Designer.cs">
-      <DependentUpon>GuiSimPos.cs</DependentUpon>
-    </Compile>
     <Compile Include="SimPositionProgram\BoatGenerator\IBoatPosition.cs" />
-    <Compile Include="SimPositionProgram\ISimPosition.cs" />
     <Compile Include="SimPositionProgram\BoatGenerator\MapPolygon.cs" />
-    <Compile Include="SimPositionProgram\SimPosition.cs" />
     <Compile Include="GUI\WorkerScreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\WorkerScreen.designer.cs">
       <DependentUpon>WorkerScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimPositionProgram\GuiSimPos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimPositionProgram\GuiSimPos.designer.cs">
+      <DependentUpon>GuiSimPos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SimPositionProgram\ISimPosition.cs" />
+    <Compile Include="SimPositionProgram\SimPosition.cs" />
     <EmbeddedResource Include="GUI\LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,14 +188,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SimPositionProgram\GuiSimPos.resx">
-      <DependentUpon>GuiSimPos.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\WorkerScreen.resx">
       <DependentUpon>WorkerScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SimPositionProgram\GuiSimPos.resx">
+      <DependentUpon>GuiSimPos.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="API\IO.Swagger\IO.Swagger.nuspec" />
     <None Include="API\IO.Swagger\packages.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

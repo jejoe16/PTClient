@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PTClient.Logic.Emergency
+﻿namespace PTClient.Logic.Emergency
 {
     class Point
     {

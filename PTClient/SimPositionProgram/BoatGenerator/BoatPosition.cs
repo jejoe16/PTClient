@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PTClient.SharedResources;
-using PTClient.Logic.LogicController;
 using System.Threading;
 
 namespace PTClient.SimPositionProgram.BoatGenerator

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PTClient.SharedResources;
 
 namespace PTClient.Logic.Position
@@ -31,11 +27,6 @@ namespace PTClient.Logic.Position
         /// </summary>
         /// <returns>ArrayList with instance of turbines</returns>
         List<TurbineItem> GetTurbineList();
-
-        /// <summary>
-        /// Method to show the location debugger
-        /// </summary>
-        void ShowPosDebugger();
 
         List<String> GetTurbineNames();
         double GetTurbineLongitude(String Name);
