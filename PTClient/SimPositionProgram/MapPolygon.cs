@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTClient.SimPositionProgram.BoatGenerator
+namespace PTClient.SimPositionProgram
 {
     class MapPolygon
     {

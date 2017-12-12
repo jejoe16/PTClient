@@ -13,12 +13,11 @@ namespace PTClient.Logic.Position
     {
         private double MinDistance = 0.5;
         private List<TurbineItem> windturbines = new List<TurbineItem>();
-        private VesselPosition vessel = new VesselPosition();
         private DistanceCalc DistanceCalculator = new DistanceCalc();
 
         public void ShowPosDebugger()
         {
-            vessel.ShowDebugger();
+
         }
 
         
