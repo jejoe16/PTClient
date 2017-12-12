@@ -12,6 +12,7 @@ namespace PTClient.Logic.Position
         private DistanceCalc DistanceCalculator = new DistanceCalc();
 
 
+
         public void AddTurbines(List<TurbineItem> turbines)
         {
             windturbines = turbines;

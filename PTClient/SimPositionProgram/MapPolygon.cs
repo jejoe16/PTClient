@@ -3,7 +3,7 @@ using GMap.NET.WindowsForms;
 using System;
 using System.Collections.Generic;
 
-namespace PTClient.SimPositionProgram.BoatGenerator
+namespace PTClient.SimPositionProgram
 {
     class MapPolygon
     {

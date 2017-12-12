@@ -1,7 +1,10 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 using PTClient.GUI;
 using PTClient.GUI.Map;
+using PTClient.Logic.LogicController;
+using PTClient.SharedResources;
 using PTClient.SimPositionProgram.BoatGenerator;
 using System;
 using System.Collections.Generic;
@@ -10,6 +13,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,26 +22,27 @@ namespace PTClient.SimPosition
     public partial class GuiSimPos : Form
     {
 
-        IBoatPosition Boat = BoatPosition.GetBoatPosition();
+        private GUIController controller = new GUIController();
+        private IBoatPosition Boat = BoatPosition.GetBoatPosition();
+        private Boolean boatStatus = true;
+        private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
+        private volatile int Dir;
+        private Thread thread;
+        private IController LogicController;
+
         public GuiSimPos()
         {
+            LogicController = controller.GetLogicController();
             InitializeComponent();
         }
 
-        private double lat = 0;
-        private double lon = 0;
 
-        public double Lat { get => lat; }
-        public double Lon { get => lon; }
-        /// <summary>
-        /// Init code that sets the default screen.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void OnLoad(object sender, EventArgs e)
         {
             gMapSim.MapProvider = GMap.NET.MapProviders.OpenStreet4UMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            gMapSim.Overlays.Add(vesselOverlay);
             gMapSim.SetPositionByKeywords("anholt");
             gMapSim.MinZoom = 0;
             gMapSim.MaxZoom = 50;
@@ -89,18 +94,137 @@ namespace PTClient.SimPosition
             gMapSim.Update();
 
         }
-        /// <summary>
-        /// Updates the position when a user clicks on a position.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void SetPosition_Click(object sender, EventArgs e)
         {
-            lat = gMapSim.Position.Lat;
-            lon = gMapSim.Position.Lng;
-            Boat.SetPosition(lat, lon);
-            latLabel.Text = String.Concat(lat);
-            longLabel.Text = String.Concat(lon);
+            Boat.SetPosition(gMapSim.Position.Lat, gMapSim.Position.Lng);
+            latLabel.Text = String.Concat(Boat.GetNextLatitude());
+            longLabel.Text = String.Concat(Boat.GetNextLongitude());
+        }
+
+        private void start_Click(object sender, EventArgs e)
+        {
+            boatStatus = false;
+            if (thread != null)
+            {
+                thread.Join();
+            }
+            EngineStartButton.Enabled = false;
+            EngineStopButton.Enabled = true;
+            Thread.Sleep(2000);
+            thread = new Thread(new ThreadStart(BoatThreadCallBack));
+            thread.Start();
+        }
+
+        private void stop_Click(object sender, EventArgs e)
+        {
+            boatStatus = false;
+            thread.Join();
+            EngineStartButton.Enabled = true;
+            EngineStopButton.Enabled = false;
+        }
+
+        private void BoatThreadCallBack()
+        {
+            boatStatus = true;
+
+            while (boatStatus)
+            {
+                Boat.GenerateRandomPosition();
+                AddNewBoatMarker();
+                Thread.Sleep(1500);
+            }
+
+        }
+
+        private void DirectionThreadCallBack()
+        {
+            boatStatus = true;
+            while (boatStatus)
+            {
+                Boat.GoDirection(Dir);
+                AddNewBoatMarker();
+                Thread.Sleep(1500);
+            }
+        }
+
+        private void AddNewBoatMarker()
+        {
+            gMapSim.Invoke(new Action(() => vesselOverlay.Clear()));
+            VesselMarker vessel = new VesselMarker("Boat1", Boat.GetNextLatitude(), Boat.GetNextLongitude());
+            Bitmap Image = new Bitmap(vessel.Image);
+            Bitmap resized = new Bitmap(Image, new Size(30, 50));
+            Bitmap rotated = controller.rotateImage(resized, Boat.getDirection());
+            GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
+            gMapSim.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
+            latLabel.Invoke(new Action(() => latLabel.Text = String.Concat(Boat.GetNextLatitude())));
+            longLabel.Invoke(new Action(() => longLabel.Text = String.Concat(Boat.GetNextLongitude())));
+        }
+
+        private void pictureBoxDir_Click(object sender, EventArgs e)
+        {
+
+            boatStatus = false;
+            if (thread != null)
+            {
+                thread.Abort();
+            }
+
+            ThreadStart start;
+            EngineStopButton.Enabled = true;
+
+            PictureBox box = sender as PictureBox;
+            if (box.Name == pictureNorth.Name)
+            {
+                Dir = (int)Direction.North;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureNorthEast.Name)
+            {
+                Dir = (int)Direction.NorthEast;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureEast.Name)
+            {
+                Dir = (int)Direction.East;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouthEast.Name)
+            {
+                Dir = (int)Direction.SouthEast;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouth.Name)
+            {
+                Dir = (int)Direction.South;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureSouthWest.Name)
+            {
+                Dir = (int)Direction.SouthWest;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else if (box.Name == pictureWest.Name)
+            {
+                Dir = (int)Direction.West;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+            else
+            {
+                Dir = (int)Direction.NorthWest;
+                start = new ThreadStart(DirectionThreadCallBack);
+            }
+
+            thread = new Thread(start);
+            thread.Start();
+        }
+
+        private void SimPos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (thread != null)
+            {
+                thread.Abort();
+            }
         }
     }
 }

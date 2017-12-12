@@ -20,8 +20,7 @@ namespace PTClient.GUI.Map
         private Boolean boatStatus = true;
         private GMapOverlay vesselOverlay = new GMapOverlay("vesselmarkers");
         private GMapOverlay routes = new GMapOverlay("routes");
-        private volatile int Dir;
-        private Thread thread;
+        private Thread BoatThread;
         private Thread RouteThread;
         private Thread workerThread;
         private IController LogicController;
@@ -30,6 +29,7 @@ namespace PTClient.GUI.Map
         {
             LogicController = controller.GetLogicController();
             LogicController.NewSession(Username, Password);
+            boat = BoatPosition.GetBoatPosition();
             controller.generateMap();
             InitializeComponent();
             
@@ -49,10 +49,16 @@ namespace PTClient.GUI.Map
             workerThread = new Thread(worker);
             workerThread.Start();
 
-            boat = BoatPosition.GetBoatPosition();
+            
             ThreadStart route = new ThreadStart(SetRouteThread);
             RouteThread = new Thread(route);
             RouteThread.Start();
+
+            ThreadStart boatstarter = new ThreadStart(BoatThreadCallBack);
+            BoatThread = new Thread(boatstarter);
+            BoatThread.Start();
+
+
 
         }
 
@@ -73,70 +79,25 @@ namespace PTClient.GUI.Map
             
         }
 
-
-
+        
         private void Logout_Click(object sender, EventArgs e)
         {
             LogicController.Logout();
-            if (thread != null)
-            {
-                thread.Abort();
-            }
             if (RouteThread != null)
             {
                 RouteThread.Abort();
                 workerThread.Abort();
+                BoatThread.Abort();
             }
             this.Close();
         }
 
-        private void start_Click(object sender, EventArgs e)
-        {
-            boatStatus = false;
-            if (thread != null)
-            {
-                thread.Join();
-            }
-            EngineStartButton.Enabled = false;
-            EngineStopButton.Enabled = true;
-            Thread.Sleep(2000);
-            thread = new Thread(new ThreadStart(BoatThreadCallBack));
-            thread.Start();
-        }
-
-        private void stop_Click(object sender, EventArgs e)
-        {
-            boatStatus = false;
-            thread.Join();
-            EngineStartButton.Enabled = true;
-            EngineStopButton.Enabled = false;
-        }
-
+        
         private void BoatThreadCallBack()
         {
             boatStatus = true;
-            
             while (boatStatus)
             {
-                boat.GenerateRandomPosition();
-                gmap.Invoke(new Action(() => vesselOverlay.Clear()));
-                VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongitude());
-                Bitmap Image = new Bitmap(vessel.Image);
-                Bitmap resized = new Bitmap(Image, new Size(30, 50));
-                Bitmap rotated = controller.rotateImage(resized, boat.getDirection());
-                GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(vessel.Latitude, vessel.Longitude), new Bitmap(rotated));
-                gmap.Invoke(new Action(() => vesselOverlay.Markers.Add(marker)));
-                Thread.Sleep(1500);
-            }
-            
-        }
-
-        private void DirectionThreadCallBack()
-        {
-            boatStatus = true;
-            while (boatStatus)
-            {
-                boat.GoDirection(Dir);
                 gmap.Invoke(new Action(() => vesselOverlay.Clear()));
                 VesselMarker vessel = new VesselMarker("Boat1", boat.GetNextLatitude(), boat.GetNextLongitude());
                 Bitmap Image = new Bitmap(vessel.Image);
@@ -148,63 +109,7 @@ namespace PTClient.GUI.Map
             }
         }
 
-        private void pictureBoxDir_Click(object sender, EventArgs e)
-        {
-            
-            boatStatus = false;
-            if (thread != null)
-            {
-                thread.Abort();
-            }
-            
-            ThreadStart start;
-            EngineStopButton.Enabled = true;
-            
-            PictureBox box = sender as PictureBox; 
-            if(box.Name == pictureNorth.Name)
-            {
-                Dir = (int)Direction.North;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
-            else if (box.Name == pictureNorthEast.Name)
-            {
-                Dir = (int)Direction.NorthEast;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
-            else if (box.Name == pictureEast.Name)
-            {
-                Dir = (int)Direction.East;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
-            else if (box.Name == pictureSouthEast.Name)
-            {
-                Dir = (int)Direction.SouthEast;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
-            else if (box.Name == pictureSouth.Name)
-            {
-                Dir = (int)Direction.South;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
-            else if (box.Name == pictureSouthWest.Name)
-            {
-                Dir = (int)Direction.SouthWest;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
-            else if (box.Name == pictureWest.Name)
-            {
-                Dir = (int)Direction.West;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
-            else
-            {
-                Dir = (int)Direction.NorthWest;
-                start = new ThreadStart(DirectionThreadCallBack);
-            }
 
-            thread = new Thread(start);
-            thread.Start();
-        }
 
         private void SimPosBot_Click(object sender, EventArgs e)
         {
@@ -222,14 +127,12 @@ namespace PTClient.GUI.Map
 
         private void CaptainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (thread != null)
-            {
-                thread.Abort();
-            }
+            
             if (RouteThread != null)
             {
                 RouteThread.Abort();
                 workerThread.Abort();
+                BoatThread.Abort();
             }
         }
 

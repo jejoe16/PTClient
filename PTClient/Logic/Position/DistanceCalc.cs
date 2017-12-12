@@ -5,6 +5,13 @@ namespace PTClient.Logic.Position
     class DistanceCalc
     {
 
+
+        public DistanceCalc()
+        {
+
+        }
+
+        //Returns the distance between (lat1, lon1) and (lat2, lon2) in kilometers.
         public double Distance(double lat1, double lon1, double lat2, double lon2)
         {
             double theta = lon1 - lon2;
@@ -16,11 +23,13 @@ namespace PTClient.Logic.Position
             return (dist);
         }
 
+        //converts Degress to Radial
         private double DegToRad(double deg)
         {
             return (deg * Math.PI / 180.0);
         }
 
+        //converts Radial to Degrees
         private double RadToDeg(double rad)
         {
             return (rad / Math.PI * 180.0);
