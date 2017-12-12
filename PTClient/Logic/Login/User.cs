@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PTClient.Logic.Login
 {
@@ -27,10 +23,6 @@ namespace PTClient.Logic.Login
             this.username = user;
             this.password = pw;
         }
-        public User() { }
-        // indicates wheter or not this specific user should go down with his ship
-
-
 
     }
 }

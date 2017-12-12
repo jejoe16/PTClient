@@ -219,7 +219,7 @@ namespace PTClient.SimPosition
             thread.Start();
         }
 
-        private void CaptainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        private void SimPos_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (thread != null)
             {

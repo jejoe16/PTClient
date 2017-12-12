@@ -13,6 +13,7 @@ namespace PTClient.GUI.Map
 
         public TurbineMarker(string name, double latitude, double longitude) : base(name, latitude, longitude)
         {
+            
         }
 
         public Bitmap Image { get => image; }

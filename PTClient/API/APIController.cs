@@ -1,14 +1,8 @@
 ﻿using PTClient.IO.Swagger.Api;
 using PTClient.IO.Swagger.Model;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PTClient.SharedResources;
-using System.Net.NetworkInformation;
-using System.Net;
 
 
 namespace PTClient.API
@@ -19,7 +13,6 @@ namespace PTClient.API
         private DefaultApi api = null;
         private InlineResponse200 response200 = null;
         private InlineResponse201 response201 = null;
-        private InlineResponse202 response202 = null;
         private InlineResponse203 response203 = null;
         private InlineResponse204 response204 = null;
         private InlineResponse2021 response2021 = null;

@@ -1,14 +1,8 @@
 ﻿using PTClient.API;
-using PTClient.GUI;
-using PTClient.GUI.Map;
 using PTClient.Logic.Login;
 using PTClient.Logic.Position;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PTClient.SharedResources;
 using System.Net;
 using PTClient.Logic.Emergency;
@@ -56,8 +50,6 @@ namespace PTClient.Logic.LogicController
             return turbines.GetTurbineNames();
         }
 
-        
-
         public double GetTurbineLongitude(String Name)
         {
             return turbines.GetTurbineLongitude(Name);
@@ -67,8 +59,6 @@ namespace PTClient.Logic.LogicController
         {
             return turbines.GetTurbineLatitude(Name);
         }
-
-
 
         public void NewSession(String Username, String Password)
         {
@@ -124,7 +114,7 @@ namespace PTClient.Logic.LogicController
             else
             {
                 api.UpdateUserPosition(session.GetUserName(), session.GetPassword(), "Harbor/Vessel");
-                session.SetUserPosition("Harbor/Vessel");
+                session.SetUserPosition("null");
             }
             return true;
         }
@@ -159,7 +149,7 @@ namespace PTClient.Logic.LogicController
 
         public List<Point> GetRoute()
         {
-            return emergencyRoute.getPickUpPoints();
+            return emergencyRoute.GetPickUpPoints();
         }
 
         public void SetEmergency()
@@ -172,23 +162,20 @@ namespace PTClient.Logic.LogicController
             return state.Emergency;
         }
 
-        public Boolean ExistRouteapi(double lat, double longi)
+        public Boolean ExistRouteapi(double latitude, double longitude)
         {
             //checker om der fra apiet har en route, og hvis der bliver returneret en liste med en længde går videre.
 
-            List<TurbineItem> turbineList = api.checkRoute(session.GetUserName(), session.GetPassword(), longi, lat);
-            //if (turbineList.ToArray().Length == null) {
+            List<TurbineItem> turbineList = api.checkRoute(session.GetUserName(), session.GetPassword(), longitude, latitude);
                 if (turbineList.ToArray().Length > 0)
                 {
-                    emergencyRoute.setRoute(turbineList);
+                    emergencyRoute.SetRoute(turbineList);
                     return true;
                 }
                 else
                 {
                     return false;
                 }
-            //}
-            //return false;
             
         }
     }

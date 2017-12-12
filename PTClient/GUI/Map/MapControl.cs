@@ -38,23 +38,8 @@ namespace PTClient.GUI.Map
                 markerListDrawing.Add(marker);
             }
 
-
-
-            //foreach (VesselMarker obj in markers)
-            //{
-            //    Bitmap Image = new Bitmap(obj.Image);
-            //    Bitmap resized = new Bitmap(Image, new Size(20, 40));
-            //    GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(obj.Latitude, obj.Longitude), new Bitmap(resized));
-            //    markerListDrawing.Add(marker);
-            //}
             return markerListDrawing;
 
-        }
-        private double ConvertStoD(string s)
-        {
-            StringBuilder sb = new StringBuilder(s);
-            sb.Insert(2,",");
-            return double.Parse(sb.ToString());
         }
 
         

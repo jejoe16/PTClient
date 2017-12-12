@@ -1,9 +1,5 @@
 ﻿using PTClient.SharedResources;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PTClient.Logic.Emergency
 {
@@ -11,13 +7,12 @@ namespace PTClient.Logic.Emergency
     {
         private List<TurbineItem> route = new List<TurbineItem>();
 
-
-        public void setRoute(List<TurbineItem> route)
+        public void SetRoute(List<TurbineItem> route)
         {
             this.route = route;
         }
 
-        public List<Point> getPickUpPoints()
+        public List<Point> GetPickUpPoints()
         {
             List<Point> pickUpPoints = new List<Point>();
             foreach (var Turbineitem in route)
