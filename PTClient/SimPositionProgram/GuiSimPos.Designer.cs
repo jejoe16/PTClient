@@ -285,6 +285,7 @@ namespace PTClient.SimPosition
             this.Controls.Add(this.EngineStartButton);
             this.Name = "GuiSimPos";
             this.Text = "GuiSimPos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimPos_FormClosing);
             this.Load += new System.EventHandler(this.OnLoad);
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouthEast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSouth)).EndInit();
