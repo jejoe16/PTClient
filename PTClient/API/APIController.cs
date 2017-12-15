@@ -43,7 +43,7 @@ namespace PTClient.API
             response2022 = api.TurbineGet();
             return response2022.Turbines;
         }
-
+        
        public List<WorkerItem> getWorkerListItem()
         {
             response2021 = api.GetAllWorkersGet();
