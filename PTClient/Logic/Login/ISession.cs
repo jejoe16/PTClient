@@ -4,15 +4,41 @@ namespace PTClient.Logic.Login
 {
     interface ISession
     {
+        /// <summary>
+        /// returns the username of the user with the current session
+        /// </summary>
+        /// <returns></returns>
         String GetUserName();
-        void SetUserName(String username);
+        /// <summary>
+        /// returns the password of the current user
+        /// </summary>
+        /// <returns></returns>
         String GetPassword();
-        void SetPassWord(String password);
+        /// <summary>
+        /// removes the current user from the session
+        /// </summary>
         void ClearSession();
-        void SetCaptain(bool capt);
+        /// <summary>
+        /// sets the captain status of the current user
+        /// </summary>
+        /// <param name="capt"></param>
         bool GetCaptain();
+        /// <summary>
+        /// checks if anyone is logged in
+        /// </summary>
+        /// <returns></returns>
         bool LoggedIn();
+        /// <summary>
+        /// sets the users position
+        /// </summary>
+        /// <param name="position"></param>
         void SetUserPosition(String position);
+        /// <summary>
+        /// creates a new user in the session
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <param name="Captain"></param>
         void createUser(string Username, string Password, bool Captain);
 
 

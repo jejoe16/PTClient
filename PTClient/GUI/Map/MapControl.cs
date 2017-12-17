@@ -11,11 +11,19 @@ using System.Threading.Tasks;
 
 namespace PTClient.GUI.Map
 {
+    /// <summary>
+    /// For Creating a new list of turbine markers. add to list and return it when it's done.
+    /// </summary>
     class MapControl : IMap
     {
         private static List<Object> markers = new List<Object>();
         private ReaderWriterLock rwl = new ReaderWriterLock();
-
+        /// <summary>
+        /// Adds a turbine to the list of turbine markesrs
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="Latitude"></param>
+        /// <param name="Longitude"></param>
         public void AddTurbineMarker(String Name, double Latitude, double Longitude)
         {
             rwl.AcquireWriterLock(10000);
@@ -29,7 +37,10 @@ namespace PTClient.GUI.Map
             }
         }
         
-
+        /// <summary>
+        /// For generating the list with GMapMarkers.
+        /// </summary>
+        /// <returns> returns a list with all added turbine markers</returns>
         public List<GMap.NET.WindowsForms.GMapMarker> DrawMarkers()
         {
             rwl.AcquireWriterLock(10000);

@@ -36,6 +36,15 @@ namespace PTClient.GUI.Map
             
         }
 
+        /// <summary>
+        /// Loads the map, and sets the turbine markers.
+        /// starts 3 threads:
+        /// first keep the work list updated
+        /// second checks for a new route
+        /// Last controls the boat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Onload(object sender, EventArgs e)
         {
             gmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
@@ -63,6 +72,9 @@ namespace PTClient.GUI.Map
 
         }
 
+        /// <summary>
+        /// places markers on the map based on the list returned from map control
+        /// </summary>
         private void SetMarkers()
         {
             
@@ -80,7 +92,11 @@ namespace PTClient.GUI.Map
             
         }
 
-        
+        /// <summary>
+        /// logs the captain out, stops allr unning thread relevant to this window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Logout_Click(object sender, EventArgs e)
         {
 
@@ -94,7 +110,9 @@ namespace PTClient.GUI.Map
             this.Close();
         }
 
-        
+        /// <summary>
+        /// draws the boat on the map, facing it in the correct direction.
+        /// </summary>
         private void BoatThreadCallBack()
         {
             boatStatus = true;
@@ -112,7 +130,11 @@ namespace PTClient.GUI.Map
         }
 
 
-
+        /// <summary>
+        /// opens a new window with all sim position features, in a new thread
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SimPosBot_Click(object sender, EventArgs e)
         {
             ThreadStart starter = new ThreadStart(BootSimScreen);
@@ -120,13 +142,21 @@ namespace PTClient.GUI.Map
             thread.Start();
         }
 
+
+        /// <summary>
+        /// opens a new sim position window
+        /// </summary>
         private void BootSimScreen()
         {
             GuiSimPos sim = new GuiSimPos();
             sim.ShowDialog();
         }
 
-
+        /// <summary>
+        /// makes sure all threads are closed before window closes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CaptainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             
@@ -139,7 +169,9 @@ namespace PTClient.GUI.Map
         }
 
         
-
+        /// <summary>
+        /// updates work list from the database on the server
+        /// </summary>
         private void UpdateWorkerList()
         {
             while (true)
@@ -163,7 +195,9 @@ namespace PTClient.GUI.Map
             LogicController.CallEmergency();
         }
 
-
+        /// <summary>
+        /// ask the server for a new route. if the server is in an emergency state, will a route to the critical positions be drawn
+        /// </summary>
         private void SetRouteThread()
         {
             List<Logic.Emergency.Point> PickUpPoints = new List<Logic.Emergency.Point>();
@@ -171,7 +205,7 @@ namespace PTClient.GUI.Map
             {
                 if (LogicController.ExistRouteapi(boat.GetNextLatitude(), boat.GetNextLongitude()))
                 {
-                    LogicController.SetEmergency();
+
                     PickUpPoints = LogicController.GetRoute();
                     
                     break;

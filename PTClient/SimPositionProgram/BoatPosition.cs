@@ -14,7 +14,10 @@ namespace PTClient.SimPositionProgram.BoatGenerator
         private ReaderWriterLock boat_lock = new ReaderWriterLock();
 
 
-
+        /// <summary>
+        /// BoatPosition is a singleton object
+        /// </summary>
+        /// <returns></returns>
         public static BoatPosition GetBoatPosition()
 
         {
@@ -25,6 +28,10 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             return BoatPos;
         }
 
+        /// <summary>
+        /// generates a new random position for the vessel in any direction
+        /// the new position will be 50 m from the previous position
+        /// </summary>
         public void GenerateRandomPosition()
         {
             try
@@ -44,6 +51,12 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             }
         }
 
+        /// <summary>
+        /// goes in a specific direction 
+        /// int direction should match the enum in Shared resources
+        /// </summary>
+        /// <param name="Direction"></param>
+        /// <returns></returns>
         public Boolean GoDirection(int Direction)
         {
             try
@@ -64,6 +77,11 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             }
         }
 
+        /// <summary>
+        /// Moves the boat 50 m in defined direction
+        /// </summary>
+        /// <param name="Dir"></param>
+        /// <returns></returns>
         private Boolean Move(int Dir)
         {
             Boolean Valid = false;
@@ -117,6 +135,13 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             return Valid;
         }
 
+        /// <summary>
+        /// calculates new position 50 m in given direction
+        /// negative numbers for south and west
+        /// </summary>
+        /// <param name="north"></param>
+        /// <param name="east"></param>
+        /// <returns></returns>
         private Boolean CalculatePosition(int north, int east)
         {
             //Earth’s radius, sphere
@@ -148,6 +173,12 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             }
         }
 
+        /// <summary>
+        /// validates if the position is within the the park limits, park limits is defined in MapPolygon
+        /// </summary>
+        /// <param name="Longitude"></param>
+        /// <param name="Latitude"></param>
+        /// <returns></returns>
         private Boolean ValidatePosition(double Longitude, double Latitude)
         {
             MapPolygon map = new MapPolygon();
@@ -159,7 +190,10 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             return true;
         }
 
-
+        /// <summary>
+        /// gets the current longitude of the vessel
+        /// </summary>
+        /// <returns></returns>
         public double GetNextLongitude()
         {
             try
@@ -171,7 +205,10 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             }
             
         }
-
+        /// <summary>
+        /// get the current latitude of the vessel
+        /// </summary>
+        /// <returns></returns>
         public double GetNextLatitude()
         {
             try
@@ -185,6 +222,10 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             
         }
 
+        /// <summary>
+        /// get the direction the vessel are going
+        /// </summary>
+        /// <returns></returns>
         public float getDirection()
         {
             try
@@ -198,6 +239,11 @@ namespace PTClient.SimPositionProgram.BoatGenerator
             }
         }
 
+        /// <summary>
+        /// externally set the position of the vessel
+        /// </summary>
+        /// <param name="Latitude"></param>
+        /// <param name="Longitude"></param>
         public void SetPosition(double Latitude, double Longitude)
         {
             try

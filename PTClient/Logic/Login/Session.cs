@@ -49,21 +49,7 @@ namespace PTClient.Logic.Login
             }
             return true;
         }
-
-        public void SetCaptain(bool capt)
-        {
-            currentUser.Captain = capt;
-        }
-
-        public void SetPassWord(string password)
-        {
-            currentUser.Password = password;
-        }
-
-        public void SetUserName(string username)
-        {
-            currentUser.Username = username;
-        }
+        
 
         public void SetUserPosition(String position)
         {
