@@ -2,21 +2,21 @@
 {
     class Point
     {
-        private double lattitude;
-        private double longtitude;
+        private double latitude;
+        private double longitude;
 
-        public Point(double lattitude, double longtitude)
+        public Point(double latitude, double longitude)
         {
-            this.lattitude = lattitude;
-            this.longtitude = longtitude;
+            this.latitude = latitude;
+            this.longitude = longitude;
         }
-        public double getLatt()
+        public double getLat()
         {
-            return lattitude;
+            return latitude;
         }
         public double getLong()
         {
-            return longtitude;
+            return longitude;
         }
     }
 }

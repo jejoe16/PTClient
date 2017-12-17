@@ -17,7 +17,7 @@ namespace PTClient.Logic.Emergency
             List<Point> pickUpPoints = new List<Point>();
             foreach (var Turbineitem in route)
             {
-                pickUpPoints.Add(new Point(lattitude: Turbineitem.Latitude.Value, longtitude: Turbineitem.Longitude.Value));
+                pickUpPoints.Add(new Point(latitude: Turbineitem.Latitude.Value, longitude: Turbineitem.Longitude.Value));
             }
             return pickUpPoints;
         }

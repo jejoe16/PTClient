@@ -23,6 +23,7 @@ namespace PTClient.GUI.Map
         private Thread BoatThread;
         private Thread RouteThread;
         private Thread workerThread;
+        private ReaderWriterLock rwl = new ReaderWriterLock();
         private IController LogicController;
 
         public CaptainScreen(String Username, String Password)
@@ -82,6 +83,7 @@ namespace PTClient.GUI.Map
         
         private void Logout_Click(object sender, EventArgs e)
         {
+
             LogicController.Logout();
             if (RouteThread != null)
             {
@@ -188,7 +190,7 @@ namespace PTClient.GUI.Map
                 List<PointLatLng> points = new List<PointLatLng>();
                     foreach (var Point in PickUpPoints)
                     {
-                        points.Add(new PointLatLng(Point.getLatt(), Point.getLong()));
+                        points.Add(new PointLatLng(Point.getLat(), Point.getLong()));
                     }
                     GMapRoute route = new GMapRoute(points, "Emergency route");
                     route.Stroke = new Pen(Color.Red, 3);
