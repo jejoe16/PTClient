@@ -52,7 +52,7 @@
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(100, 20);
             this.textBoxUsername.TabIndex = 2;
-            this.textBoxUsername.Text = "metalfist213";
+            this.textBoxUsername.Text = "captain1";
             // 
             // textBoxPassword
             // 

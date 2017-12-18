@@ -133,6 +133,6 @@ namespace PTClient.GUI
             ConCheckThread.Abort();
         }
 
-        
+
     }
 }
