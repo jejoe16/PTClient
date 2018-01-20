@@ -24,6 +24,9 @@ namespace PTClient.GUI
             return controller;
         }
 
+        /// <summary>
+        /// gets turbine information from the server, and adds each turbine to the Mapcontrol
+        /// </summary>
         public void generateMap() 
         {
             List<String> TurbineNames = controller.GetTurbineNames();
@@ -33,6 +36,13 @@ namespace PTClient.GUI
             }
         }
 
+
+        /// <summary>
+        /// used to rotate the vessel bitmap, depending on the direction the vessel is going
+        /// </summary>
+        /// <param name="rotateMe"></param>
+        /// <param name="degrees"></param>
+        /// <returns></returns>
         public Bitmap rotateImage(Bitmap rotateMe, float degrees)
         {
             lock (lockThis)

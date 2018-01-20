@@ -10,8 +10,14 @@ namespace PTClient.Logic.Position
         {
 
         }
-
-        //Returns the distance between (lat1, lon1) and (lat2, lon2) in kilometers.
+        /// <summary>
+        /// Returns the distance between (lat1, lon1) and (lat2, lon2) in kilometers.
+        /// </summary>
+        /// <param name="lat1"></param>
+        /// <param name="lon1"></param>
+        /// <param name="lat2"></param>
+        /// <param name="lon2"></param>
+        /// <returns></returns>
         public double Distance(double lat1, double lon1, double lat2, double lon2)
         {
             double theta = lon1 - lon2;

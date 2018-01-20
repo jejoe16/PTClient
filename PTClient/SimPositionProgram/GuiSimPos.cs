@@ -123,7 +123,9 @@ namespace PTClient.SimPosition
             EngineStartButton.Enabled = true;
             EngineStopButton.Enabled = false;
         }
-
+        /// <summary>
+        /// moves the boat in a random direction, until stopped
+        /// </summary>
         private void BoatThreadCallBack()
         {
             boatStatus = true;
@@ -136,7 +138,9 @@ namespace PTClient.SimPosition
             }
 
         }
-
+        /// <summary>
+        /// make the vessel go in a specific direction
+        /// </summary>
         private void DirectionThreadCallBack()
         {
             boatStatus = true;
@@ -148,6 +152,9 @@ namespace PTClient.SimPosition
             }
         }
 
+        /// <summary>
+        /// show the vessels position on the map in simposition
+        /// </summary>
         private void AddNewBoatMarker()
         {
             gMapSim.Invoke(new Action(() => vesselOverlay.Clear()));
@@ -161,6 +168,11 @@ namespace PTClient.SimPosition
             longLabel.Invoke(new Action(() => longLabel.Text = String.Concat(Boat.GetNextLongitude())));
         }
 
+        /// <summary>
+        /// goes in a direction dependin on the button clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBoxDir_Click(object sender, EventArgs e)
         {
 
@@ -219,6 +231,11 @@ namespace PTClient.SimPosition
             thread.Start();
         }
 
+        /// <summary>
+        /// stop threads on window close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SimPos_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (thread != null)

@@ -27,9 +27,22 @@ namespace PTClient.Logic.Position
         /// </summary>
         /// <returns>ArrayList with instance of turbines</returns>
         List<TurbineItem> GetTurbineList();
-
+        /// <summary>
+        /// returns all turbine names in a list
+        /// </summary>
+        /// <returns></returns>
         List<String> GetTurbineNames();
+        /// <summary>
+        /// gets a single turbine longitude
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
         double GetTurbineLongitude(String Name);
+        /// <summary>
+        /// get a single turbine latitude
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
         double GetTurbineLatitude(String Name);
     }
 }

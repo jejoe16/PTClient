@@ -8,6 +8,9 @@ namespace PTClient.SimPositionProgram
     class MapPolygon
     {
         GMapPolygon polygon;
+        /// <summary>
+        /// defined limits of the park, can be changed
+        /// </summary>
         public MapPolygon()
         {
             List<PointLatLng> points = new List<PointLatLng>();
@@ -20,6 +23,12 @@ namespace PTClient.SimPositionProgram
             polygon = new GMapPolygon(points, "Anholt");
         }
 
+        /// <summary>
+        /// checks if the vessel is winthin the maps bounds
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <returns></returns>
         public Boolean WithinMapBounds(double latitude, double longitude)
         {
             PointLatLng point = new PointLatLng(latitude, longitude);

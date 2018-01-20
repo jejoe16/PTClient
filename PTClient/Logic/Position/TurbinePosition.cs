@@ -18,6 +18,12 @@ namespace PTClient.Logic.Position
             windturbines = turbines;
         }
 
+        /// <summary>
+        /// checks if the vessel is within 500 meter of a turbine
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <returns></returns>
         public string GetNearWindTurbine(Double latitude, Double longitude)
         {
 
@@ -33,7 +39,10 @@ namespace PTClient.Logic.Position
             }
             return null;
         }
-
+        /// <summary>
+        /// get the turbine list
+        /// </summary>
+        /// <returns></returns>
         public List<TurbineItem> GetTurbineList()
         {
             return windturbines;

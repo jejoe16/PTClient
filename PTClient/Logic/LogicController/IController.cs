@@ -21,7 +21,6 @@ namespace PTClient.Logic.LogicController
         List<WorkerItem> GetWorkerListItems();
         Boolean ExistRouteapi(double lat, double longi);
         Boolean CheckState();
-        void SetEmergency();
         List<Point> GetRoute();
         bool CallEmergency();
 

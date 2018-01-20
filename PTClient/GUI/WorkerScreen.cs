@@ -20,13 +20,22 @@ namespace PTClient.GUI
         }
 
         
-
+        /// <summary>
+        /// closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
             controller.Logout();
             this.Close();
         }
 
+        /// <summary>
+        /// check in to turbine. if there are a turbine nearby
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             Boolean check = controller.CheckIn(Boat.GetNextLatitude(), Boat.GetNextLongitude());
@@ -39,6 +48,11 @@ namespace PTClient.GUI
             }
         }
 
+        /// <summary>
+        /// checks out from a turbine and places the technician on the vessel again
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             Boolean check = controller.CheckOut();
