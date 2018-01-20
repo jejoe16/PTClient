@@ -185,7 +185,7 @@ namespace PTClient.Logic.LogicController
             try
             {
                 WebClient client = new WebClient();
-                client.DownloadData("http://35.187.75.150:12230");
+                client.DownloadData("http://192.168.43.251:12230");
                 return true;
             }
             catch

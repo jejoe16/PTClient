@@ -53,12 +53,12 @@ namespace PTClient.IO.Swagger.Client
         public ApiClient()
         {
             Configuration = IO.Swagger.Client.Configuration.Default;
-            RestClient = new RestClient("http://35.187.75.150:12230/TrackServer");
+            RestClient = new RestClient("http://192.168.43.251:12230/TrackServer");
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default base path (http://35.187.75.150:12230/TrackServer).
+        /// with default base path (http://192.168.43.251:12230/TrackServer).
         /// </summary>
         /// <param name="config">An instance of Configuration.</param>
         public ApiClient(Configuration config)
@@ -73,7 +73,7 @@ namespace PTClient.IO.Swagger.Client
         /// with default configuration.
         /// </summary>
         /// <param name="basePath">The base path.</param>
-        public ApiClient(String basePath = "http://35.187.75.150:12230/TrackServer")
+        public ApiClient(String basePath = "http://192.168.43.251:12230/TrackServer")
         {
            if (String.IsNullOrEmpty(basePath))
                 throw new ArgumentException("basePath cannot be empty");
